@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,5 +43,18 @@ public class AtorController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public Ator criar(@RequestBody Ator ator) {
         return atorRepository.save(ator);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Ator> atualizar(@PathVariable Long id, @RequestBody Ator ator){
+        return atorRepository.findById(id)
+        .map(registro -> {
+            registro.setNome(ator.getNome());
+
+            Ator atualizado = atorRepository.save(registro);
+            
+            return ResponseEntity.ok().body(atualizado);
+        })
+        .orElse(ResponseEntity.notFound().build());
     }
 }
