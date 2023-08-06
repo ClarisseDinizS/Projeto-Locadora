@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.model.Ator;
 import com.backend.repository.AtorRepository;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 @RestController
 @RequestMapping("/api/ator")
 public class AtorController {
@@ -34,7 +38,7 @@ public class AtorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Ator> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Ator> buscarPorId(@PathVariable @NotNull @Positive Long id) {
         return atorRepository.findById(id)
                 .map(registro -> ResponseEntity.ok().body(registro))
                 .orElse(ResponseEntity.notFound().build());
@@ -42,12 +46,12 @@ public class AtorController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Ator criar(@RequestBody Ator ator) {
+    public Ator criar(@RequestBody @Valid Ator ator) {
         return atorRepository.save(ator);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ator> atualizar(@PathVariable Long id, @RequestBody Ator ator) {
+    public ResponseEntity<Ator> atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Ator ator) {
         return atorRepository.findById(id)
                 .map(registro -> {
                     registro.setNome(ator.getNome());
@@ -60,7 +64,7 @@ public class AtorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+    public ResponseEntity<Void> excluir(@PathVariable @NotNull @Positive Long id) {
         return atorRepository.findById(id)
                 .map(registro -> {
                     atorRepository.deleteById(id);
