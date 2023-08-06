@@ -3,7 +3,9 @@ package com.backend.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,13 @@ public class AtorController {
     @GetMapping
     public @ResponseBody List<Ator> listar() {
         return atorRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Ator> buscarPorId(@PathVariable Long id) {
+        return atorRepository.findById(id)
+                .map(registro -> ResponseEntity.ok().body(registro))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
