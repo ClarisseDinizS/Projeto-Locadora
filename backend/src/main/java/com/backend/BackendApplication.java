@@ -16,7 +16,7 @@ public class BackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDatabase(AtorRepository atorRepository){
+	CommandLineRunner initDatabase(AtorRepository atorRepository) {
 		return args -> {
 			atorRepository.deleteAll();
 
