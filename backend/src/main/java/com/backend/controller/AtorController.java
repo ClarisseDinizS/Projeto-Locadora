@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.model.Ator;
 import com.backend.repository.AtorRepository;
+import com.backend.service.AtorService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -26,20 +27,20 @@ import jakarta.validation.constraints.Positive;
 @RequestMapping("/api/ator")
 public class AtorController {
 
-    private final AtorRepository atorRepository;
+    private final AtorService atorService;
 
-    public AtorController(AtorRepository atorRepository) {
-        this.atorRepository = atorRepository;
+    public AtorController(AtorService atorService) {
+        this.atorService = atorService;
     }
 
     @GetMapping
     public @ResponseBody List<Ator> listar() {
-        return atorRepository.findAll();
+        return atorService.listar();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Ator> buscarPorId(@PathVariable @NotNull @Positive Long id) {
-        return atorRepository.findById(id)
+        return atorService.buscarPorId(id)
                 .map(registro -> ResponseEntity.ok().body(registro))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -47,30 +48,21 @@ public class AtorController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Ator criar(@RequestBody @Valid Ator ator) {
-        return atorRepository.save(ator);
+        return atorService.criar(ator);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Ator> atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Ator ator) {
-        return atorRepository.findById(id)
-                .map(registro -> {
-                    registro.setNome(ator.getNome());
-
-                    Ator atualizado = atorRepository.save(registro);
-
-                    return ResponseEntity.ok().body(atualizado);
-                })
+        return atorService.atualizar(id, ator)
+                .map(registro -> ResponseEntity.ok().body(registro))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable @NotNull @Positive Long id) {
-        return atorRepository.findById(id)
-                .map(registro -> {
-                    atorRepository.deleteById(id);
-
-                    return ResponseEntity.noContent().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+        if (atorService.excluir(id)) {
+            return ResponseEntity.noContent().<Void>build();
+        }
+        return ResponseEntity.notFound().<Void>build();
     }
 }
