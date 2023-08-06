@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,15 +47,26 @@ public class AtorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Ator> atualizar(@PathVariable Long id, @RequestBody Ator ator){
+    public ResponseEntity<Ator> atualizar(@PathVariable Long id, @RequestBody Ator ator) {
         return atorRepository.findById(id)
-        .map(registro -> {
-            registro.setNome(ator.getNome());
+                .map(registro -> {
+                    registro.setNome(ator.getNome());
 
-            Ator atualizado = atorRepository.save(registro);
-            
-            return ResponseEntity.ok().body(atualizado);
-        })
-        .orElse(ResponseEntity.notFound().build());
+                    Ator atualizado = atorRepository.save(registro);
+
+                    return ResponseEntity.ok().body(atualizado);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        return atorRepository.findById(id)
+                .map(registro -> {
+                    atorRepository.deleteById(id);
+
+                    return ResponseEntity.noContent().<Void>build();
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }
