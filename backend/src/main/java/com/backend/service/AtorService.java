@@ -1,13 +1,12 @@
 package com.backend.service;
 
 import java.util.List;
-import java.util.Optional;
-
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.backend.exception.RegistroNotFoundException;
 import com.backend.model.Ator;
 import com.backend.repository.AtorRepository;
 
@@ -29,31 +28,26 @@ public class AtorService {
         return atorRepository.findAll();
     }
 
-    public Optional<Ator> buscarPorId(@PathVariable @NotNull @Positive Long id) {
-        return atorRepository.findById(id);
+    public Ator buscarPorId(@PathVariable @NotNull @Positive Long id) {
+        return atorRepository.findById(id).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
     public Ator criar(@Valid Ator ator) {
         return atorRepository.save(ator);
     }
 
-    public Optional<Ator> atualizar(@NotNull @Positive Long id, @Valid Ator ator) {
+    public Ator atualizar(@NotNull @Positive Long id, @Valid Ator ator) {
         return atorRepository.findById(id)
                 .map(registro -> {
                     registro.setNome(ator.getNome());
 
                     return atorRepository.save(registro);
-                });
+                }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    public boolean excluir(@PathVariable @NotNull @Positive Long id) {
-        return atorRepository.findById(id)
-                .map(registro -> {
-                    atorRepository.deleteById(id);
-
-                    return true;
-                })
-                .orElse(false);
+    public void excluir(@PathVariable @NotNull @Positive Long id) {
+        atorRepository.delete(atorRepository.findById(id)
+                .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
-    
+
 }
