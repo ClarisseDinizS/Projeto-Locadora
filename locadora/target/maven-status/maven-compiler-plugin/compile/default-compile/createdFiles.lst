@@ -1,7 +1,8 @@
 projeto\dao\AtorDAO.class
+projeto\utils\PersistenceUtil$1.class
 projeto\model\domain\Ator.class
 projeto\controller\ListarAtorController.class
 projeto\model\application\AtorApplication.class
 projeto\controller\CadastrarAtorController.class
-projeto\App.class
+projeto\TesteConexao.class
 projeto\utils\PersistenceUtil.class

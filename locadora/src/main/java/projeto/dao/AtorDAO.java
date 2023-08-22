@@ -13,7 +13,7 @@ public class AtorDAO {
 
     public List<Ator> listarAtor() {
         try (Session session = PersistenceUtil.getSession()) {
-            String hql = "FROM Ator";
+            String hql = "FROM Ator ORDER BY id";
             Query<Ator> query = session.createQuery(hql, Ator.class);
             return query.getResultList();
         } catch (Exception e) {
@@ -43,6 +43,7 @@ public class AtorDAO {
     }
 
     public void atualizarAtor(Ator ator) {
+        System.out.println("Aqui");
         try (Session session = PersistenceUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
             session.merge(ator);

@@ -15,4 +15,34 @@
         <servlet-name>ListarAtorController</servlet-name>
         <url-pattern>/listarAtor</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CadastrarAtorController</servlet-name>
+        <servlet-class>projeto.controller.CadastrarAtorController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>CadastrarAtorController</servlet-name>
+        <url-pattern>/salvarAtor</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditarAtorController</servlet-name>
+        <servlet-class>projeto.controller.EditarAtorController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>EditarAtorController</servlet-name>
+        <url-pattern>/editarAtor</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExcluirAtorController</servlet-name>
+        <servlet-class>projeto.controller.ExcluirAtorController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExcluirAtorController</servlet-name>
+        <url-pattern>/excluirAtor</url-pattern>
+    </servlet-mapping>
 </web-app>

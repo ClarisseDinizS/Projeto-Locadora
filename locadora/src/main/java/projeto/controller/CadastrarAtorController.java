@@ -6,23 +6,26 @@ import projeto.model.application.AtorApplication;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/CadastrarAtorController")
-public class CadastrarAtorController {
+@WebServlet(name = "CadastrarAtorController", urlPatterns = { "/salvarAtor" })
+public class CadastrarAtorController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nome = request.getParameter("nome");
+        request.setCharacterEncoding("UTF-8");
 
+        String nome = request.getParameter("nome");
+        
         int resultado = AtorApplication.incluirAtor(nome);
 
         if (resultado == 0) {
             // Inclusão bem-sucedida
-            response.sendRedirect("ListaAtoresServlet");
+            response.sendRedirect("listarAtor");
         } else if (resultado == 1) {
             // Tratar o erro de nome vazio
             response.sendRedirect("ErroNomeVazio.jsp");

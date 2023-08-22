@@ -9,19 +9,28 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class PersistenceUtil {
 
-    private static Session s = null;
+    private static SessionFactory sessionFactory;
 
-    private static ThreadLocal<Session> threadLocalSession = new ThreadLocal<Session>() {
-        @Override
-        protected Session initialValue() {
-            StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-            Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
-            SessionFactory factory = meta.getSessionFactoryBuilder().build();
-            return factory.openSession();
+    // Construtor privado para impedir a criação de instâncias
+    private PersistenceUtil() {
+    }
+
+    // Método estático para obter a instância única da SessionFactory
+    public static synchronized SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+                    .configure("hibernate.cfg.xml")
+                    .build();
+            Metadata meta = new MetadataSources(ssr)
+                    .getMetadataBuilder()
+                    .build();
+            sessionFactory = meta.getSessionFactoryBuilder().build();
         }
-    };
+        return sessionFactory;
+    }
 
+    // Método estático para obter a sessão a partir da SessionFactory
     public static Session getSession() {
-        return threadLocalSession.get();
+        return getSessionFactory().openSession();
     }
 }

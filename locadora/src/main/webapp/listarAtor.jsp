@@ -8,12 +8,14 @@
     <title>Lista de Atores</title>
 </head>
 <body>
+    <a href="novoAtor.jsp"><button>Criar</button></a>
     <p><a href="${pageContext.request.contextPath}/">Voltar</a></p>
     <h1>Lista de Atores</h1>
     <table border="1">
         <tr>
-            <th>ID</th>
+            <th>Id</th>
             <th>Nome</th>
+            <th>Ações</th>
         </tr>
         <%
             List<Ator> listarAtor = (List<Ator>) request.getAttribute("listarAtor");
@@ -24,6 +26,7 @@
         <tr>
             <td><%= ator.getId() %></td>
             <td><%= ator.getNome() %></td>
+            <td><a href="editarAtor?id=<%= ator.getId() %>"><button>Editar</button></a><a href="excluirAtor?id=<%= ator.getId() %>"><button>Excluir</button></a></td>
         </tr>
         <%
                 }
