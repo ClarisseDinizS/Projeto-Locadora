@@ -9,7 +9,7 @@
         <property name="hibernate.connection.password">1</property>
         <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property> -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.password">1</property>
+        <property name="hibernate.connection.password">123</property>
         <property name="hibernate.connection.url">jdbc:postgresql:postgres</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -17,5 +17,6 @@
         <!-- Mapeamentos de classes aqui -->
         <mapping class="projeto.model.domain.Ator" />
         <mapping class="projeto.model.domain.Classe" />
+        <mapping class="projeto.model.domain.Diretor" />
     </session-factory>
 </hibernate-configuration>

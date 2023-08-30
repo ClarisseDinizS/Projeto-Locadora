@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Novo Diretor</title>
+    <title> Novo Diretor </title>
 </head>
 <body>
     <h1>Novo Diretor</h1>

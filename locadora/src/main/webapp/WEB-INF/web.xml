@@ -85,4 +85,44 @@
         <servlet-name>ExcluirClasseController</servlet-name>
         <url-pattern>/excluirClasse</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ListarDiretorController</servlet-name>
+        <servlet-class>projeto.controller.ListarDiretorController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ListarDiretorController</servlet-name>
+        <url-pattern>/listarDiretor</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CadastrarDiretorController</servlet-name>
+        <servlet-class>projeto.controller.CadastrarDiretorController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>CadastrarDiretorController</servlet-name>
+        <url-pattern>/salvarDiretor</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditarDiretorController</servlet-name>
+        <servlet-class>projeto.controller.EditarDiretorController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>EditarDiretorController</servlet-name>
+        <url-pattern>/editarDiretor</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExcluirDiretorController</servlet-name>
+        <servlet-class>projeto.controller.ExcluirDiretorController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExcluirDiretorController</servlet-name>
+        <url-pattern>/excluirDiretor</url-pattern>
+    </servlet-mapping>
 </web-app>

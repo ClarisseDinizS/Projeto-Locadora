@@ -1,9 +1,12 @@
 <html>
 <body>
 <h2>Atores</h2>
-<p><a href="listarAtor">Lista</a></p>
+<a href="listarAtor"><button>Lista</button></a>
 <br/>
 <h2>Classes</h2>
-<p><a href="listarClasse">Lista</a></p>
+<a href="listarClasse"><button>Lista</button></a>
+<br/>
+<h2>Diretores</h2>
+<a href="listarDiretor"><button>Lista</button></a>
 </body>
 </html>

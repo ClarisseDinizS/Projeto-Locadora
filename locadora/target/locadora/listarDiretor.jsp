@@ -32,7 +32,7 @@
                 }
             } else {
         %>
-        <p>Nenhum diretor encontrado.</p>
+        <p>Nenhum diretor encontrado!</p>
         <%
             }
         %>
