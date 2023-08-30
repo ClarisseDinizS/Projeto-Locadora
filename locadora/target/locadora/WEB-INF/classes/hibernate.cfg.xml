@@ -16,5 +16,6 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
         <!-- Mapeamentos de classes aqui -->
         <mapping class="projeto.model.domain.Ator" />
+        <mapping class="projeto.model.domain.Classe" />
     </session-factory>
 </hibernate-configuration>

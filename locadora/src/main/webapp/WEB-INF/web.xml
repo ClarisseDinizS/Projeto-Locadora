@@ -45,4 +45,44 @@
         <servlet-name>ExcluirAtorController</servlet-name>
         <url-pattern>/excluirAtor</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ListarClasseController</servlet-name>
+        <servlet-class>projeto.controller.ListarClasseController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ListarClasseController</servlet-name>
+        <url-pattern>/listarClasse</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CadastrarClasseController</servlet-name>
+        <servlet-class>projeto.controller.CadastrarClasseController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>CadastrarClasseController</servlet-name>
+        <url-pattern>/salvarClasse</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditarClasseController</servlet-name>
+        <servlet-class>projeto.controller.EditarClasseController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>EditarClasseController</servlet-name>
+        <url-pattern>/editarClasse</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExcluirClasseController</servlet-name>
+        <servlet-class>projeto.controller.ExcluirClasseController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ExcluirClasseController</servlet-name>
+        <url-pattern>/excluirClasse</url-pattern>
+    </servlet-mapping>
 </web-app>

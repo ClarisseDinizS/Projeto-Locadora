@@ -43,7 +43,6 @@ public class AtorDAO {
     }
 
     public void atualizarAtor(Ator ator) {
-        System.out.println("Aqui");
         try (Session session = PersistenceUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
             session.merge(ator);
