@@ -3,8 +3,6 @@ package com.backend.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 @Entity
 @Table(name = "classe")
@@ -20,5 +18,7 @@ public class Classe {
     private Integer valor;
 
     @Column
-    private LocalDate data;
+    private String data;
+
+    
 }
