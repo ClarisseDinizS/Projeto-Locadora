@@ -11,6 +11,7 @@
     <form action="editarAtor" method="post">
         <input type="hidden" name="id" value="${id}">
         Nome: <input type="text" name="nome" value="${nome}"><br>
+        <br>
         <input type="submit" value="Salvar">
     </form>
 </body>

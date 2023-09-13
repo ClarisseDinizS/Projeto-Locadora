@@ -1,5 +1,9 @@
 <html>
-<body>
+<head>
+    <title>Locadora DEV WEB 2</title>
+</head>
+<body> 
+<h1> Locadora Dev Web 2 </h1>
 <h2>Atores</h2>
 <a href="listarAtor"><button>Lista</button></a>
 <br/>

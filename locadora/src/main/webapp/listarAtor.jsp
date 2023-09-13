@@ -8,7 +8,7 @@
     <title>Lista de Atores</title>
 </head>
 <body>
-    <a href="novoAtor.jsp"><button>Criar</button></a>
+    
     <p><a href="${pageContext.request.contextPath}/">Voltar</a></p>
     <h1>Lista de Atores</h1>
     <table border="1">
@@ -37,5 +37,7 @@
             }
         %>
     </table>
+    <br>
+    <a href="novoAtor.jsp"><button>Criar</button></a>
 </body>
 </html>

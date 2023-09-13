@@ -10,6 +10,7 @@
     <p><a href="listarDiretor">Voltar</a></p>
     <form action="salvarDiretor" method="post">
         Nome: <input type="text" name="nome"><br>
+        <br>
         <input type="submit" value="Salvar">
     </form>
 </body>

@@ -19,6 +19,7 @@
             var formattedDate = prazoDevolucaoDate.toISOString().substr(0, 10);
             prazoDevolucaoInput.value = formattedDate;
         </script><br>
+        <br>
         <input type="submit" value="Salvar">
     </form>
 </body>
