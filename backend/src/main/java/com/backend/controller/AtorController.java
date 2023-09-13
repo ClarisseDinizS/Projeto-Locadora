@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.model.Ator;
+import com.backend.dto.AtorDTO;
 import com.backend.service.AtorService;
 
 import jakarta.validation.Valid;
@@ -32,24 +31,24 @@ public class AtorController {
     }
 
     @GetMapping
-    public @ResponseBody List<Ator> listar() {
+    public List<AtorDTO> listar() {
         return atorService.listar();
     }
 
     @GetMapping("/{id}")
-    public Ator buscarPorId(@PathVariable @NotNull @Positive Long id) {
+    public AtorDTO buscarPorId(@PathVariable @NotNull @Positive Long id) {
         return atorService.buscarPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Ator criar(@RequestBody @Valid Ator ator) {
-        return atorService.criar(ator);
+    public AtorDTO criar(@RequestBody @Valid AtorDTO atorDto) {
+        return atorService.criar(atorDto);
     }
 
     @PutMapping("/{id}")
-    public Ator atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Ator ator) {
-        return atorService.atualizar(id, ator);
+    public AtorDTO atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid AtorDTO atorDto) {
+        return atorService.atualizar(id, atorDto);
     }
 
     @DeleteMapping("/{id}")

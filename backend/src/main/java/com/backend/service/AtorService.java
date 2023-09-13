@@ -1,13 +1,14 @@
 package com.backend.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import com.backend.dto.AtorDTO;
+import com.backend.dto.mapper.AtorMapper;
 import com.backend.exception.RegistroNotFoundException;
-import com.backend.model.Ator;
 import com.backend.repository.AtorRepository;
 
 import jakarta.validation.Valid;
@@ -19,33 +20,35 @@ import jakarta.validation.constraints.Positive;
 public class AtorService {
 
     private final AtorRepository atorRepository;
+    private final AtorMapper atorMapper;
 
-    public AtorService(AtorRepository atorRepository) {
+    public AtorService(AtorRepository atorRepository, AtorMapper atorMapper) {
         this.atorRepository = atorRepository;
+        this.atorMapper = atorMapper;
     }
 
-    public List<Ator> listar() {
-        return atorRepository.findAll();
+    public List<AtorDTO> listar() {
+        return atorRepository.findAll().stream().map(atorMapper::paraDTO).collect(Collectors.toList());
     }
 
-    public Ator buscarPorId(@PathVariable @NotNull @Positive Long id) {
-        return atorRepository.findById(id).orElseThrow(() -> new RegistroNotFoundException(id));
+    public AtorDTO buscarPorId (@NotNull @Positive Long id) {
+        return atorRepository.findById(id).map(atorMapper::paraDTO).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    public Ator criar(@Valid Ator ator) {
-        return atorRepository.save(ator);
+    public AtorDTO criar(@Valid @NotNull AtorDTO atorDto) {
+        return atorMapper.paraDTO(atorRepository.save(atorMapper.paraEntidade(atorDto)));
     }
 
-    public Ator atualizar(@NotNull @Positive Long id, @Valid Ator ator) {
+    public AtorDTO atualizar(@NotNull @Positive Long id, @Valid AtorDTO atorDto) {
         return atorRepository.findById(id)
                 .map(registro -> {
-                    registro.setNome(ator.getNome());
+                    registro.setNome(atorDto.nome());
 
-                    return atorRepository.save(registro);
+                    return atorMapper.paraDTO(atorRepository.save(registro));
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
-    public void excluir(@PathVariable @NotNull @Positive Long id) {
+    public void excluir(@NotNull @Positive Long id) {
         atorRepository.delete(atorRepository.findById(id)
                 .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
