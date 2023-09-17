@@ -14,17 +14,12 @@
   <!-- Coluna Ações -->
   <ng-container matColumnDef="acoes">
     <mat-header-cell *matHeaderCellDef class="coluna-acoes">
-      <button
-        mat-mini-fab
-        color="accent"
-        aria-label="Adicionar um Ator"
-        (click)="onAdd()"
-      >
+      <button mat-mini-fab color="accent" aria-label="Adicionar um Ator" (click)="onAdd()">
         <mat-icon>add</mat-icon>
       </button>
     </mat-header-cell>
     <mat-cell *matCellDef="let ator" class="coluna-acoes">
-      <button mat-icon-button color="primary" aria-label="Editar Ator">
+      <button mat-icon-button color="primary" aria-label="Editar Ator" (click)="onEdit(ator)">
         <mat-icon>edit</mat-icon>
       </button>
 

@@ -9,7 +9,8 @@ import { Ator } from '../../model/ator';
 })
 export class AtorListaComponent {
   @Input() atores: Ator[] = [];
-  @Output() add = new EventEmitter(false);
+  @Output() adicionar = new EventEmitter(false);
+  @Output() editar = new EventEmitter(false);
 
   readonly colunasExibidas = ['id', 'nome', 'acoes'];
 
@@ -18,6 +19,10 @@ export class AtorListaComponent {
   ngOnInit(): void {}
 
   onAdd() {
-    this.add.emit(true);
+    this.adicionar.emit(true);
+  }
+
+  onEdit(ator: Ator){
+    this.editar.emit(ator);
   }
 }

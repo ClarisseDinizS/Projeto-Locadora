@@ -16,13 +16,30 @@ export class AtorService {
   listar() {
     return this.httpCliente.get<Ator[]>(this.API)
       .pipe(
-        first(),
+        first()
         //delay(5000),
-        tap(ator => console.log(ator))
+        // tap(ator => console.log(ator))
       );
   }
 
+  buscarPorId(id: number) {
+    return this.httpCliente.get<Ator>(`${this.API}/${id}`);
+  }
+
   salvar(registro: Partial<Ator>) {
+    if (registro.id != 0) {
+      return this.atualizar(registro);
+    }
+    return this.criar(registro);
+  }
+
+  private criar(registro: Partial<Ator>) {
     return this.httpCliente.post<Ator>(this.API, registro).pipe(first());
+  }
+
+  private atualizar(registro: Partial<Ator>) {
+    return this.httpCliente
+      .put<Ator>(`${this.API}/${registro.id}`, registro)
+      .pipe(first());
   }
 }

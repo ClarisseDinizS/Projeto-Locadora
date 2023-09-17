@@ -2,6 +2,9 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+
+import { Ator } from '../../model/ator';
 import { AtorService } from '../../services/ator.service';
 
 @Component({
@@ -11,15 +14,23 @@ import { AtorService } from '../../services/ator.service';
 })
 export class AtorFormularioComponent {
   formulario = this.formBuild.group({
+    id: [0],
     nome: ['']
   });
 
   constructor(private formBuild: NonNullableFormBuilder,
     private servico: AtorService,
     private snackBar: MatSnackBar,
-    private localizacao: Location) { }
+    private localizacao: Location,
+    private route: ActivatedRoute) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    const ator: Ator = this.route.snapshot.data['ator'];
+    this.formulario.setValue({
+      id: ator.id,
+      nome: ator.nome
+    });
+  }
 
   onSubmit() {
     this.servico.salvar(this.formulario.value).subscribe(

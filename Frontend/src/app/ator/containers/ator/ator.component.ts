@@ -41,4 +41,8 @@ export class AtorComponent implements OnInit {
   onAdd() {
     this.router.navigate(['novo'], { relativeTo: this.route });
   }
+
+  onEdit(ator: Ator){
+    this.router.navigate(['editar', ator.id], { relativeTo: this.route });
+  }
 }
