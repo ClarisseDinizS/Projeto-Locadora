@@ -7,7 +7,7 @@ import { Ator } from '../model/ator';
 @Injectable({
   providedIn: 'root'
 })
-export class AtoresService {
+export class AtorService {
 
   private readonly API = 'api/ator';
 
@@ -18,7 +18,7 @@ export class AtoresService {
       .pipe(
         first(),
         delay(5000),
-        tap(atores => console.log(atores))
+        tap(ator => console.log(ator))
       );
   }
 }
