@@ -1,4 +1,11 @@
 <mat-toolbar color="primary">
-  <span>Projeto Locadora</span>
+  <button mat-raised-button color="accent" (click)="navegarParaHome()">
+    <mat-icon>home</mat-icon>
+    Projeto Locadora
+  </button>
+  <button mat-raised-button (click)="navegarParaAtor()">
+    <mat-icon>movie</mat-icon>
+    Atores
+  </button>
 </mat-toolbar>
 <router-outlet></router-outlet>

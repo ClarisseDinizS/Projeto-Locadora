@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/home/home/home.component';
 
 const routes: Routes = [
-  // { path: '', pathMatch: 'full', redirectTo: 'ator' },
-  {path: '', component: HomeComponent},
+  { path: '', component: HomeComponent },
   { path: 'ator', loadChildren: () => import('./ator/ator.module').then(m => m.AtorModule) }
 ];
 
