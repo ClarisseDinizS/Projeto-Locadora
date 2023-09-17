@@ -9,7 +9,7 @@ import { Ator } from '../model/ator';
 })
 export class AtoresService {
 
-  private readonly API = 'api/atores';
+  private readonly API = 'api/ator';
 
   constructor(private httpCliente: HttpClient) { }
 

@@ -9,8 +9,6 @@ import { AtoresComponent } from './atores/atores.component';
 
 @NgModule({
   declarations: [
-  
-  
     AtoresComponent
   ],
   imports: [

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, Observable, of } from 'rxjs';
-import { ErrorDialogComponent } from 'src/app/shared/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 import { Ator } from '../model/ator';
 import { AtoresService } from '../services/atores.service';
@@ -13,11 +13,11 @@ import { AtoresService } from '../services/atores.service';
 })
 export class AtoresComponent implements OnInit {
 
-  atores: Observable<Ator[]>;
-  colunasExibidas = ['nome'];
+  atores$: Observable<Ator[]>;
+  colunasExibidas = ['id', 'nome'];
 
-  constructor(private atorServico: AtoresService, public dialog: MatDialog) {
-    this.atores = this.atorServico.list()
+  constructor(private atoresServico: AtoresService, public dialog: MatDialog) {
+    this.atores$ = this.atoresServico.list()
       .pipe(
         catchError(error => {
           this.onError('Erro ao carregar atores')
@@ -32,7 +32,5 @@ export class AtoresComponent implements OnInit {
       })
     }
 
-    ngOnInit(): void {
-
-    }
+    ngOnInit(): void {}
 }

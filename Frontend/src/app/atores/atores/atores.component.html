@@ -1,24 +1,31 @@
 <mat-card>
-    <mat-card-content>
-      <mat-toolbar color="primary">Atores</mat-toolbar>
-  
-      <div ngIf="atores$ | async as atores; else carregando">
-        <table mat-table [dataSource]="atores" class="mat-elevation-z8">
-          <!-- Coluna Nome -->
-          <ng-container matColumnDef="nome">
-            <th mat-header-cellmatHeaderCellDef>Atores</th>
-            <td mat-cell *matCellDef="let ator">{{ ator.nome }}</td>
-          </ng-container>
-  
-          <tr mat-header-rowmatHeaderRowDef="colunasExibidas"></tr>
-          <tr mat-row *matRowDef="let row; columns: colunasExibidas"></tr>
-        </table>
+  <mat-card-content>
+    <mat-toolbar color="primary">Atores Disponíveis</mat-toolbar>
+
+    <div *ngIf="atores$ | async as atores; else carregando">
+      <table mat-table [dataSource]="atores" class="mat-elevation-z8">
+
+        <!-- Coluna Id -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let ator">{{ ator.id }}</td>
+        </ng-container>
+
+        <!-- Coluna Nome -->
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>Ator</th>
+          <td mat-cell *matCellDef="let ator">{{ ator.nome }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunasExibidas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunasExibidas;"></tr>
+      </table>
+    </div>
+
+    <ng-template #carregando>
+      <div class="carregando-spinner">
+        <mat-spinner></mat-spinner>
       </div>
-  
-      <ng-template #carregando>
-        <div class="carregando-spinner">
-          <mat-spinner></mat-spinner>
-        </div>
-      </ng-template>
-    </mat-card-content>
-  </mat-card>
+    </ng-template>
+  </mat-card-content>
+</mat-card>
