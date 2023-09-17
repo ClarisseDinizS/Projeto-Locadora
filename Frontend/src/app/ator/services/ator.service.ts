@@ -42,4 +42,8 @@ export class AtorService {
       .put<Ator>(`${this.API}/${registro.id}`, registro)
       .pipe(first());
   }
+
+  excluir(id: number) {
+    return this.httpCliente.delete(`${this.API}/${id}`).pipe(first());
+  }
 }

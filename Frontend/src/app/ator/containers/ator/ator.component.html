@@ -3,7 +3,7 @@
     <mat-toolbar color="primary">Atores Disponíveis</mat-toolbar>
     <div class="mat-elevation-z8 coluna-flex">
       <app-ator-lista *ngIf="atores$ | async as atores; else carregando" [atores]="atores" (adicionar)="onAdd()"
-        (editar)="onEdit($event)"></app-ator-lista>
+        (editar)="onEdit($event)" (excluir)="onRemove($event)"></app-ator-lista>
 
       <ng-template #carregando>
         <div class="carregando-spinner">

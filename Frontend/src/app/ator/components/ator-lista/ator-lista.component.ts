@@ -11,6 +11,7 @@ export class AtorListaComponent {
   @Input() atores: Ator[] = [];
   @Output() adicionar = new EventEmitter(false);
   @Output() editar = new EventEmitter(false);
+  @Output() excluir = new EventEmitter(false);
 
   readonly colunasExibidas = ['id', 'nome', 'acoes'];
 
@@ -24,5 +25,9 @@ export class AtorListaComponent {
 
   onEdit(ator: Ator){
     this.editar.emit(ator);
+  }
+
+  onRemove(ator: Ator){
+    this.excluir.emit(ator);
   }
 }
