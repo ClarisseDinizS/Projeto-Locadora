@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
-import { Ator } from '../model/ator';
-import { AtorService } from '../services/ator.service';
+import { Ator } from '../../model/ator';
+import { AtorService } from '../../services/ator.service';
 
 @Component({
   selector: 'app-ator',
@@ -14,7 +14,6 @@ import { AtorService } from '../services/ator.service';
 })
 export class AtorComponent implements OnInit {
   atores$: Observable<Ator[]>;
-  colunasExibidas = ['id', 'nome', 'acoes'];
 
   constructor(
     private atorServico: AtorService,
@@ -22,21 +21,22 @@ export class AtorComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.atores$ = this.atorServico.list().pipe(
+
+    this.atores$ = this.atorServico.listar().pipe(
       catchError((error) => {
-        this.onError('Erro ao carregar atores');
+        this.onError('Erro ao carregar atores.');
         return of([]);
       })
     );
   }
 
-  onError(message: string) {
+  onError(mensagemErro: string) {
     this.dialog.open(ErrorDialogComponent, {
-      data: message,
+      data: mensagemErro,
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onAdd() {
     this.router.navigate(['novo'], { relativeTo: this.route });

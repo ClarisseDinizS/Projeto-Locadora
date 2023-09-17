@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary">Atores Disponíveis</mat-toolbar>
+    <div class="mat-elevation-z8 coluna-flex">
+      <app-ator-lista
+        *ngIf="atores$ | async as atores; else carregando"
+        [atores]="atores"
+        (add)="onAdd()"
+      ></app-ator-lista>
+
+      <ng-template #carregando>
+        <div class="carregando-spinner">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-template>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -13,12 +13,16 @@ export class AtorService {
 
   constructor(private httpCliente: HttpClient) { }
 
-  list() {
+  listar() {
     return this.httpCliente.get<Ator[]>(this.API)
       .pipe(
         first(),
-        delay(5000),
+        //delay(5000),
         tap(ator => console.log(ator))
       );
+  }
+
+  salvar(registro: Partial<Ator>) {
+    return this.httpCliente.post<Ator>(this.API, registro).pipe(first());
   }
 }

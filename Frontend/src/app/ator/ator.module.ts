@@ -1,23 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { CompartilhadoModule } from '../shared/compartilhado.module';
-import { AtorFormularioComponent } from './ator-formulario/ator-formulario.component';
+import { AtorFormularioComponent } from './containers/ator-formulario/ator-formulario.component';
 import { AtoresRoutingModule } from './ator-routing.module';
-import { AtorComponent } from './ator/ator.component';
+import { AtorComponent } from './containers/ator/ator.component';
+import { AtorListaComponent } from './components/ator-lista/ator-lista.component';
 
 
 @NgModule({
   declarations: [
     AtorComponent,
-    AtorFormularioComponent
+    AtorFormularioComponent,
+    AtorListaComponent
   ],
   imports: [
     CommonModule,
     AtoresRoutingModule,
     CompartilhadoModule,
-    AppMaterialModule
+    AppMaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class AtorModule { }

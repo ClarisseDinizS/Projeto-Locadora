@@ -1,0 +1,39 @@
+<mat-table [dataSource]="atores">
+  <!-- Coluna Id -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let ator">{{ ator.id }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Nome -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef>Ator</mat-header-cell>
+    <mat-cell *matCellDef="let ator">{{ ator.nome }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Ações -->
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef class="coluna-acoes">
+      <button
+        mat-mini-fab
+        color="accent"
+        aria-label="Adicionar um Ator"
+        (click)="onAdd()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let ator" class="coluna-acoes">
+      <button mat-icon-button color="primary" aria-label="Editar Ator">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Remover Ator">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: colunasExibidas"></mat-row>
+</mat-table>
