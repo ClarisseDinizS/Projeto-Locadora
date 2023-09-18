@@ -1,12 +1,18 @@
 package com.backend;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 
-import com.backend.model.Ator;
+import com.backend.model.Classe;
 import com.backend.repository.AtorRepository;
+import com.backend.repository.ClasseRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -16,14 +22,16 @@ public class BackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDatabase(AtorRepository atorRepository) {
+	CommandLineRunner initDatabase(ClasseRepository classeRepository) {
 		return args -> {
-			atorRepository.deleteAll();
+			classeRepository.deleteAll();
 
-			Ator ator = new Ator();
-			ator.setNome("Edson Lima");
+			Classe classe = new Classe();
+			classe.setNome("Edson Lima");
+			classe.setValor(Double.parseDouble("30"));
+			classe.setData(new Date());
 
-			atorRepository.save(ator);
+			classeRepository.save(classe);
 		};
 	}
 }

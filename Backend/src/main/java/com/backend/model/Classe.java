@@ -1,5 +1,9 @@
 package com.backend.model;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,10 +19,9 @@ public class Classe {
     private String nome;
 
     @Column
-    private Integer valor;
+    private Double valor;
 
     @Column
-    private String data;
-
-    
+    @JsonFormat(pattern = "dd/MM/yyyy", timezone = "GMT-3")
+    private Date data;    
 }

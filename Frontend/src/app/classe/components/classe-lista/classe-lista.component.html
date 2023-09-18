@@ -1,0 +1,46 @@
+<mat-table [dataSource]="classes">
+  <!-- Coluna Id -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let classe">{{ classe.id }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Nome -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef>Classe</mat-header-cell>
+    <mat-cell *matCellDef="let classe">{{ classe.nome }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Valor -->
+  <ng-container matColumnDef="valor">
+    <mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
+    <mat-cell *matCellDef="let classe">{{ classe.valor }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Data -->
+  <ng-container matColumnDef="data">
+    <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+    <mat-cell *matCellDef="let classe">{{ classe.data }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Ações -->
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef class="coluna-acoes">
+      <button mat-mini-fab color="accent" aria-label="Adicionar uma Classe" (click)="onAdd()" class="coluna-acoes-header">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let classe" class="coluna-acoes">
+      <button mat-icon-button color="primary" aria-label="Editar Classe" (click)="onEdit(classe)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Remover Classe" (click)="onRemove(classe)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: colunasExibidas"></mat-row>
+</mat-table>

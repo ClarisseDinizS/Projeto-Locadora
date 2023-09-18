@@ -16,6 +16,6 @@ export class AtorResolver implements Resolve<Ator> {
     if (route.params && route.params['id']) {
       return this.service.buscarPorId(route.params['id']);
     }
-    return of({ id: 0, nome: '', categoria: '', lessons: [] });
+    return of({ id: 0, nome: '', lessons: [] });
   }
 }
