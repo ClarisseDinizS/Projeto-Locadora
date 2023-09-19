@@ -1,6 +1,7 @@
 package com.backend;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.boot.CommandLineRunner;
@@ -29,7 +30,7 @@ public class BackendApplication {
 			Classe classe = new Classe();
 			classe.setNome("Edson Lima");
 			classe.setValor(Double.parseDouble("30"));
-			classe.setData(new Date());
+			classe.setData(null);
 
 			classeRepository.save(classe);
 		};

@@ -1,6 +1,9 @@
 package com.backend.model;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -23,5 +26,6 @@ public class Classe {
 
     @Column
     @JsonFormat(pattern = "dd/MM/yyyy", timezone = "GMT-3")
-    private Date data;    
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate data;
 }

@@ -20,7 +20,7 @@
   <!-- Coluna Data -->
   <ng-container matColumnDef="data">
     <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
-    <mat-cell *matCellDef="let classe">{{ classe.data }}</mat-cell>
+    <mat-cell *matCellDef="let classe">{{ classe.data | date: 'dd/MM/yyyy' }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Ações -->
