@@ -22,5 +22,9 @@ export class AppComponent {
   navegarParaClasse() {
     this.router.navigate(['/classe']);
   }
+
+  navegarParaDiretor() {
+    this.router.navigate(['/diretor']);
+  }
 }
 
