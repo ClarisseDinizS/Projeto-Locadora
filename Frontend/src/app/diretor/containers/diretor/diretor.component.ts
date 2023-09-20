@@ -63,7 +63,7 @@ export class DiretorComponent implements OnInit {
         this.diretorServico.excluir(diretor.id).subscribe(
           () => {
             this.recarregar();
-            this.snackBar.open('Ator removido com sucesso!', 'X', {
+            this.snackBar.open('Diretor removido com sucesso!', 'X', {
               duration: 5000,
               verticalPosition: 'top',
               horizontalPosition: 'center',
