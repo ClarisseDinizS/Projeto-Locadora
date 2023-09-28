@@ -25,14 +25,14 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner initDatabase(ClasseRepository classeRepository) {
 		return args -> {
-			classeRepository.deleteAll();
+			/*classeRepository.deleteAll();
 
 			Classe classe = new Classe();
 			classe.setNome("Edson Lima");
 			classe.setValor(Double.parseDouble("30"));
 			classe.setData(null);
 
-			classeRepository.save(classe);
+			classeRepository.save(classe);*/
 		};
 	}
 }
