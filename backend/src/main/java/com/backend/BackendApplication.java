@@ -6,20 +6,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.backend.model.Ator;
-import com.backend.model.Diretor;
-import com.backend.model.Titulo;
-import com.backend.repository.DiretorRepository;
-import com.backend.repository.TituloRepository;
+import com.backend.model.*;
+import com.backend.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 
-import com.backend.model.Classe;
-import com.backend.repository.AtorRepository;
-import com.backend.repository.ClasseRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
@@ -31,7 +25,7 @@ public class BackendApplication {
 
 	@Bean
 	CommandLineRunner initDatabase(ClasseRepository classeRepository, DiretorRepository diretorRepository, AtorRepository atorRepository,
-								   TituloRepository tituloRepository) {
+								   TituloRepository tituloRepository, ItemRepository itemRepository, ClienteRepository clienteRepository) {
 		return args -> {
 			classeRepository.deleteAll();
 			Classe classe = new Classe();
@@ -63,6 +57,27 @@ public class BackendApplication {
 			titulo.setAtores(atorList);
 
 			tituloRepository.save(titulo);
+
+			itemRepository.deleteAll();
+			Item item = new Item();
+			item.setNumserie(1);
+			item.setDtaquisicao(LocalDate.now().minusYears(9));
+			item.setTipoItem("Dvd");
+			item.setTitulo(titulo);
+
+			itemRepository.save(item);
+
+			clienteRepository.deleteAll();
+			Cliente cliente = new Cliente();
+			cliente.setNome("Isabella");
+			cliente.setDataNascimento(LocalDate.now());
+			cliente.setNumeroInscricao(12);
+			cliente.setSexo("Feminino");
+			cliente.setEstahAtivo("Ativo");
+
+			clienteRepository.save(cliente);
+
+
 
 
 
