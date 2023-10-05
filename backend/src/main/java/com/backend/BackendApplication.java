@@ -1,9 +1,7 @@
 package com.backend;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.backend.model.*;
@@ -11,10 +9,7 @@ import com.backend.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -40,7 +35,7 @@ public class BackendApplication {
 			diretorRepository.save(diretor);
 
 			atorRepository.deleteAll();
-			List<Ator> atorList = new ArrayList<Ator>();
+			List<Ator> atorList = new ArrayList<>();
 			Ator ator = new Ator();
 			ator.setNome("Clarisse Diniz");
 			atorRepository.save(ator);

@@ -9,11 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import com.backend.dto.DiretorDTO;
 import com.backend.dto.mapper.DiretorMapper;
 import com.backend.exception.RegistroNotFoundException;
-import com.backend.exception.RelationFoundException;
 import com.backend.model.Diretor;
-import com.backend.model.Titulo;
 import com.backend.repository.DiretorRepository;
-import com.backend.repository.TituloRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -25,14 +22,12 @@ public class DiretorService {
 
     private final DiretorRepository diretorRepository;
     private final DiretorMapper diretorMapper;
-    private final TituloRepository tituloRepository;
     private final EntidadeService entidadeService;
 
     public DiretorService(DiretorRepository diretorRepository, DiretorMapper diretorMapper,
-            TituloRepository tituloRepository, EntidadeService entidadeService) {
+            EntidadeService entidadeService) {
         this.diretorRepository = diretorRepository;
         this.diretorMapper = diretorMapper;
-        this.tituloRepository = tituloRepository;
         this.entidadeService = entidadeService;
     }
 
@@ -63,9 +58,7 @@ public class DiretorService {
         // .orElseThrow(() -> new RegistroNotFoundException(id)));
         Diretor diretor = diretorRepository.findById(id).orElseThrow(() -> new RegistroNotFoundException(id));
 
-        List<Titulo> titulo = tituloRepository.findByDiretor(diretor);
-
-        entidadeService.verificarRelacoesComTitulos(titulo,
+        entidadeService.verificarRelacoesComTitulos(diretor,
                 "Não é possível excluir este diretor por estar relacionado a esses títulos:");
 
         diretorRepository.delete(diretor);

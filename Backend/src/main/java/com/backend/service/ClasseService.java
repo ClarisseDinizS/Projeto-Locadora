@@ -10,10 +10,7 @@ import com.backend.dto.ClasseDTO;
 import com.backend.dto.mapper.ClasseMapper;
 import com.backend.exception.RegistroNotFoundException;
 import com.backend.model.Classe;
-import com.backend.model.Diretor;
-import com.backend.model.Titulo;
 import com.backend.repository.ClasseRepository;
-import com.backend.repository.TituloRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -25,14 +22,12 @@ public class ClasseService {
 
     private final ClasseRepository classeRepository;
     private final ClasseMapper classeMapper;
-    private final TituloRepository tituloRepository;
     private final EntidadeService entidadeService;
 
     public ClasseService(ClasseRepository classeRepository, ClasseMapper classeMapper,
-            TituloRepository tituloRepository, EntidadeService entidadeService) {
+            EntidadeService entidadeService) {
         this.classeRepository = classeRepository;
         this.classeMapper = classeMapper;
-        this.tituloRepository = tituloRepository;
         this.entidadeService = entidadeService;
     }
 
@@ -61,14 +56,9 @@ public class ClasseService {
     }
 
     public void excluir(@NotNull @Positive Long id) {
-        // classeRepository.delete(classeRepository.findById(id)
-        // .orElseThrow(() -> new RegistroNotFoundException(id)));
-
         Classe classe = classeRepository.findById(id).orElseThrow(() -> new RegistroNotFoundException(id));
 
-        List<Titulo> titulo = tituloRepository.findByClasse(classe);
-
-        entidadeService.verificarRelacoesComTitulos(titulo,
+        entidadeService.verificarRelacoesComTitulos(classe,
                 "Não é possível excluir esta classe por estar relacionado a esses títulos:");
 
         classeRepository.delete(classe);
