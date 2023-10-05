@@ -9,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import com.backend.dto.ClasseDTO;
 import com.backend.dto.mapper.ClasseMapper;
 import com.backend.exception.RegistroNotFoundException;
-import com.backend.model.Classe;
 import com.backend.repository.ClasseRepository;
 
 import jakarta.validation.Valid;
@@ -56,11 +55,10 @@ public class ClasseService {
     }
 
     public void excluir(@NotNull @Positive Long id) {
-        Classe classe = classeRepository.findById(id).orElseThrow(() -> new RegistroNotFoundException(id));
+        entidadeService.verificarRelacoes(classeRepository.findById(id)
+                .orElseThrow(() -> new RegistroNotFoundException(id)));
 
-        entidadeService.verificarRelacoesComTitulos(classe,
-                "Não é possível excluir esta classe por estar relacionado a esses títulos:");
-
-        classeRepository.delete(classe);
+        classeRepository.delete(classeRepository.findById(id)
+                .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
 }

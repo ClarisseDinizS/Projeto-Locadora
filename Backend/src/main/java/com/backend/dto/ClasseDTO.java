@@ -1,7 +1,6 @@
 package com.backend.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import org.hibernate.validator.constraints.Length;
 import jakarta.validation.constraints.NotBlank;

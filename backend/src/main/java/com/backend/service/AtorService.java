@@ -9,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import com.backend.dto.AtorDTO;
 import com.backend.dto.mapper.AtorMapper;
 import com.backend.exception.RegistroNotFoundException;
-import com.backend.model.Ator;
 import com.backend.repository.AtorRepository;
 
 import jakarta.validation.Valid;
@@ -54,15 +53,11 @@ public class AtorService {
     }
 
     public void excluir(@NotNull @Positive Long id) {
-        atorRepository.delete(atorRepository.findById(id)
+        entidadeService.verificarRelacoes(atorRepository.findById(id)
                 .orElseThrow(() -> new RegistroNotFoundException(id)));
 
-        Ator ator = atorRepository.findById(id).orElseThrow(() -> new RegistroNotFoundException(id));
-
-        entidadeService.verificarRelacoesComTitulos(ator,
-                "Não é possível excluir este ator por estar relacionado a esses títulos:");
-
-        atorRepository.delete(ator);
+        atorRepository.delete(atorRepository.findById(id)
+                .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
 
 }

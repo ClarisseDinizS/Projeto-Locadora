@@ -1,8 +1,6 @@
 package com.backend.dto.mapper;
 
-import com.backend.dto.DiretorDTO;
 import com.backend.dto.TituloDTO;
-import com.backend.model.Diretor;
 import com.backend.model.Titulo;
 import org.springframework.stereotype.Component;
 
