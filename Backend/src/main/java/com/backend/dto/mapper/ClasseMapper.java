@@ -7,21 +7,21 @@ import com.backend.model.Classe;
 
 @Component
 public class ClasseMapper {
-    
-    public ClasseDTO paraDTO(Classe classe){
-        if(classe == null){
+
+    public ClasseDTO paraDTO(Classe classe) {
+        if (classe == null) {
             return null;
         }
-         return new ClasseDTO(classe.getId(), classe.getNome(), classe.getValor(), classe.getData());
+        return new ClasseDTO(classe.getId(), classe.getNome(), classe.getValor(), classe.getData());
     }
 
-    public Classe paraEntidade(ClasseDTO classeDTO){
-       if(classeDTO == null){
+    public Classe paraEntidade(ClasseDTO classeDTO) {
+        if (classeDTO == null) {
             return null;
-        } 
+        }
 
         Classe classe = new Classe();
-        if(classeDTO.id() != null){
+        if (classeDTO.id() != null) {
             classe.setId(classeDTO.id());
         }
 

@@ -56,5 +56,5 @@ public class DiretorController {
     public void excluir(@PathVariable @NotNull @Positive Long id) {
         diretorService.excluir(id);
     }
-    
+
 }

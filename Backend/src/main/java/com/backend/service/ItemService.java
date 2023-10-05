@@ -29,8 +29,9 @@ public class ItemService {
         return itemRepository.findAll().stream().map(itemMapper::paraDTO).collect(Collectors.toList());
     }
 
-    public ItemDTO buscarPorId (@NotNull @Positive Long id) {
-        return itemRepository.findById(id).map(itemMapper::paraDTO).orElseThrow(() -> new RegistroNotFoundException(id));
+    public ItemDTO buscarPorId(@NotNull @Positive Long id) {
+        return itemRepository.findById(id).map(itemMapper::paraDTO)
+                .orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
     public ItemDTO criar(@Valid @NotNull ItemDTO itemDto) {

@@ -39,10 +39,8 @@ public class Titulo {
 
     @ManyToMany
     @NotNull
-    @JoinTable(name="ator_titulo", joinColumns= {@JoinColumn(name="idTitulo")}, inverseJoinColumns= {@JoinColumn(name="idAtor")})
+    @JoinTable(name = "ator_titulo", 
+            joinColumns = { @JoinColumn(name = "idTitulo") }, 
+            inverseJoinColumns = { @JoinColumn(name = "idAtor") })
     private List<Ator> atores;
-
-    public Titulo() {
-
-    }
 }

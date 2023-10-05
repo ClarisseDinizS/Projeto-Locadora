@@ -7,21 +7,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class TituloMapper {
 
-    public TituloDTO paraDTO(Titulo titulo){
-        if(titulo == null){
+    public TituloDTO paraDTO(Titulo titulo) {
+        if (titulo == null) {
             return null;
         }
         return new TituloDTO(titulo.getId(), titulo.getNome(), titulo.getAno(), titulo.getSinopse(),
                 titulo.getCategoria(), titulo.getDiretor(), titulo.getClasse(), titulo.getAtores());
     }
 
-    public Titulo paraEntidade(TituloDTO tituloDto){
-        if(tituloDto == null){
+    public Titulo paraEntidade(TituloDTO tituloDto) {
+        if (tituloDto == null) {
             return null;
         }
 
         Titulo titulo = new Titulo();
-        if(tituloDto.id() != null){
+        if (tituloDto.id() != null) {
             titulo.setId(tituloDto.id());
         }
 

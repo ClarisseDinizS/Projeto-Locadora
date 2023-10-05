@@ -7,6 +7,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record ClasseDTO(Long id, @NotBlank @NotNull @Length(min = 5, max = 100) String nome,
-                @NotNull Double valor, @NotNull LocalDate data) {
+        @NotNull Double valor, @NotNull LocalDate data) {
 
 }

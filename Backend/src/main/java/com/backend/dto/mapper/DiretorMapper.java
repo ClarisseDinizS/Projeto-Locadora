@@ -8,20 +8,20 @@ import com.backend.model.Diretor;
 @Component
 public class DiretorMapper {
 
-    public DiretorDTO paraDTO(Diretor diretor){
-        if(diretor == null){
+    public DiretorDTO paraDTO(Diretor diretor) {
+        if (diretor == null) {
             return null;
         }
-         return new DiretorDTO(diretor.getId(), diretor.getNome());
+        return new DiretorDTO(diretor.getId(), diretor.getNome());
     }
 
-    public Diretor paraEntidade(DiretorDTO diretorDto){
-       if(diretorDto == null){
+    public Diretor paraEntidade(DiretorDTO diretorDto) {
+        if (diretorDto == null) {
             return null;
-        } 
+        }
 
         Diretor diretor = new Diretor();
-        if(diretorDto.id() != null){
+        if (diretorDto.id() != null) {
             diretor.setId(diretorDto.id());
         }
 
@@ -30,5 +30,5 @@ public class DiretorMapper {
         return diretor;
 
     }
-    
+
 }

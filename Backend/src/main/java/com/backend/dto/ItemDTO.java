@@ -6,6 +6,6 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record ItemDTO(Long id, @NotBlank @NotNull Integer numserie, LocalDate dtaquisicao, @NotBlank @NotNull String tipoItem,
-                      @NotBlank @NotNull Titulo titulo) {
+public record ItemDTO(Long id, @NotBlank @NotNull Integer numserie, LocalDate dtaquisicao,
+        @NotBlank @NotNull String tipoItem, @NotBlank @NotNull Titulo titulo) {
 }

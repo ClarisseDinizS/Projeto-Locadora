@@ -29,8 +29,9 @@ public class ClienteService {
         return clienteRepository.findAll().stream().map(clienteMapper::paraDTO).collect(Collectors.toList());
     }
 
-    public ClienteDTO buscarPorId (@NotNull @Positive Long id) {
-        return clienteRepository.findById(id).map(clienteMapper::paraDTO).orElseThrow(() -> new RegistroNotFoundException(id));
+    public ClienteDTO buscarPorId(@NotNull @Positive Long id) {
+        return clienteRepository.findById(id).map(clienteMapper::paraDTO)
+                .orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
     public ClienteDTO criar(@Valid @NotNull ClienteDTO clienteDto) {
@@ -45,7 +46,6 @@ public class ClienteService {
                     registro.setDataNascimento(clienteDto.dataNascimento());
                     registro.setSexo(clienteDto.sexo());
                     registro.setEstahAtivo(clienteDto.estahAtivo());
-
 
                     return clienteMapper.paraDTO(clienteRepository.save(registro));
                 }).orElseThrow(() -> new RegistroNotFoundException(id));

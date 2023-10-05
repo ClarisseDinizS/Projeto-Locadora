@@ -19,8 +19,9 @@ public class BackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDatabase(ClasseRepository classeRepository, DiretorRepository diretorRepository, AtorRepository atorRepository,
-								   TituloRepository tituloRepository, ItemRepository itemRepository, ClienteRepository clienteRepository) {
+	CommandLineRunner initDatabase(ClasseRepository classeRepository, DiretorRepository diretorRepository,
+			AtorRepository atorRepository, TituloRepository tituloRepository, 
+			ItemRepository itemRepository, ClienteRepository clienteRepository) {
 		return args -> {
 			classeRepository.deleteAll();
 			Classe classe = new Classe();
@@ -71,11 +72,6 @@ public class BackendApplication {
 			cliente.setEstahAtivo("Ativo");
 
 			clienteRepository.save(cliente);
-
-
-
-
-
 
 		};
 	}

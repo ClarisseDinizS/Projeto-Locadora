@@ -23,7 +23,7 @@ import jakarta.validation.constraints.Positive;
 @RestController
 @RequestMapping("/api/classe")
 public class ClasseController {
-    
+
     private final ClasseService classeService;
 
     public ClasseController(ClasseService classeService) {

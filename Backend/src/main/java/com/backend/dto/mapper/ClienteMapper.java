@@ -7,21 +7,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClienteMapper {
 
-    public ClienteDTO paraDTO(Cliente cliente){
-        if(cliente == null){
+    public ClienteDTO paraDTO(Cliente cliente) {
+        if (cliente == null) {
             return null;
         }
         return new ClienteDTO(cliente.getId(), cliente.getNumeroInscricao(), cliente.getNome(),
                 cliente.getDataNascimento(), cliente.getSexo(), cliente.getEstahAtivo());
     }
 
-    public Cliente paraEntidade(ClienteDTO clienteDto){
-        if(clienteDto == null){
+    public Cliente paraEntidade(ClienteDTO clienteDto) {
+        if (clienteDto == null) {
             return null;
         }
 
         Cliente cliente = new Cliente();
-        if(clienteDto.id() != null){
+        if (clienteDto.id() != null) {
             cliente.setId(clienteDto.id());
         }
 

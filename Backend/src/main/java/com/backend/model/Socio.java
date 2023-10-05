@@ -37,9 +37,9 @@ public class Socio {
     private String sexo;
 
     @OneToMany
-    @JoinTable(name="socio_dependente",
-            joinColumns= {@JoinColumn(name="idSocio")},
-            inverseJoinColumns= {@JoinColumn(name="idCliente")})
+    @JoinTable(name = "socio_dependente", 
+            joinColumns = { @JoinColumn(name = "idSocio") }, 
+            inverseJoinColumns = { @JoinColumn(name = "idCliente") })
     private List<Cliente> dependentes;
 
     @Column(length = 5, nullable = false)

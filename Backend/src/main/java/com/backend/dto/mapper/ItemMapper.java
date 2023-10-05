@@ -7,20 +7,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class ItemMapper {
 
-    public ItemDTO paraDTO(Item item){
-        if(item == null){
+    public ItemDTO paraDTO(Item item) {
+        if (item == null) {
             return null;
         }
-        return new ItemDTO(item.getId(), item.getNumserie(), item.getDtaquisicao(), item.getTipoItem(), item.getTitulo());
+        return new ItemDTO(item.getId(), item.getNumserie(), item.getDtaquisicao(), item.getTipoItem(),
+                item.getTitulo());
     }
 
-    public Item paraEntidade(ItemDTO itemDto){
-        if(itemDto == null){
+    public Item paraEntidade(ItemDTO itemDto) {
+        if (itemDto == null) {
             return null;
         }
 
         Item item = new Item();
-        if(itemDto.id() != null){
+        if (itemDto.id() != null) {
             item.setId(itemDto.id());
         }
 
@@ -28,7 +29,6 @@ public class ItemMapper {
         item.setDtaquisicao(itemDto.dtaquisicao());
         item.setTipoItem(itemDto.tipoItem());
         item.setTitulo(itemDto.titulo());
-
 
         return item;
 

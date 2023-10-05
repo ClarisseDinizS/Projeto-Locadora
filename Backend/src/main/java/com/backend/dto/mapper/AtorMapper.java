@@ -8,20 +8,20 @@ import com.backend.model.Ator;
 @Component
 public class AtorMapper {
 
-    public AtorDTO paraDTO(Ator ator){
-        if(ator == null){
+    public AtorDTO paraDTO(Ator ator) {
+        if (ator == null) {
             return null;
         }
-         return new AtorDTO(ator.getId(), ator.getNome());
+        return new AtorDTO(ator.getId(), ator.getNome());
     }
 
-    public Ator paraEntidade(AtorDTO atorDto){
-       if(atorDto == null){
+    public Ator paraEntidade(AtorDTO atorDto) {
+        if (atorDto == null) {
             return null;
-        } 
+        }
 
         Ator ator = new Ator();
-        if(atorDto.id() != null){
+        if (atorDto.id() != null) {
             ator.setId(atorDto.id());
         }
 
@@ -30,5 +30,5 @@ public class AtorMapper {
         return ator;
 
     }
-    
+
 }
