@@ -1,9 +1,14 @@
 package com.backend.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-
 import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Data
 @Entity
@@ -28,6 +33,4 @@ public class Cliente {
 
     @Column(length = 5, nullable = false)
     private String estahAtivo;
-
-
 }

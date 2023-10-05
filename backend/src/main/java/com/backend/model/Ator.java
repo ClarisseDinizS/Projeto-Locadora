@@ -26,5 +26,4 @@ public class Ator {
     @Length(min = 3, max = 200)
     @Column(name = "nome", length = 200, nullable = false)
     private String nome;
-
 }

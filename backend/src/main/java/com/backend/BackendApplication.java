@@ -4,12 +4,23 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.backend.model.*;
-import com.backend.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import com.backend.model.Ator;
+import com.backend.model.Classe;
+import com.backend.model.Cliente;
+import com.backend.model.Diretor;
+import com.backend.model.Item;
+import com.backend.model.Titulo;
+import com.backend.repository.AtorRepository;
+import com.backend.repository.ClasseRepository;
+import com.backend.repository.ClienteRepository;
+import com.backend.repository.DiretorRepository;
+import com.backend.repository.ItemRepository;
+import com.backend.repository.TituloRepository;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -43,6 +54,7 @@ public class BackendApplication {
 			atorList.add(ator);
 
 			tituloRepository.deleteAll();
+			List<Titulo> tituloList = new ArrayList<>();
 			Titulo titulo = new Titulo();
 			titulo.setNome("Harry Potter");
 			titulo.setAno(LocalDate.now().minusYears(9));
@@ -53,6 +65,11 @@ public class BackendApplication {
 			titulo.setAtores(atorList);
 
 			tituloRepository.save(titulo);
+			tituloList.add(titulo);
+			
+			for(Ator ator1 : atorList){
+				ator1.setTitulos(tituloList);
+			}
 
 			itemRepository.deleteAll();
 			Item item = new Item();

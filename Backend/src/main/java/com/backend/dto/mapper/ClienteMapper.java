@@ -1,8 +1,9 @@
 package com.backend.dto.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.backend.dto.ClienteDTO;
 import com.backend.model.Cliente;
-import org.springframework.stereotype.Component;
 
 @Component
 public class ClienteMapper {

@@ -1,17 +1,19 @@
 package com.backend.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.backend.dto.ClienteDTO;
 import com.backend.dto.mapper.ClienteMapper;
 import com.backend.exception.RegistroNotFoundException;
 import com.backend.repository.ClienteRepository;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Validated
 @Service

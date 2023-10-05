@@ -1,8 +1,9 @@
 package com.backend.dto.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.backend.dto.TituloDTO;
 import com.backend.model.Titulo;
-import org.springframework.stereotype.Component;
 
 @Component
 public class TituloMapper {
