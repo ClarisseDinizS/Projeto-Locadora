@@ -9,6 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import com.backend.dto.AtorDTO;
 import com.backend.dto.mapper.AtorMapper;
 import com.backend.exception.RegistroNotFoundException;
+import com.backend.exception.RelationFoundException;
+import com.backend.model.Titulo;
 import com.backend.repository.AtorRepository;
 
 import jakarta.validation.Valid;
@@ -31,8 +33,9 @@ public class AtorService {
         return atorRepository.findAll().stream().map(atorMapper::paraDTO).collect(Collectors.toList());
     }
 
-    public AtorDTO buscarPorId (@NotNull @Positive Long id) {
-        return atorRepository.findById(id).map(atorMapper::paraDTO).orElseThrow(() -> new RegistroNotFoundException(id));
+    public AtorDTO buscarPorId(@NotNull @Positive Long id) {
+        return atorRepository.findById(id).map(atorMapper::paraDTO)
+                .orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
     public AtorDTO criar(@Valid @NotNull AtorDTO atorDto) {
