@@ -1,0 +1,52 @@
+<mat-table [dataSource]="titulos">
+  <!-- Coluna Id -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let titulo">{{ titulo.id }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Nome -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef>Titulo</mat-header-cell>
+    <mat-cell *matCellDef="let titulo">{{ titulo.nome }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Nome -->
+  <ng-container matColumnDef="ano">
+    <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
+    <mat-cell *matCellDef="let titulo">{{ titulo.ano | date: 'yyyy' }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Nome -->
+  <ng-container matColumnDef="categoria">
+    <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+    <mat-cell *matCellDef="let titulo">{{ titulo.categoria }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Nome -->
+  <ng-container matColumnDef="diretor">
+    <mat-header-cell *matHeaderCellDef>Diretor</mat-header-cell>
+    <mat-cell *matCellDef="let titulo">{{ titulo.diretor.nome }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Ações -->
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef class="coluna-acoes">
+      <button mat-mini-fab color="accent" aria-label="Adicionar um Titulo" (click)="onAdd()" class="coluna-acoes-header">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let titulo" class="coluna-acoes">
+      <button mat-icon-button color="primary" aria-label="Editar Titulo" (click)="onEdit(titulo)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Remover Titulo" (click)="onRemove(titulo)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: colunasExibidas"></mat-row>
+</mat-table>

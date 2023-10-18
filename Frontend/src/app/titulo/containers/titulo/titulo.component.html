@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary">Titulos Disponíveis</mat-toolbar>
+    <div class="mat-elevation-z8 coluna-flex">
+      <app-titulo-lista *ngIf="titulos$ | async as titulos; else carregando" [titulos]="titulos" (adicionar)="onAdd()"
+        (editar)="onEdit($event)" (excluir)="onRemove($event)">
+      </app-titulo-lista>
+
+      <ng-template #carregando>
+        <div class="carregando-spinner">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-template>
+    </div>
+  </mat-card-content>
+</mat-card>

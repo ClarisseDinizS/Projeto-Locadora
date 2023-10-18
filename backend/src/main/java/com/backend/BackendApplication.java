@@ -66,10 +66,6 @@ public class BackendApplication {
 
 			tituloRepository.save(titulo);
 			tituloList.add(titulo);
-			
-			for(Ator ator1 : atorList){
-				ator1.setTitulos(tituloList);
-			}
 
 			itemRepository.deleteAll();
 			Item item = new Item();
