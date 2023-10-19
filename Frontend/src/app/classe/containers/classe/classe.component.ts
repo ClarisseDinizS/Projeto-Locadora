@@ -59,7 +59,6 @@ export class ClasseComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((resultado: boolean) => {
       if (resultado) {
-
         this.classeServico.excluir(classe.id).subscribe(
           () => {
             this.recarregar();
@@ -69,7 +68,10 @@ export class ClasseComponent implements OnInit {
               horizontalPosition: 'center',
             });
           },
-          () => this.onError('Erro ao tentar remover classe.')
+          (error) =>
+            this.onError(
+              error.error ? error.error : 'Erro ao tentar remover o título.'
+            )
         );
       }
     });

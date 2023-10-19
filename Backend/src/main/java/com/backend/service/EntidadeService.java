@@ -64,8 +64,9 @@ public class EntidadeService {
         if (itens != null && !itens.isEmpty()) {
             for (Item item : itens) {
                 mensagem.append(item.getNumSerie());
-                mensagem.append("\n");
+                mensagem.append(", ");
             }
+            mensagem.deleteCharAt(mensagem.length() - 2);
         }
 
         throw new RelationFoundException(mensagem.toString());

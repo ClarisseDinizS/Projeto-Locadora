@@ -7,6 +7,6 @@ import com.backend.model.Titulo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record ItemDTO(Long id, @NotBlank @NotNull Integer numSerie, LocalDate dtaAquisicao,
+public record ItemDTO(Long id, @NotNull Integer numSerie, LocalDate dtaAquisicao,
         @NotBlank @NotNull String tipoItem, @NotNull Titulo titulo) {
 }

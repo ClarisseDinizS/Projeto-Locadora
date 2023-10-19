@@ -59,7 +59,6 @@ export class ItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((resultado: boolean) => {
       if (resultado) {
-
         this.itemServico.excluir(item.id).subscribe(
           () => {
             this.recarregar();
@@ -69,7 +68,10 @@ export class ItemComponent implements OnInit {
               horizontalPosition: 'center',
             });
           },
-          () => this.onError('Erro ao tentar remover item.')
+          (error) =>
+            this.onError(
+              error.error ? error.error : 'Erro ao tentar remover o título.'
+            )
         );
       }
     });

@@ -59,7 +59,6 @@ export class AtorComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((resultado: boolean) => {
       if (resultado) {
-
         this.atorServico.excluir(ator.id).subscribe(
           () => {
             this.recarregar();
@@ -69,7 +68,10 @@ export class AtorComponent implements OnInit {
               horizontalPosition: 'center',
             });
           },
-          () => this.onError('Erro ao tentar remover ator.')
+          (error) =>
+            this.onError(
+              error.error ? error.error : 'Erro ao tentar remover o título.'
+            )
         );
       }
     });

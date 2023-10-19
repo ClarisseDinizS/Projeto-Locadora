@@ -44,6 +44,6 @@ export class ItemService {
   }
 
   excluir(id: number) {
-    return this.httpCliente.delete(`${this.API}/${id}`).pipe(first());
+    return this.httpCliente.delete(`${this.API}/${id}`, { observe: 'response' }).pipe(first());
   }
 }

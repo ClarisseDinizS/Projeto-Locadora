@@ -14,7 +14,7 @@
   <!-- Coluna Valor -->
   <ng-container matColumnDef="valor">
     <mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
-    <mat-cell *matCellDef="let classe">{{ classe.valor }}</mat-cell>
+    <mat-cell *matCellDef="let classe">{{ classe.valor | number: '1.2-2' }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Data -->
