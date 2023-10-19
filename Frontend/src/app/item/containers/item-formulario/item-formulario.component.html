@@ -1,0 +1,57 @@
+<mat-card>
+  <mat-card-header>
+    <mat-toolbar color="primary">
+      <mat-card-title>Detalhes do Item</mat-card-title>
+    </mat-toolbar>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="formulario" class="largura-minima">
+      <mat-form-field class="largura-total">
+        <mat-label>Num. Serie</mat-label>
+        <input matInput placeholder="Num. Serie" formControlName="numSerie" #numSerie />
+        <mat-error *ngIf="formulario.get('numSerie')?.invalid">{{
+          getErrorMessage("numSerie")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Data de Aquisição</mat-label>
+        <input matInput placeholder="Data de Aquisição" formControlName="dtaAquisicao" [matDatepicker]="dtaAquisicao" />
+        <mat-datepicker-toggle matIconSuffix [for]="dtaAquisicao"></mat-datepicker-toggle>
+        <mat-datepicker #dtaAquisicao></mat-datepicker>
+        <mat-error *ngIf="formulario.get('dtaAquisicao')?.invalid">{{ getErrorMessage("dtaAquisicao") }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Tipo do Item</mat-label>
+        <input matInput placeholder="Tipo do Item" formControlName="tipoItem" #tipoItem />
+        <mat-hint align="end">{{ tipoItem.value.length }}/100</mat-hint>
+        <mat-error *ngIf="formulario.get('tipoItem')?.invalid">{{
+          getErrorMessage("tipoItem")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Título</mat-label>
+        <mat-select formControlName="titulo" name="titulo" placeholder="Título">
+          <mat-option *ngFor="let titulo of titulos" [value]="titulo">
+            {{ titulo.nome }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formulario.get('titulo')?.invalid">{{
+          getErrorMessage("titulo")
+          }}</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions class="acoes-centralizadas">
+    <button mat-raised-button color="primary" (click)="onSubmit()">
+      Salvar
+    </button>
+    <button mat-raised-button (click)="onCancel()" class="botao-espaço">
+      Cancelar
+    </button>
+  </mat-card-actions>
+</mat-card>

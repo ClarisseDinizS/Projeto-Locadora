@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 
 import { Titulo } from '../model/titulo';
 import { TituloService } from '../services/titulo.service';
-import {Ator} from "../../ator/model/ator";
 import {Diretor} from "../../diretor/model/diretor";
 import {Classe} from "../../classe/model/classe";
 

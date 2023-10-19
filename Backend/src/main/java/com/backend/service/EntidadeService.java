@@ -63,7 +63,7 @@ public class EntidadeService {
 
         if (itens != null && !itens.isEmpty()) {
             for (Item item : itens) {
-                mensagem.append(item.getNumserie());
+                mensagem.append(item.getNumSerie());
                 mensagem.append("\n");
             }
         }

@@ -69,8 +69,8 @@ public class BackendApplication {
 
 			itemRepository.deleteAll();
 			Item item = new Item();
-			item.setNumserie(1);
-			item.setDtaquisicao(LocalDate.now().minusYears(9));
+			item.setNumSerie(1);
+			item.setDtaAquisicao(LocalDate.now().minusYears(9));
 			item.setTipoItem("Dvd");
 			item.setTitulo(titulo);
 

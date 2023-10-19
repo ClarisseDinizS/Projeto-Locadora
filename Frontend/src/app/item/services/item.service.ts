@@ -2,44 +2,44 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { Titulo } from '../model/titulo';
+import { Item } from '../model/item';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TituloService {
+export class ItemService {
 
-  private readonly API = 'api/titulo';
+  private readonly API = 'api/item';
 
   constructor(private httpCliente: HttpClient) { }
 
   listar() {
-    return this.httpCliente.get<Titulo[]>(this.API)
+    return this.httpCliente.get<Item[]>(this.API)
       .pipe(
         first()
         //delay(5000),
-        // tap(titulo => console.log(titulo))
+        // tap(item => console.log(item))
       );
   }
 
   buscarPorId(id: number) {
-    return this.httpCliente.get<Titulo>(`${this.API}/${id}`);
+    return this.httpCliente.get<Item>(`${this.API}/${id}`);
   }
 
-  salvar(registro: Partial<Titulo>) {
+  salvar(registro: Partial<Item>) {
     if (registro.id != 0) {
       return this.atualizar(registro);
     }
     return this.criar(registro);
   }
 
-  private criar(registro: Partial<Titulo>) {
-    return this.httpCliente.post<Titulo>(this.API, registro).pipe(first());
+  private criar(registro: Partial<Item>) {
+    return this.httpCliente.post<Item>(this.API, registro).pipe(first());
   }
 
-  private atualizar(registro: Partial<Titulo>) {
+  private atualizar(registro: Partial<Item>) {
     return this.httpCliente
-      .put<Titulo>(`${this.API}/${registro.id}`, registro)
+      .put<Item>(`${this.API}/${registro.id}`, registro)
       .pipe(first());
   }
 

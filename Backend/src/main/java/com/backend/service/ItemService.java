@@ -43,8 +43,8 @@ public class ItemService {
     public ItemDTO atualizar(@NotNull @Positive Long id, @Valid ItemDTO itemDto) {
         return itemRepository.findById(id)
                 .map(registro -> {
-                    registro.setNumserie(itemDto.numserie());
-                    registro.setDtaquisicao(itemDto.dtaquisicao());
+                    registro.setNumSerie(itemDto.numSerie());
+                    registro.setDtaAquisicao(itemDto.dtaAquisicao());
                     registro.setTipoItem(itemDto.tipoItem());
                     registro.setTitulo(itemDto.titulo());
 

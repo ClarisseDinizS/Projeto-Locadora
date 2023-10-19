@@ -12,7 +12,7 @@ public class ItemMapper {
         if (item == null) {
             return null;
         }
-        return new ItemDTO(item.getId(), item.getNumserie(), item.getDtaquisicao(), item.getTipoItem(),
+        return new ItemDTO(item.getId(), item.getNumSerie(), item.getDtaAquisicao(), item.getTipoItem(),
                 item.getTitulo());
     }
 
@@ -26,8 +26,8 @@ public class ItemMapper {
             item.setId(itemDto.id());
         }
 
-        item.setNumserie(itemDto.numserie());
-        item.setDtaquisicao(itemDto.dtaquisicao());
+        item.setNumSerie(itemDto.numSerie());
+        item.setDtaAquisicao(itemDto.dtaAquisicao());
         item.setTipoItem(itemDto.tipoItem());
         item.setTitulo(itemDto.titulo());
 

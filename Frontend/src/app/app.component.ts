@@ -30,5 +30,9 @@ export class AppComponent {
   navegarParaTitulo() {
     this.router.navigate(['/titulo']);
   }
+
+  navegarParaItem() {
+    this.router.navigate(['/item']);
+  }
 }
 

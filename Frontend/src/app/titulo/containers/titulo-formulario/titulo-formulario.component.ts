@@ -25,8 +25,8 @@ export class TituloFormularioComponent implements OnInit {
     ano: [new Date, Validators.required],
     sinopse: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
     categoria: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-    diretor: [<Diretor | undefined>{}],
-    classe: [<Classe | undefined>{}],
+    diretor: [<Diretor>{}],
+    classe: [<Classe>{}],
     atores: [this.formBuild.array(<Ator[]>[]), Validators.required],
   });
 
@@ -71,7 +71,6 @@ export class TituloFormularioComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formulario.value);
     this.servico.salvar(this.formulario.value).subscribe(
       (resultado) => this.onSucess(),
       (erro) => this.onError()

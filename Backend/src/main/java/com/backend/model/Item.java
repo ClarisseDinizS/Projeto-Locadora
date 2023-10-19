@@ -23,10 +23,10 @@ public class Item {
     private Long id;
 
     @Column(nullable = false)
-    private Integer numserie;
+    private Integer numSerie;
 
     @Column
-    private LocalDate dtaquisicao;
+    private LocalDate dtaAquisicao;
 
     @Column(length = 200, nullable = false)
     private String tipoItem;
