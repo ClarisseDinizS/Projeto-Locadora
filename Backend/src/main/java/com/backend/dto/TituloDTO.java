@@ -11,6 +11,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record TituloDTO(Long id, @NotBlank @NotNull String nome, LocalDate ano, String sinopse,
-        @NotBlank @NotNull String categoria, @NotBlank @NotNull Diretor diretor,
-        @NotBlank @NotNull Classe classe, @NotBlank @NotNull List<Ator> atores) {
+        @NotBlank @NotNull String categoria, @NotNull Diretor diretor,
+        @NotNull Classe classe, @NotNull List<Ator> atores) {
 }

@@ -29,7 +29,5 @@ public class Classe {
     private Double valor;
 
     @Column
-    @JsonFormat(pattern = "dd/MM/yyyy", timezone = "GMT-3")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate data;
 }

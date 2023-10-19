@@ -1,38 +1,77 @@
+import { Classe } from './../../../classe/model/classe';
+import { Ator } from './../../../ator/model/ator';
+import { Diretor } from './../../../diretor/model/diretor';
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
 import { Titulo } from '../../model/titulo';
 import { TituloService } from '../../services/titulo.service';
+import { DiretorService } from 'src/app/diretor/service/diretor.service';
+import { AtorService } from 'src/app/ator/services/ator.service';
+import { ClasseService } from 'src/app/classe/services/classe.service';
 
 @Component({
   selector: 'app-titulo-formulario',
   templateUrl: './titulo-formulario.component.html',
   styleUrls: ['./titulo-formulario.component.scss'],
 })
-export class TituloFormularioComponent {
+export class TituloFormularioComponent implements OnInit {
   formulario = this.formBuild.group({
     id: [0],
-    nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]]
+    nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    ano: [new Date, Validators.required],
+    sinopse: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    categoria: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    diretor: [<Diretor | undefined>{}],
+    classe: [<Classe | undefined>{}],
+    atores: [this.formBuild.array(<Ator[]>[]), Validators.required],
   });
+
+  diretores: Diretor[] = [];
+  atores: Ator[] = [];
+  classes:Classe[] = [];
 
   constructor(private formBuild: NonNullableFormBuilder,
     private servico: TituloService,
+    private diretorService: DiretorService,
+    private atorService: AtorService,
+    private classeService: ClasseService,
     private snackBar: MatSnackBar,
     private localizacao: Location,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.diretorService.listar().subscribe(diretores =>{
+      this.diretores = diretores;
+    });
+
+    this.classeService.listar().subscribe(classes =>{
+      this.classes = classes;
+    });
+
+    this.atorService.listar().subscribe(atores =>{
+      this.atores = atores;
+    });
+
     const titulo: Titulo = this.route.snapshot.data['titulo'];
+
     this.formulario.setValue({
       id: titulo.id,
-      nome: titulo.nome
+      nome: titulo.nome,
+      ano: titulo.ano,
+      sinopse: titulo.sinopse,
+      categoria: titulo.categoria,
+      diretor: titulo.diretor,
+      classe: titulo.classe,
+      atores: titulo.atores
     });
   }
 
   onSubmit() {
+    console.log(this.formulario.value);
     this.servico.salvar(this.formulario.value).subscribe(
       (resultado) => this.onSucess(),
       (erro) => this.onError()

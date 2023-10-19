@@ -29,29 +29,27 @@ public class EntidadeService {
         List<Item> itens = null;
         String mensagemErro = null;
 
-        switch (object.getClass().getSimpleName()) {
-            case "Classe":
-                mensagemErro = "Não é possível excluir esta " + object.getClass().getSimpleName()
-                        + " por estar relacionado a esses Títulos:";
-                titulos = tituloRepository.findByClasse((Classe) object);
-                break;
-            case "Diretor":
-                mensagemErro = "Não é possível excluir este " + object.getClass().getSimpleName()
-                        + " por estar relacionado a esses Títulos:";
-                titulos = tituloRepository.findByDiretor((Diretor) object);
-                break;
-            case "Ator":
-                mensagemErro = "Não é possível excluir este " + object.getClass().getSimpleName()
-                        + " por estar relacionado a esses Títulos:";
-                titulos = tituloRepository.findByAtores((Ator) object);
-                break;
-            case "Titulo":
-                mensagemErro = "Não é possível excluir este Título por estar relacionado a esses Itens:";
-                itens = itemRepository.findByTitulo((Titulo) object);
-                break;
-            default:
-                mensagemErro = "Tipo de entidade não suportado: " + object.getClass().getSimpleName();
-                break;
+        if ((object.getClass().getSimpleName()).equals("Classe")
+                && !(tituloRepository.findByClasse((Classe) object).isEmpty())) {
+            mensagemErro = "Não é possível excluir esta " + object.getClass().getSimpleName()
+                    + " por estar relacionado a esses Títulos:";
+            titulos = tituloRepository.findByClasse((Classe) object);
+        } else if ((object.getClass().getSimpleName()).equals("Diretor")
+                && !(tituloRepository.findByDiretor((Diretor) object).isEmpty())) {
+            mensagemErro = "Não é possível excluir este " + object.getClass().getSimpleName()
+                    + " por estar relacionado a esses Títulos:";
+            titulos = tituloRepository.findByDiretor((Diretor) object);
+        } else if ((object.getClass().getSimpleName()).equals("Ator")
+                && !(tituloRepository.findByAtores((Ator) object).isEmpty())) {
+            mensagemErro = "Não é possível excluir este " + object.getClass().getSimpleName()
+                    + " por estar relacionado a esses Títulos:";
+            titulos = tituloRepository.findByAtores((Ator) object);
+        } else if ((object.getClass().getSimpleName()).equals("Titulo")
+                && !(itemRepository.findByTitulo((Titulo) object).isEmpty())) {
+            mensagemErro = "Não é possível excluir este Título por estar relacionado a esses Itens:";
+            itens = itemRepository.findByTitulo((Titulo) object);
+        } else {
+            return;
         }
 
         StringBuilder mensagem = new StringBuilder(mensagemErro + "\n");
@@ -71,6 +69,5 @@ public class EntidadeService {
         }
 
         throw new RelationFoundException(mensagem.toString());
-
     }
 }

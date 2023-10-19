@@ -8,10 +8,73 @@
   <mat-card-content>
     <form [formGroup]="formulario" class="largura-minima">
       <mat-form-field class="largura-total">
+        <mat-label>Nome</mat-label>
         <input matInput placeholder="Nome" formControlName="nome" #nome />
         <mat-hint align="end">{{ nome.value.length }}/100</mat-hint>
         <mat-error *ngIf="formulario.get('nome')?.invalid">{{
           getErrorMessage("nome")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Ano</mat-label>
+        <input matInput placeholder="Ano" formControlName="ano" [matDatepicker]="ano" />
+        <mat-datepicker-toggle matIconSuffix [for]="ano"></mat-datepicker-toggle>
+        <mat-datepicker #ano></mat-datepicker>
+        <mat-error *ngIf="formulario.get('ano')?.invalid">{{ getErrorMessage("ano") }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Sinopse</mat-label>
+        <input matInput placeholder="Sinopse" formControlName="sinopse" #sinopse />
+        <mat-hint align="end">{{ sinopse.value.length }}/100</mat-hint>
+        <mat-error *ngIf="formulario.get('sinopse')?.invalid">{{
+          getErrorMessage("sinopse")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Categoria</mat-label>
+        <input matInput placeholder="Categoria" formControlName="categoria" #categoria />
+        <mat-hint align="end">{{ categoria.value.length }}/100</mat-hint>
+        <mat-error *ngIf="formulario.get('categoria')?.invalid">{{
+          getErrorMessage("categoria")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Diretor</mat-label>
+        <mat-select formControlName="diretor" name="diretor" placeholder="Diretor">
+          <mat-option *ngFor="let diretor of diretores" [value]="diretor">
+            {{ diretor.nome }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formulario.get('diretor')?.invalid">{{
+          getErrorMessage("diretor")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Classes</mat-label>
+        <mat-select formControlName="classe" name="classe" placeholder="Classe">
+          <mat-option *ngFor="let classe of classes" [value]="classe">
+            {{ classe.nome }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formulario.get('classe')?.invalid">{{
+          getErrorMessage("classe")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Atores</mat-label>
+        <mat-select multiple formControlName="atores" name="atores" placeholder="Atores">
+          <mat-option *ngFor="let ator of atores" [value]="ator">
+            {{ ator.nome }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formulario.get('atores')?.invalid">{{
+          getErrorMessage("atores")
           }}</mat-error>
       </mat-form-field>
     </form>

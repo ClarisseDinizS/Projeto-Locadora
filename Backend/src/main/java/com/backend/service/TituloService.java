@@ -65,5 +65,4 @@ public class TituloService {
         tituloRepository.delete(tituloRepository.findById(id)
                 .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
-
 }

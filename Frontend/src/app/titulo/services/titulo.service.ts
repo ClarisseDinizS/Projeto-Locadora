@@ -27,6 +27,7 @@ export class TituloService {
   }
 
   salvar(registro: Partial<Titulo>) {
+    console.log(registro);
     if (registro.id != 0) {
       return this.atualizar(registro);
     }
