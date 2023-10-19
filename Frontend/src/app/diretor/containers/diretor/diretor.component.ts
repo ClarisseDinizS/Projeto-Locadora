@@ -69,7 +69,6 @@ export class DiretorComponent implements OnInit {
             });
           },
           (error) => {
-            console.log(error.error);
             this.onError(
               error.error ? error.error : 'Erro ao tentar remover o título.'
             )}
