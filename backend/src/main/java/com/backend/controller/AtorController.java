@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.dto.AtorDTO;
 import com.backend.service.AtorService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/api/ator")
+@Tag(name="AtorController", description = "")
 public class AtorController {
 
     private final AtorService atorService;
@@ -31,6 +34,7 @@ public class AtorController {
     }
 
     @GetMapping
+    @Operation(summary = "Listar atores")
     public List<AtorDTO> listar() {
         return atorService.listar();
     }
