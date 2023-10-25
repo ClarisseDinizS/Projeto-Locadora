@@ -5,6 +5,7 @@ import {NavBarComponent} from "./nav-bar/nav-bar.component";
 
 const routes: Routes = [{
   path: '', component: NavBarComponent, children: [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'ator', loadChildren: () => import('./ator/ator.module').then(m => m.AtorModule) },
   { path: 'classe', loadChildren: () => import('./classe/classe.module').then(m => m.ClasseModule) },

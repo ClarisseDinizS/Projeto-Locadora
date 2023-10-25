@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class NavBarComponent implements OnInit {
 
   constructor(private router: Router,
-              //private authService: AuthService,
-              ) {
+    //private authService: AuthService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -27,5 +27,4 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['login']);
     //this.authService.logout();
   }
-
 }
