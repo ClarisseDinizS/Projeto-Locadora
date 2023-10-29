@@ -1,31 +1,31 @@
-<mat-table [dataSource]="itens">
+<mat-table matSort (matSortChange)="sortData($event)" [dataSource]="itens">
   <!-- Coluna Id -->
   <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-header-cell mat-sort-header="id" *matHeaderCellDef>Id</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.id }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Num. Série -->
   <ng-container matColumnDef="numSerie">
-    <mat-header-cell *matHeaderCellDef>Num. Série</mat-header-cell>
+    <mat-header-cell mat-sort-header="numSerie" *matHeaderCellDef>Num. Série</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.numSerie }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Data de Aquisição -->
   <ng-container matColumnDef="dtaAquisicao">
-    <mat-header-cell *matHeaderCellDef>Data de Aquisição</mat-header-cell>
+    <mat-header-cell mat-sort-header="dtaAquisicao" *matHeaderCellDef>Data de Aquisição</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.dtaAquisicao | date: 'dd/MM/yyyy' }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Tipo do Item -->
   <ng-container matColumnDef="tipoItem">
-    <mat-header-cell *matHeaderCellDef>Tipo do Item</mat-header-cell>
+    <mat-header-cell mat-sort-header="tipoItem" *matHeaderCellDef>Tipo do Item</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.tipoItem }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Titulo -->
   <ng-container matColumnDef="titulo">
-    <mat-header-cell *matHeaderCellDef>Titulo</mat-header-cell>
+    <mat-header-cell mat-sort-header="titulo" *matHeaderCellDef>Titulo</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.titulo.nome }}</mat-cell>
   </ng-container>
 
