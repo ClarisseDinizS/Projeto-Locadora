@@ -2,7 +2,11 @@ package com.backend.model;
 
 import java.time.LocalDate;
 
+import com.backend.enums.Tipo;
+import com.backend.enums.converters.TipoConverter;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +33,8 @@ public class Item {
     private LocalDate dtaAquisicao;
 
     @Column(length = 200, nullable = false)
-    private String tipoItem;
+    @Convert(converter = TipoConverter.class)
+    private Tipo tipoItem;
 
     @ManyToOne
     @NotNull

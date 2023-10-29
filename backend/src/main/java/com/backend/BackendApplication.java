@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.backend.enums.Tipo;
 import com.backend.model.Ator;
 import com.backend.model.Classe;
 import com.backend.model.Cliente;
@@ -71,7 +72,7 @@ public class BackendApplication {
 			Item item = new Item();
 			item.setNumSerie(1);
 			item.setDtaAquisicao(LocalDate.now().minusYears(9));
-			item.setTipoItem("Dvd");
+			item.setTipoItem(Tipo.DVD);
 			item.setTitulo(titulo);
 
 			itemRepository.save(item);

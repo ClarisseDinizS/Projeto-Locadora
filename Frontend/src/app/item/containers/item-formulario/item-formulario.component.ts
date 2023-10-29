@@ -1,6 +1,3 @@
-import { Classe } from '../../../classe/model/classe';
-import { Ator } from '../../../ator/model/ator';
-import { Diretor } from '../../../diretor/model/diretor';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
@@ -22,7 +19,7 @@ export class ItemFormularioComponent implements OnInit {
     id: [0],
     numSerie: [0, Validators.required],
     dtaAquisicao: [new Date(), Validators.required],
-    tipoItem: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)],],
+    tipoItem: ['', Validators.required],
     titulo: [<Titulo>{}],
   });
 
@@ -54,6 +51,7 @@ export class ItemFormularioComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.formulario.value);
     this.servico.salvar(this.formulario.value).subscribe(
       (resultado) => this.onSucess(),
       (erro) => this.onError()

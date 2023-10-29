@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.backend.dto.ItemDTO;
 import com.backend.dto.mapper.ItemMapper;
+import com.backend.enums.Tipo;
 import com.backend.exception.RegistroNotFoundException;
 import com.backend.repository.ItemRepository;
 
@@ -45,7 +46,7 @@ public class ItemService {
                 .map(registro -> {
                     registro.setNumSerie(itemDto.numSerie());
                     registro.setDtaAquisicao(itemDto.dtaAquisicao());
-                    registro.setTipoItem(itemDto.tipoItem());
+                    registro.setTipoItem(this.itemMapper.converterValorItem(itemDto.tipoItem()));
                     registro.setTitulo(itemDto.titulo());
 
                     return itemMapper.paraDTO(itemRepository.save(registro));

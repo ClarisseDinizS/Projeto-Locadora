@@ -18,7 +18,7 @@ public class AplicationControllerAdvice {
     }
 
     @ExceptionHandler(RelationFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST) // Você pode definir o status HTTP apropriado
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleRelationFoundException(RelationFoundException ex) {
         return ex.getMessage();
     }
