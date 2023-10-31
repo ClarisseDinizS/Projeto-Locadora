@@ -34,6 +34,10 @@ export class TituloFormularioComponent implements OnInit {
   atores: Ator[] = [];
   classes:Classe[] = [];
 
+  compareWithDiretor=(diretor1: Diretor, diretor2: Diretor) => diretor1.id == diretor2.id;
+  compareWithAtor=(ator1: Ator, ator2: Ator) => ator1.id == ator2.id;
+  compareWithClasse=(classe1: Classe, classe2: Classe) => classe1.id == classe2.id;
+
   constructor(private formBuild: NonNullableFormBuilder,
     private servico: TituloService,
     private diretorService: DiretorService,

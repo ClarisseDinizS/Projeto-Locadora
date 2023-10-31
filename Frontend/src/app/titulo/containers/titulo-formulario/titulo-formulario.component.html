@@ -44,7 +44,7 @@
 
       <mat-form-field class="largura-total">
         <mat-label>Diretor</mat-label>
-        <mat-select formControlName="diretor" name="diretor" placeholder="Diretor">
+        <mat-select formControlName="diretor" name="diretor" placeholder="Diretor" [compareWith]="compareWithDiretor">
           <mat-option *ngFor="let diretor of diretores" [value]="diretor">
             {{ diretor.nome }}
           </mat-option>
@@ -56,7 +56,7 @@
 
       <mat-form-field class="largura-total">
         <mat-label>Classes</mat-label>
-        <mat-select formControlName="classe" name="classe" placeholder="Classe">
+        <mat-select formControlName="classe" name="classe" placeholder="Classe" [compareWith]="compareWithClasse">
           <mat-option *ngFor="let classe of classes" [value]="classe">
             {{ classe.nome }}
           </mat-option>
@@ -68,7 +68,7 @@
 
       <mat-form-field class="largura-total">
         <mat-label>Atores</mat-label>
-        <mat-select multiple formControlName="atores" name="atores" placeholder="Atores">
+        <mat-select multiple formControlName="atores" name="atores" placeholder="Atores" [compareWith]="compareWithAtor">
           <mat-option *ngFor="let ator of atores" [value]="ator">
             {{ ator.nome }}
           </mat-option>

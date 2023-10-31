@@ -8,6 +8,7 @@ import { Item } from '../../model/item';
 import { ItemService } from '../../services/item.service';
 import { Titulo } from 'src/app/titulo/model/titulo';
 import { TituloService } from 'src/app/titulo/services/titulo.service';
+import {Diretor} from "../../../diretor/model/diretor";
 
 @Component({
   selector: 'app-item-formulario',
@@ -24,6 +25,8 @@ export class ItemFormularioComponent implements OnInit {
   });
 
   titulos: Titulo[] = [];
+
+  compareWithTitulo=(titulo1: Titulo, titulo2: Titulo) => titulo1.id == titulo2.id;
 
   constructor(
     private formBuild: NonNullableFormBuilder,

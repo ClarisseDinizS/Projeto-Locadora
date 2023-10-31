@@ -38,7 +38,7 @@
 
       <mat-form-field class="largura-total">
         <mat-label>Título</mat-label>
-        <mat-select formControlName="titulo" name="titulo" placeholder="Título">
+        <mat-select formControlName="titulo" name="titulo" placeholder="Título" [compareWith]="compareWithTitulo">
           <mat-option *ngFor="let titulo of titulos" [value]="titulo">
             {{ titulo.nome }}
           </mat-option>
