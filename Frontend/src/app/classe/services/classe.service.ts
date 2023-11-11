@@ -17,8 +17,6 @@ export class ClasseService{
     return this.httpCliente.get<Classe[]>(this.API)
       .pipe(
         first()
-        //delay(5000),
-        // tap(classe => console.log(classe))
       );
   }
 

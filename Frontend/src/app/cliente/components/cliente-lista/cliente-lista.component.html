@@ -1,1 +1,55 @@
-<p>cliente-lista works!</p>
+<mat-table [dataSource]="clientes">
+  <!-- Coluna Id -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let cliente">{{ cliente.id }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="numeroInscricao">
+    <mat-header-cell *matHeaderCellDef>Nº de Incrição</mat-header-cell>
+    <mat-cell *matCellDef="let cliente">{{ cliente.numeroInscricao }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Nome -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+    <mat-cell *matCellDef="let cliente">{{ cliente.nome }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Data -->
+  <ng-container matColumnDef="dataNascimento">
+    <mat-header-cell *matHeaderCellDef>Data de Nascimento</mat-header-cell>
+    <mat-cell *matCellDef="let cliente">{{ cliente.dataNascimento | date: 'dd/MM/yyyy' }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="sexo">
+    <mat-header-cell *matHeaderCellDef>Sexo</mat-header-cell>
+    <mat-cell *matCellDef="let cliente">{{ cliente.sexo }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="estahAtivo">
+    <mat-header-cell *matHeaderCellDef >Está Ativo?</mat-header-cell>
+    <mat-cell *matCellDef="let cliente">{{ cliente.estahAtivo }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Ações -->
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef class="coluna-acoes">
+      <button mat-mini-fab color="accent" aria-label="Adicionar um cliente" (click)="onAdd()" class="coluna-acoes-header">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let cliente" class="coluna-acoes">
+      <button mat-icon-button color="primary" aria-label="Editar cliente" (click)="onEdit(cliente)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Remover cliente" (click)="onRemove(cliente)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: colunasExibidas"></mat-row>
+</mat-table>
