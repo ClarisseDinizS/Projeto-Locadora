@@ -1,13 +1,13 @@
-<mat-table [dataSource]="atores">
+<mat-table [dataSource]="dataSource" matSort>
   <!-- Coluna Id -->
   <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
     <mat-cell *matCellDef="let ator">{{ ator.id }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Nome -->
   <ng-container matColumnDef="nome">
-    <mat-header-cell *matHeaderCellDef>Ator</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Ator</mat-header-cell>
     <mat-cell *matCellDef="let ator">{{ ator.nome }}</mat-cell>
   </ng-container>
 
@@ -32,3 +32,6 @@
   <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
   <mat-row *matRowDef="let row; columns: colunasExibidas"></mat-row>
 </mat-table>
+
+<mat-paginator [length]="atores.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons></mat-paginator>
