@@ -3,8 +3,6 @@ package com.backend.dto.mapper;
 import org.springframework.stereotype.Component;
 
 import com.backend.dto.ClienteDTO;
-import com.backend.enums.Status;
-import com.backend.enums.Tipo;
 import com.backend.model.Cliente;
 
 @Component

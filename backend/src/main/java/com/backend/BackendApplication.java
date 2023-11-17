@@ -14,14 +14,18 @@ import com.backend.enums.Tipo;
 import com.backend.model.Ator;
 import com.backend.model.Classe;
 import com.backend.model.Cliente;
+import com.backend.model.Dependente;
 import com.backend.model.Diretor;
 import com.backend.model.Item;
+import com.backend.model.Socio;
 import com.backend.model.Titulo;
 import com.backend.repository.AtorRepository;
 import com.backend.repository.ClasseRepository;
 import com.backend.repository.ClienteRepository;
+import com.backend.repository.DependenteRepository;
 import com.backend.repository.DiretorRepository;
 import com.backend.repository.ItemRepository;
+import com.backend.repository.SocioRepository;
 import com.backend.repository.TituloRepository;
 
 @SpringBootApplication
@@ -34,7 +38,8 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner initDatabase(ClasseRepository classeRepository, DiretorRepository diretorRepository,
 			AtorRepository atorRepository, TituloRepository tituloRepository, 
-			ItemRepository itemRepository, ClienteRepository clienteRepository) {
+			ItemRepository itemRepository, ClienteRepository clienteRepository,
+			SocioRepository	socioRepository, DependenteRepository dependenteRepository) {
 		return args -> {
 			
 			// Criação das Classes
@@ -209,6 +214,46 @@ public class BackendApplication {
 			// cliente4.setSexo("Masculino");
 			// cliente4.setEstahAtivo("Ativo");
 			// clienteRepository.save(cliente4);
+
+			// Criação dos Sócios
+			socioRepository.deleteAll();
+			Socio socio = new Socio();
+			socio.setNome("Souglas Almeida");
+			socio.setNumeroInscricao(22);
+			socio.setDataNascimento(LocalDate.now());
+			socio.setSexo("Masculino");
+			socio.setEstahAtivo(Status.ATIVO);
+			socio.setCpf("12345678910");
+			socio.setEndereco("Rua dos Bobos, 0");
+			socio.setTelefone("12345678910");
+			socio.setDependentes(null);
+			socioRepository.save(socio);
+
+			// Criação dos Dependentes
+			dependenteRepository.deleteAll();
+			Dependente dependente = new Dependente();
+			dependente.setNome("J K");
+			dependente.setNumeroInscricao(13);
+			dependente.setDataNascimento(LocalDate.now());
+			dependente.setSexo("Masculino");
+			dependente.setEstahAtivo(Status.ATIVO);
+			dependente.setSocio(socio);
+			dependenteRepository.save(dependente);
+
+			Dependente dependente2 = new Dependente();
+			dependente2.setNome("Ma Theus");
+			dependente2.setNumeroInscricao(31);
+			dependente2.setDataNascimento(LocalDate.now());
+			dependente2.setSexo("Masculino");
+			dependente2.setEstahAtivo(Status.ATIVO);
+			dependente2.setSocio(socio);
+			dependenteRepository.save(dependente2);
+
+			List<Dependente> dependentes = new ArrayList<>();
+			dependentes.add(dependente);
+			dependentes.add(dependente2);
+			socio.setDependentes(dependentes);
+			socioRepository.save(socio);
 
 		};
 	}
