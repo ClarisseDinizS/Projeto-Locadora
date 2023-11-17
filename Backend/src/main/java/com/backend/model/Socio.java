@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -26,8 +28,10 @@ public class Socio extends Cliente {
     @Column(length = 20, nullable = false)
     private String telefone;
 
-    @JsonIgnoreProperties("socio")
-    @OneToMany(mappedBy = "socio")
-    private List<Dependente> dependentes;
+    @OneToMany
+    @JoinTable(name = "socio_dependente", 
+            joinColumns = { @JoinColumn(name = "idSocio") }, 
+            inverseJoinColumns = { @JoinColumn(name = "idDependente") })
+    private List<Cliente> dependentes;
 
 }
