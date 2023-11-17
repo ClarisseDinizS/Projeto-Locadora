@@ -2,26 +2,26 @@ package com.backend.enums.converters;
 
 import java.util.stream.Stream;
 
-import com.backend.enums.Tipo;
+import com.backend.enums.Status;
 
 import jakarta.persistence.AttributeConverter;
 
-public class StatusConverter implements AttributeConverter<Tipo, String> {
+public class StatusConverter implements AttributeConverter<Status, String> {
 
     @Override
-    public String convertToDatabaseColumn(Tipo tipo) {
-        if (tipo == null) {
+    public String convertToDatabaseColumn(Status status) {
+        if (status == null) {
             return null;
         }
-        return tipo.getValor();
+        return status.getValor();
     }
 
     @Override
-    public Tipo convertToEntityAttribute(String valor) {
+    public Status convertToEntityAttribute(String valor) {
         if (valor == null) {
             return null;
         }
-        return Stream.of(Tipo.values())
+        return Stream.of(Status.values())
                 .filter(t -> t.getValor().equals(valor))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);

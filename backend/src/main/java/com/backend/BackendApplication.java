@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.backend.enums.Status;
 import com.backend.enums.Tipo;
 import com.backend.model.Ator;
 import com.backend.model.Classe;
@@ -182,32 +183,32 @@ public class BackendApplication {
 			cliente.setNumeroInscricao(12);
 			cliente.setDataNascimento(LocalDate.now());
 			cliente.setSexo("Feminino");
-			cliente.setEstahAtivo("Ativo");
+			cliente.setEstahAtivo(Status.ATIVO);
 			clienteRepository.save(cliente);
 
-			Cliente cliente2 = new Cliente();
-			cliente2.setNome("João Pedro Assis");
-			cliente2.setNumeroInscricao(45);
-			cliente2.setDataNascimento(LocalDate.now());
-			cliente2.setSexo("Masculino");
-			cliente2.setEstahAtivo("Ativo");
-			clienteRepository.save(cliente2);
+			// Cliente cliente2 = new Cliente();
+			// cliente2.setNome("João Pedro Assis");
+			// cliente2.setNumeroInscricao(45);
+			// cliente2.setDataNascimento(LocalDate.now());
+			// cliente2.setSexo("Masculino");
+			// cliente2.setEstahAtivo("Ativo");
+			// clienteRepository.save(cliente2);
 
-			Cliente cliente3 = new Cliente();
-			cliente3.setNome("Cristina Dias");
-			cliente3.setNumeroInscricao(75);
-			cliente3.setDataNascimento(LocalDate.now());
-			cliente3.setSexo("Feminino");
-			cliente3.setEstahAtivo("Ativo");
-			clienteRepository.save(cliente3);
+			// Cliente cliente3 = new Cliente();
+			// cliente3.setNome("Cristina Dias");
+			// cliente3.setNumeroInscricao(75);
+			// cliente3.setDataNascimento(LocalDate.now());
+			// cliente3.setSexo("Feminino");
+			// cliente3.setEstahAtivo("Ativo");
+			// clienteRepository.save(cliente3);
 
-			Cliente cliente4 = new Cliente();
-			cliente4.setNome("Marcos Veltri");
-			cliente4.setNumeroInscricao(89);
-			cliente4.setDataNascimento(LocalDate.now());
-			cliente4.setSexo("Masculino");
-			cliente4.setEstahAtivo("Ativo");
-			clienteRepository.save(cliente4);
+			// Cliente cliente4 = new Cliente();
+			// cliente4.setNome("Marcos Veltri");
+			// cliente4.setNumeroInscricao(89);
+			// cliente4.setDataNascimento(LocalDate.now());
+			// cliente4.setSexo("Masculino");
+			// cliente4.setEstahAtivo("Ativo");
+			// clienteRepository.save(cliente4);
 
 		};
 	}

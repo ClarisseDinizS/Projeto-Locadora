@@ -2,7 +2,11 @@ package com.backend.model;
 
 import java.time.LocalDate;
 
+import com.backend.enums.Status;
+import com.backend.enums.converters.StatusConverter;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,5 +36,6 @@ public class Cliente {
     private String sexo;
 
     @Column(length = 5, nullable = false)
-    private String estahAtivo;
+    @Convert(converter = StatusConverter.class)
+    private Status estahAtivo;
 }
