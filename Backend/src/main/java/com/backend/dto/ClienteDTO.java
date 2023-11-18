@@ -2,10 +2,9 @@ package com.backend.dto;
 
 import java.time.LocalDate;
 
-import com.backend.enums.Status;
-
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public record ClienteDTO(Long id, @NotNull Integer numeroInscricao, @NotNull String nome,
-                LocalDate dataNascimento, String sexo, Status estahAtivo) {
+                LocalDate dataNascimento, String sexo, @Pattern(regexp = "Sim|Não") String estahAtivo) {
 }

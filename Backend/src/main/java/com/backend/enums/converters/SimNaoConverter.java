@@ -2,26 +2,26 @@ package com.backend.enums.converters;
 
 import java.util.stream.Stream;
 
-import com.backend.enums.Status;
+import com.backend.enums.SimNao;
 
 import jakarta.persistence.AttributeConverter;
 
-public class StatusConverter implements AttributeConverter<Status, String> {
+public class SimNaoConverter implements AttributeConverter<SimNao, String> {
 
     @Override
-    public String convertToDatabaseColumn(Status status) {
-        if (status == null) {
+    public String convertToDatabaseColumn(SimNao simNao) {
+        if (simNao == null) {
             return null;
         }
-        return status.getValor();
+        return simNao.getValor();
     }
 
     @Override
-    public Status convertToEntityAttribute(String valor) {
+    public SimNao convertToEntityAttribute(String valor) {
         if (valor == null) {
             return null;
         }
-        return Stream.of(Status.values())
+        return Stream.of(SimNao.values())
                 .filter(t -> t.getValor().equals(valor))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);

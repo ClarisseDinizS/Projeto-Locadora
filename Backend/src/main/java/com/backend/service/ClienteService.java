@@ -31,6 +31,10 @@ public class ClienteService {
         return clienteRepository.findAll().stream().map(clienteMapper::paraDTO).collect(Collectors.toList());
     }
 
+    public List<ClienteDTO> listarDependentes() {
+        return clienteRepository.findAllClientesQueNaoSaoSocios().stream().map(clienteMapper::paraDTO).collect(Collectors.toList());
+    }
+
     public ClienteDTO buscarPorId(@NotNull @Positive Long id) {
         return clienteRepository.findById(id).map(clienteMapper::paraDTO)
                 .orElseThrow(() -> new RegistroNotFoundException(id));
@@ -47,7 +51,7 @@ public class ClienteService {
                     registro.setNome(clienteDto.nome());
                     registro.setDataNascimento(clienteDto.dataNascimento());
                     registro.setSexo(clienteDto.sexo());
-                    registro.setEstahAtivo(clienteDto.estahAtivo());
+                    registro.setEstahAtivo(this.clienteMapper.converterValorEstahAtivo(clienteDto.estahAtivo()));
 
                     return clienteMapper.paraDTO(clienteRepository.save(registro));
                 }).orElseThrow(() -> new RegistroNotFoundException(id));

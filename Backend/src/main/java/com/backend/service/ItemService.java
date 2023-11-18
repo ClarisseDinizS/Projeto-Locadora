@@ -45,7 +45,7 @@ public class ItemService {
                 .map(registro -> {
                     registro.setNumSerie(itemDto.numSerie());
                     registro.setDtaAquisicao(itemDto.dtaAquisicao());
-                    registro.setTipoItem(itemDto.tipoItem());
+                    registro.setTipoItem(this.itemMapper.converterTipoItem(itemDto.tipoItem()));
                     registro.setTitulo(itemDto.titulo());
 
                     return itemMapper.paraDTO(itemRepository.save(registro));

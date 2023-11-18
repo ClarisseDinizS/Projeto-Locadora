@@ -43,8 +43,6 @@ public class SocioService {
     }
 
     public SocioDTO criar(@Valid @NotNull SocioDTO socioDTO) {
-        // Convertendo o DTO para a entidade Cliente
-        clienteService.criar(clienteMapper.paraDTO(socioMapper.paraEntidade(socioDTO)));
         return socioMapper.paraDTO(socioRepository.save(socioMapper.paraEntidade(socioDTO)));
     }
 
@@ -55,7 +53,7 @@ public class SocioService {
                     registro.setNome(socioDTO.nome());
                     registro.setDataNascimento(socioDTO.dataNascimento());
                     registro.setSexo(socioDTO.sexo());
-                    registro.setEstahAtivo(socioDTO.estahAtivo());
+                    registro.setEstahAtivo(this.socioMapper.converterValorEstahAtivo(socioDTO.estahAtivo()));
                     registro.setCpf(socioDTO.cpf());
                     registro.setEndereco(socioDTO.endereco());
                     registro.setTelefone(socioDTO.telefone());

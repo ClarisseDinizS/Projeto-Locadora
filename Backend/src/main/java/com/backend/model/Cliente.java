@@ -2,8 +2,11 @@ package com.backend.model;
 
 import java.time.LocalDate;
 
-import com.backend.enums.Status;
-import com.backend.enums.converters.StatusConverter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import com.backend.enums.SimNao;
+import com.backend.enums.converters.SimNaoConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -19,7 +22,9 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cliente")
-@Inheritance(strategy= InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
+// @SQLDelete(sql = "UPDATE cliente SET estah_Ativo = 'Não' WHERE id = ?")
+// @Where(clause = "estahAtivo = 'Sim'")
 public class Cliente {
 
     @Id
@@ -39,6 +44,6 @@ public class Cliente {
     private String sexo;
 
     @Column(length = 5, nullable = false)
-    @Convert(converter = StatusConverter.class)
-    private Status estahAtivo;
+    @Convert(converter = SimNaoConverter.class)
+    private SimNao estahAtivo = SimNao.SIM;
 }

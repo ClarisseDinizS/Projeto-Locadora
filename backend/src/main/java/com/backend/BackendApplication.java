@@ -9,7 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.backend.enums.Status;
+import com.backend.enums.SimNao;
 import com.backend.enums.Tipo;
 import com.backend.model.Ator;
 import com.backend.model.Classe;
@@ -186,7 +186,7 @@ public class BackendApplication {
 			cliente.setNumeroInscricao(12);
 			cliente.setDataNascimento(LocalDate.now());
 			cliente.setSexo("Feminino");
-			cliente.setEstahAtivo(Status.ATIVO);
+			cliente.setEstahAtivo(SimNao.SIM);
 			clienteRepository.save(cliente);
 
 			// Cliente cliente2 = new Cliente();
@@ -220,7 +220,7 @@ public class BackendApplication {
 			socio.setNumeroInscricao(22);
 			socio.setDataNascimento(LocalDate.now());
 			socio.setSexo("Masculino");
-			socio.setEstahAtivo(Status.ATIVO);
+			socio.setEstahAtivo(SimNao.SIM);
 			socio.setCpf("12345678910");
 			socio.setEndereco("Rua dos Bobos, 0");
 			socio.setTelefone("12345678910");
@@ -234,7 +234,7 @@ public class BackendApplication {
 			dependente.setNumeroInscricao(13);
 			dependente.setDataNascimento(LocalDate.now());
 			dependente.setSexo("Masculino");
-			dependente.setEstahAtivo(Status.ATIVO);
+			dependente.setEstahAtivo(SimNao.NAO);
 			clienteRepository.save(dependente);
 
 			Cliente dependente2 = new Cliente();
@@ -242,12 +242,11 @@ public class BackendApplication {
 			dependente2.setNumeroInscricao(31);
 			dependente2.setDataNascimento(LocalDate.now());
 			dependente2.setSexo("Masculino");
-			dependente2.setEstahAtivo(Status.ATIVO);
+			dependente2.setEstahAtivo(SimNao.SIM);
 			clienteRepository.save(dependente2);
 
 			List<Cliente> dependentes = new ArrayList<>();
 			dependentes.add(dependente);
-			dependentes.add(dependente2);
 			socio.setDependentes(dependentes);
 			socioRepository.save(socio);
 

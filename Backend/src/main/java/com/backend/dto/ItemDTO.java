@@ -6,7 +6,8 @@ import com.backend.enums.Tipo;
 import com.backend.model.Titulo;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public record ItemDTO(Long id, @NotNull Integer numSerie, LocalDate dtaAquisicao,
-        @NotNull Tipo tipoItem, @NotNull Titulo titulo) {
+        @Pattern(regexp = "Fita|DVD|Blu-Ray") String tipoItem, @NotNull Titulo titulo) {
 }

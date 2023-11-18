@@ -45,6 +45,17 @@ public class ClienteController {
         return clienteService.listar();
     }
 
+    @GetMapping("/dependentes")
+    @Operation( summary = "Listar clientes que são dependentes",
+            description = "Retorna a lista de clientes que são dependentes do sistema",
+            responses ={
+                    @ApiResponse(responseCode = "200", description = "Caso o cliente seja incluído com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Caso não tenha sido possível cadastrar o cliente")
+            })
+    public List<ClienteDTO> listarDependentes() {
+        return clienteService.listarDependentes();
+    }
+
     @GetMapping("/{id}")
     @Operation( summary = "Buscar cliente por ID",
             description = "Retorna as informações do cliete pelo ID fornecido",

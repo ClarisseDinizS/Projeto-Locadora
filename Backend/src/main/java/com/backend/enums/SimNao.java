@@ -1,11 +1,11 @@
 package com.backend.enums;
 
-public enum Status {
-    ATIVO("Ativo"), INATIVO("Inativo");
+public enum SimNao {
+    SIM("Sim"), NAO("Não");
 
     private String valor;
 
-    private Status(String valor) {
+    private SimNao(String valor) {
         this.valor = valor;
     }
 
