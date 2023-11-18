@@ -92,22 +92,25 @@ export class SocioFormularioComponent {
     const dependentes = [];
     if (socio?.dependentes) {
       socio.dependentes.forEach((dependente) => {
-        dependentes.push(this.criarDependente(dependente));
+        dependentes.push(
+          this.criarDependente(socio.numeroInscricao, dependente)
+        );
       });
     } else {
-      dependentes.push(this.criarDependente());
+      dependentes.push(this.criarDependente(socio.numeroInscricao));
     }
     return dependentes;
   }
 
   private criarDependente(
+    numeroInscricao: number = 0,
     dependente: Cliente = {
       id: 0,
-      numeroInscricao: 0,
+      numeroInscricao: numeroInscricao,
       nome: '',
       dataNascimento: new Date(),
       sexo: '',
-      estahAtivo: '',
+      estahAtivo: 'Sim',
     }
   ) {
     return this.formBuild.group({
@@ -131,20 +134,21 @@ export class SocioFormularioComponent {
     return (<UntypedFormArray>this.formulario.get('dependentes')).controls;
   }
 
-  adicionarNovoDependente(){
-    (<UntypedFormArray>this.formulario.get('dependentes')).push(this.criarDependente());
+  adicionarNovoDependente() {
+    (<UntypedFormArray>this.formulario.get('dependentes')).push(
+      this.criarDependente()
+    );
   }
 
-  removerDependente(index: number){
+  removerDependente(index: number) {
     (<UntypedFormArray>this.formulario.get('dependentes')).removeAt(index);
   }
 
   onSubmit() {
-    console.log(this.formulario.value);
-    this.servico.salvar(this.formulario.value).subscribe(
-      (resultado) => this.onSucess(),
-      (erro) => this.onError()
-    );
+      this.servico.salvar(this.formulario.value).subscribe(
+        (resultado) => this.onSucess(),
+        (erro) => this.onError()
+      );
   }
 
   onCancel() {

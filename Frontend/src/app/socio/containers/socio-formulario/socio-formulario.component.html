@@ -25,7 +25,7 @@
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Data de nascimento</mat-label>
+        <mat-label>Data de Nascimento</mat-label>
         <input matInput placeholder="Data de Nascimento" formControlName="dataNascimento"
           [matDatepicker]="dataPicker" />
         <mat-datepicker-toggle matSuffix [for]="dataPicker"></mat-datepicker-toggle>
@@ -45,7 +45,7 @@
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Está ativo?</mat-label>
+        <mat-label>Está Ativo?</mat-label>
         <mat-select formControlName="estahAtivo">
           <mat-option value="Sim">Sim</mat-option>
           <mat-option value="Nao">Não</mat-option>
@@ -89,24 +89,38 @@
       <table style="width: 100%" formArrayName="dependentes"
         *ngFor="let dependente of obterDependenteFormArray(); let i = index">
         <tr [formGroupName]="i">
-          <td style="width: 65%">
+          <td style="width: 40%">
             <mat-form-field class="largura-total">
               <mat-label>Nome do Dependente</mat-label>
               <input matInput placeholder="Nome do Dependente" formControlName="nome" #nome />
-              <!-- <mat-hint align="end">{{ nome.value.length }}/100</mat-hint>
-              <mat-error *ngIf="formulario.get('nome')?.invalid">{{
+              <mat-hint align="end">{{ nome.value.length }}/100</mat-hint>
+              <mat-error *ngIf="obterDependenteFormArray()[i].get('nome')?.invalid">{{
                 getErrorMessage("nome")
-                }}</mat-error> -->
+                }}</mat-error>
             </mat-form-field>
           </td>
           <td style="width: 30%">
             <mat-form-field class="largura-total">
-              <mat-label>Número de Inscrição do Dependente</mat-label>
-              <input matInput placeholder="Número de Inscrição do Dependente" formControlName="numeroInscricao"
-                type="number" />
-              <!-- <mat-error *ngIf="formulario.get('numeroInscricao')?.invalid">{{ getErrorMessage("numeroInscricao") }}</mat-error> -->
+              <mat-label>Data de Nascimento do Dependente</mat-label>
+              <input matInput placeholder="Data de Nascimento do Dependente" formControlName="dataNascimento"
+                [matDatepicker]="dataPicker" />
+              <mat-datepicker-toggle matSuffix [for]="dataPicker"></mat-datepicker-toggle>
+              <mat-datepicker #dataPicker></mat-datepicker>
+              <mat-error *ngIf="obterDependenteFormArray()[i].get('dataNascimento')?.invalid">{{
+                getErrorMessage("dataNascimento")
+                }}</mat-error>
             </mat-form-field>
           </td>
+          <td style="width: 20%;">
+          <mat-form-field class="largura-total">
+            <mat-label>Sexo do Dependente</mat-label>
+            <mat-select formControlName="sexo">
+              <mat-option value="Masculino">Masculino</mat-option>
+              <mat-option value="Feminino">Feminino</mat-option>
+              <mat-option value="Outro">Outro</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
           <td>
             <button mat-icon-button color="warn" (click)="removerDependente(i)">
               <mat-icon aria-label="Remover Dependente">delete</mat-icon>
