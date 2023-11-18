@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SocioService } from '../../services/socio.service';
 import { Socio } from '../../model/socio';
 import { Cliente } from '../../model/cliente';
+import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
 
 @Component({
   selector: 'app-socio-formulario',
@@ -25,7 +26,8 @@ export class SocioFormularioComponent {
     private servico: SocioService,
     private snackBar: MatSnackBar,
     private localizacao: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public formUtils: FormUtilsService
   ) { }
 
   ngOnInit(): void {
@@ -84,8 +86,6 @@ export class SocioFormularioComponent {
       ],
       dependentes: this.formBuild.array(this.obterDependentes(socio)),
     });
-
-    console.log(this.formulario.value);
   }
 
   private obterDependentes(socio: Socio) {
@@ -93,20 +93,19 @@ export class SocioFormularioComponent {
     if (socio?.dependentes) {
       socio.dependentes.forEach((dependente) => {
         dependentes.push(
-          this.criarDependente(socio.numeroInscricao, dependente)
+          this.criarDependente(dependente)
         );
       });
     } else {
-      dependentes.push(this.criarDependente(socio.numeroInscricao));
+      dependentes.push(this.criarDependente());
     }
     return dependentes;
   }
 
   private criarDependente(
-    numeroInscricao: number = 0,
     dependente: Cliente = {
       id: 0,
-      numeroInscricao: numeroInscricao,
+      numeroInscricao: this.formulario.get('numeroInscricao')?.value,
       nome: '',
       dataNascimento: new Date(),
       sexo: '',
@@ -145,10 +144,15 @@ export class SocioFormularioComponent {
   }
 
   onSubmit() {
+    console.log(this.formulario.value);
+    if (this.formulario.valid) {
       this.servico.salvar(this.formulario.value).subscribe(
         (resultado) => this.onSucess(),
         (erro) => this.onError()
       );
+    } else {
+      this.formUtils.validateAllFormFields(this.formulario);
+    }
   }
 
   onCancel() {
@@ -162,29 +166,5 @@ export class SocioFormularioComponent {
 
   private onError() {
     this.snackBar.open('Error ao salvar sócio.', '', { duration: 5000 });
-  }
-
-  getErrorMessage(fieldName: string) {
-    const field = this.formulario.get(fieldName);
-
-    if (field?.hasError('required')) {
-      return 'Campo Obrigatório';
-    }
-
-    if (field?.hasError('minlength')) {
-      const requiredLength: number = field.errors
-        ? field.errors['minlength']['requiredLength']
-        : 5;
-      return `Tamanho mínimo precisa ser de ${requiredLength} caracteres.`;
-    }
-
-    if (field?.hasError('maxlength')) {
-      const requiredLength: number = field.errors
-        ? field.errors['maxlength']['requiredLength']
-        : 200;
-      return `Tamanho máximo excedido de ${requiredLength} caracteres.`;
-    }
-
-    return 'Campo Inválido';
   }
 }
