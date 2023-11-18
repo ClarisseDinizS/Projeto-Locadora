@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.backend.dto.SocioDTO;
-import com.backend.dto.mapper.ClienteMapper;
 import com.backend.dto.mapper.SocioMapper;
 import com.backend.exception.RegistroNotFoundException;
 import com.backend.repository.SocioRepository;
@@ -22,15 +21,10 @@ public class SocioService {
 
     private final SocioRepository socioRepository;
     private final SocioMapper socioMapper;
-    private final ClienteService clienteService;
-    private final ClienteMapper clienteMapper;
 
-    public SocioService(SocioRepository socioRepository, SocioMapper socioMapper,
-            ClienteService clienteService, ClienteMapper clienteMapper) {
+    public SocioService(SocioRepository socioRepository, SocioMapper socioMapper) {
         this.socioRepository = socioRepository;
         this.socioMapper = socioMapper;
-        this.clienteService = clienteService;
-        this.clienteMapper = clienteMapper;
     }
 
     public List<SocioDTO> listar() {

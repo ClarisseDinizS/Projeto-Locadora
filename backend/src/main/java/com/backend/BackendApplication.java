@@ -181,72 +181,37 @@ public class BackendApplication {
 
 			// Criação dos Clientes
 			clienteRepository.deleteAll();
-			Cliente cliente = new Cliente();
-			cliente.setNome("Isabella Ferreira");
-			cliente.setNumeroInscricao(12);
-			cliente.setDataNascimento(LocalDate.now());
-			cliente.setSexo("Feminino");
-			cliente.setEstahAtivo(SimNao.SIM);
-			clienteRepository.save(cliente);
-
-			// Cliente cliente2 = new Cliente();
-			// cliente2.setNome("João Pedro Assis");
-			// cliente2.setNumeroInscricao(45);
-			// cliente2.setDataNascimento(LocalDate.now());
-			// cliente2.setSexo("Masculino");
-			// cliente2.setEstahAtivo("Ativo");
-			// clienteRepository.save(cliente2);
-
-			// Cliente cliente3 = new Cliente();
-			// cliente3.setNome("Cristina Dias");
-			// cliente3.setNumeroInscricao(75);
-			// cliente3.setDataNascimento(LocalDate.now());
-			// cliente3.setSexo("Feminino");
-			// cliente3.setEstahAtivo("Ativo");
-			// clienteRepository.save(cliente3);
-
-			// Cliente cliente4 = new Cliente();
-			// cliente4.setNome("Marcos Veltri");
-			// cliente4.setNumeroInscricao(89);
-			// cliente4.setDataNascimento(LocalDate.now());
-			// cliente4.setSexo("Masculino");
-			// cliente4.setEstahAtivo("Ativo");
-			// clienteRepository.save(cliente4);
-
-			// Criação dos Sócios
-			socioRepository.deleteAll();
-			Socio socio = new Socio();
-			socio.setNome("Souglas Almeida");
-			socio.setNumeroInscricao(22);
-			socio.setDataNascimento(LocalDate.now());
-			socio.setSexo("Masculino");
-			socio.setEstahAtivo(SimNao.SIM);
-			socio.setCpf("12345678910");
-			socio.setEndereco("Rua dos Bobos, 0");
-			socio.setTelefone("12345678910");
-			socio.setDependentes(null);
-			socioRepository.save(socio);
-
-			// Criação dos Dependentes
-			clienteRepository.deleteAll();
 			Cliente dependente = new Cliente();
-			dependente.setNome("J K");
-			dependente.setNumeroInscricao(13);
+			dependente.setNome("Isabella Ferreira");
+			dependente.setNumeroInscricao(12);
 			dependente.setDataNascimento(LocalDate.now());
-			dependente.setSexo("Masculino");
-			dependente.setEstahAtivo(SimNao.NAO);
+			dependente.setSexo("Feminino");
+			dependente.setEstahAtivo(SimNao.SIM);
 			clienteRepository.save(dependente);
 
 			Cliente dependente2 = new Cliente();
-			dependente2.setNome("Ma Theus");
-			dependente2.setNumeroInscricao(31);
+			dependente2.setNome("João Pedro Assis");
+			dependente2.setNumeroInscricao(45);
 			dependente2.setDataNascimento(LocalDate.now());
 			dependente2.setSexo("Masculino");
 			dependente2.setEstahAtivo(SimNao.SIM);
 			clienteRepository.save(dependente2);
 
+			// Criação dos Sócios
+			socioRepository.deleteAll();
+			Socio socio = new Socio();
+			socio.setNome("Marcos Veltri");
+			socio.setNumeroInscricao(89);
+			socio.setDataNascimento(LocalDate.now());
+			socio.setSexo("Masculino");
+			socio.setCpf("12345678910");
+			socio.setEndereco("Rua dos Bobos, 0");
+			socio.setTelefone("12345678910");
+
 			List<Cliente> dependentes = new ArrayList<>();
 			dependentes.add(dependente);
+			dependentes.add(dependente2);
+
 			socio.setDependentes(dependentes);
 			socioRepository.save(socio);
 

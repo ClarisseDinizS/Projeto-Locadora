@@ -23,8 +23,8 @@ import lombok.Data;
 @Entity
 @Table(name = "cliente")
 @Inheritance(strategy = InheritanceType.JOINED)
-// @SQLDelete(sql = "UPDATE cliente SET estah_Ativo = 'Não' WHERE id = ?")
-// @Where(clause = "estahAtivo = 'Sim'")
+@SQLDelete(sql = "UPDATE cliente SET estah_ativo = 'Não' WHERE id = ?")
+@Where(clause = "estah_ativo = 'Sim'")
 public class Cliente {
 
     @Id

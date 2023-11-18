@@ -15,8 +15,7 @@ public class SocioMapper {
         }
         return new SocioDTO(socio.getId(), socio.getNumeroInscricao(), socio.getNome(), socio.getDataNascimento(),
                 socio.getSexo(), socio.getEstahAtivo().getValor(), socio.getCpf(), socio.getEndereco(),
-                socio.getTelefone(),
-                socio.getDependentes());
+                socio.getTelefone(), socio.getDependentes());
     }
 
     public Socio paraEntidade(SocioDTO socioDTO) {
