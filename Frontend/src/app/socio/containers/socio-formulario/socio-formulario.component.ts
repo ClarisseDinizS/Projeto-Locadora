@@ -131,6 +131,14 @@ export class SocioFormularioComponent {
     return (<UntypedFormArray>this.formulario.get('dependentes')).controls;
   }
 
+  adicionarNovoDependente(){
+    (<UntypedFormArray>this.formulario.get('dependentes')).push(this.criarDependente());
+  }
+
+  removerDependente(index: number){
+    (<UntypedFormArray>this.formulario.get('dependentes')).removeAt(index);
+  }
+
   onSubmit() {
     console.log(this.formulario.value);
     this.servico.salvar(this.formulario.value).subscribe(

@@ -81,7 +81,7 @@
 
       <mat-toolbar>
         <span>Dependentes</span>
-        <button mat-icon-button color="accent">
+        <button mat-icon-button color="accent" (click)="adicionarNovoDependente()">
           <mat-icon aria-label="Adicionar um novo Dependente">add</mat-icon>
         </button>
       </mat-toolbar>
@@ -99,13 +99,18 @@
                 }}</mat-error> -->
             </mat-form-field>
           </td>
-          <td style="width: 35%">
+          <td style="width: 30%">
             <mat-form-field class="largura-total">
               <mat-label>Número de Inscrição do Dependente</mat-label>
               <input matInput placeholder="Número de Inscrição do Dependente" formControlName="numeroInscricao"
                 type="number" />
               <!-- <mat-error *ngIf="formulario.get('numeroInscricao')?.invalid">{{ getErrorMessage("numeroInscricao") }}</mat-error> -->
             </mat-form-field>
+          </td>
+          <td>
+            <button mat-icon-button color="warn" (click)="removerDependente(i)">
+              <mat-icon aria-label="Remover Dependente">delete</mat-icon>
+            </button>
           </td>
         </tr>
       </table>
