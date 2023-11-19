@@ -44,14 +44,6 @@
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Está Ativo?</mat-label>
-        <mat-select formControlName="estahAtivo">
-          <mat-option value="Sim">Sim</mat-option>
-          <mat-option value="Nao">Não</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="largura-total">
         <mat-label>Cpf</mat-label>
         <input matInput placeholder="Cpf" formControlName="cpf" #cpf />
         <mat-hint align="end">{{ cpf.value.length }}/11</mat-hint>

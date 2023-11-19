@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import com.backend.dto.SocioDTO;
 import com.backend.dto.mapper.SocioMapper;
 import com.backend.exception.RegistroNotFoundException;
+import com.backend.model.Socio;
 import com.backend.repository.SocioRepository;
 
 import jakarta.validation.Valid;
@@ -43,6 +44,7 @@ public class SocioService {
     public SocioDTO atualizar(@NotNull @Positive Long id, @Valid SocioDTO socioDTO) {
         return socioRepository.findById(id)
                 .map(registro -> {
+                    Socio socio = socioMapper.paraEntidade(socioDTO);
                     registro.setNumeroInscricao(socioDTO.numeroInscricao());
                     registro.setNome(socioDTO.nome());
                     registro.setDataNascimento(socioDTO.dataNascimento());
@@ -51,7 +53,10 @@ public class SocioService {
                     registro.setCpf(socioDTO.cpf());
                     registro.setEndereco(socioDTO.endereco());
                     registro.setTelefone(socioDTO.telefone());
-                    registro.setDependentes(socioDTO.dependentes());
+                
+                    registro.getDependentes().clear();
+
+                    socio.getDependentes().forEach(registro.getDependentes()::add);
 
                     return socioMapper.paraDTO(socioRepository.save(registro));
                 }).orElseThrow(() -> new RegistroNotFoundException(id));

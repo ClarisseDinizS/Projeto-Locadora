@@ -12,6 +12,6 @@ import com.backend.model.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     @Query("SELECT c FROM Cliente c WHERE NOT EXISTS  " +
-        "(SELECT s FROM Socio s WHERE s.id = c.id)")
+            "(SELECT s FROM Socio s WHERE s.id = c.id)")
     List<Cliente> findAllClientesQueNaoSaoSocios();
 }

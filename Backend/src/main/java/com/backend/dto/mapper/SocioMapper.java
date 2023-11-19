@@ -1,21 +1,42 @@
 package com.backend.dto.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Component;
 
+import com.backend.dto.ClienteDTO;
 import com.backend.dto.SocioDTO;
 import com.backend.enums.SimNao;
+import com.backend.model.Cliente;
 import com.backend.model.Socio;
+import com.backend.repository.ClienteRepository;
 
 @Component
 public class SocioMapper {
+
+    private final ClienteMapper clienteMapper;
+    private final ClienteRepository clienteRepository;
+
+    public SocioMapper(ClienteMapper clienteMapper, ClienteRepository clienteRepository) {
+        this.clienteMapper = clienteMapper;
+        this.clienteRepository = clienteRepository;
+    }
 
     public SocioDTO paraDTO(Socio socio) {
         if (socio == null) {
             return null;
         }
+
+        List<ClienteDTO> dependentes = socio.getDependentes().stream()
+                .map(dependente -> new ClienteDTO(dependente.getId(), dependente.getNumeroInscricao(),
+                        dependente.getNome(), dependente.getDataNascimento(), dependente.getSexo(),
+                        dependente.getEstahAtivo().getValor()))
+                .collect(Collectors.toList());
+
         return new SocioDTO(socio.getId(), socio.getNumeroInscricao(), socio.getNome(), socio.getDataNascimento(),
                 socio.getSexo(), socio.getEstahAtivo().getValor(), socio.getCpf(), socio.getEndereco(),
-                socio.getTelefone(), socio.getDependentes());
+                socio.getTelefone(), dependentes);
     }
 
     public Socio paraEntidade(SocioDTO socioDTO) {
@@ -36,10 +57,23 @@ public class SocioMapper {
         socio.setCpf(socioDTO.cpf());
         socio.setEndereco(socioDTO.endereco());
         socio.setTelefone(socioDTO.telefone());
-        socio.setDependentes(socioDTO.dependentes());
+
+        List<Cliente> dependentes = socioDTO.dependentes().stream().map(dependenteDTO -> {
+            var dependente = new Cliente();
+            dependente.setNumeroInscricao(dependenteDTO.numeroInscricao());
+            dependente.setNome(dependenteDTO.nome());
+            dependente.setDataNascimento(dependenteDTO.dataNascimento());
+            dependente.setSexo(dependenteDTO.sexo());
+            dependente.setEstahAtivo(this.clienteMapper.converterValorEstahAtivo(dependenteDTO.estahAtivo()));
+
+            return dependente;
+        }).collect(Collectors.toList());
+
+        this.clienteRepository.saveAll(dependentes);
+
+        socio.setDependentes(dependentes);
 
         return socio;
-
     }
 
     public SimNao converterValorEstahAtivo(String valor) {
@@ -52,5 +86,9 @@ public class SocioMapper {
             case "Não" -> SimNao.NAO;
             default -> throw new IllegalArgumentException("Status Inválido: " + valor);
         };
+    }
+
+    public ClienteMapper getClienteMapper() {
+        return clienteMapper;
     }
 }

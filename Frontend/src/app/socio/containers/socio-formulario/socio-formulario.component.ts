@@ -39,7 +39,7 @@ export class SocioFormularioComponent {
         nome: '',
         dataNascimento: new Date(),
         sexo: '',
-        estahAtivo: '',
+        estahAtivo: 'Sim',
         cpf: '',
         endereco: '',
         telefone: '',

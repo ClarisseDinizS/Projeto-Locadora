@@ -1,5 +1,6 @@
 package com.backend.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -30,6 +31,5 @@ public class Socio extends Cliente {
     @JoinTable(name = "socio_dependente", 
             joinColumns = { @JoinColumn(name = "idSocio") }, 
             inverseJoinColumns = { @JoinColumn(name = "idDependente") })
-    private List<Cliente> dependentes;
-
+    private List<Cliente> dependentes = new ArrayList<>();
 }
