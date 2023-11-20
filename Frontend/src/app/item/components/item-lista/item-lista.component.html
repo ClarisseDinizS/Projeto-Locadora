@@ -1,35 +1,34 @@
 <mat-table matSort (matSortChange)="sortData($event)" [dataSource]="itens">
-  <!-- Coluna Id -->
+
   <ng-container matColumnDef="id">
     <mat-header-cell mat-sort-header="id" *matHeaderCellDef>Id</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.id }}</mat-cell>
   </ng-container>
 
-  <!-- Coluna Num. Série -->
   <ng-container matColumnDef="numSerie">
     <mat-header-cell mat-sort-header="numSerie" *matHeaderCellDef>Num. Série</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.numSerie }}</mat-cell>
   </ng-container>
 
-  <!-- Coluna Data de Aquisição -->
+
   <ng-container matColumnDef="dtaAquisicao">
     <mat-header-cell mat-sort-header="dtaAquisicao" *matHeaderCellDef>Data de Aquisição</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.dtaAquisicao | date: 'dd/MM/yyyy' }}</mat-cell>
   </ng-container>
 
-  <!-- Coluna Tipo do Item -->
+
   <ng-container matColumnDef="tipoItem">
     <mat-header-cell mat-sort-header="tipoItem" *matHeaderCellDef>Tipo do Item</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.tipoItem }}</mat-cell>
   </ng-container>
 
-  <!-- Coluna Titulo -->
+
   <ng-container matColumnDef="titulo">
     <mat-header-cell mat-sort-header="titulo" *matHeaderCellDef>Titulo</mat-header-cell>
     <mat-cell *matCellDef="let item">{{ item.titulo.nome }}</mat-cell>
   </ng-container>
 
-  <!-- Coluna Ações -->
+
   <ng-container matColumnDef="acoes">
     <mat-header-cell *matHeaderCellDef class="coluna-acoes">
       <button mat-mini-fab color="accent" aria-label="Adicionar um Item" (click)="onAdd()" class="coluna-acoes-header">

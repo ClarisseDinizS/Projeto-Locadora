@@ -1,0 +1,84 @@
+<mat-card>
+  <mat-card-header>
+    <mat-toolbar color="primary">
+      <mat-card-title>Detalhes da Locação </mat-card-title>
+    </mat-toolbar>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="formulario" class="largura-minima">
+      <mat-form-field class="largura-total">
+        <mat-label>Data da Locação</mat-label>
+        <input matInput placeholder="Data da Locação" formControlName="dtLocacao" [matDatepicker]="dtLocacao" />
+        <mat-datepicker-toggle matIconSuffix [for]="dtLocacao"></mat-datepicker-toggle>
+        <mat-datepicker #dtLocacao></mat-datepicker>
+        <mat-error *ngIf="formulario.get('dtLocacao')?.invalid">{{ getErrorMessage("dtLocacao") }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Data de Devolução Prevista</mat-label>
+        <input matInput placeholder="Data de Devolução Prevista" formControlName="dtDevolucaoPrevista" [matDatepicker]="dtDevolucaoPrevista" />
+        <mat-datepicker-toggle matIconSuffix [for]="dtDevolucaoPrevista"></mat-datepicker-toggle>
+        <mat-datepicker #dtDevolucaoPrevista></mat-datepicker>
+        <mat-error *ngIf="formulario.get('dtDevolucaoPrevista')?.invalid">{{ getErrorMessage("dtDevolucaoPrevista") }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Data de Devolução Efetiva</mat-label>
+        <input matInput placeholder="Data de Devolução Efetiva" formControlName="dtDevolucaoEfetiva" [matDatepicker]="dtDevolucaoEfetiva" />
+        <mat-datepicker-toggle matIconSuffix [for]="dtDevolucaoEfetiva"></mat-datepicker-toggle>
+        <mat-datepicker #dtDevolucaoEfetiva></mat-datepicker>
+        <mat-error *ngIf="formulario.get('dtDevolucaoEfetiva')?.invalid">{{ getErrorMessage("dtDevolucaoEfetiva") }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Valor Cobrado</mat-label>
+        <input matInput placeholder="Valor Cobrado" formControlName="valorCobrado" #valorCobrado />
+        <mat-error *ngIf="formulario.get('valorCobrado')?.invalid">{{
+          getErrorMessage("valorCobrado")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Valor da Multa</mat-label>
+        <input matInput placeholder="Valor da Multa" formControlName="multaCobrada" #multaCobrada />
+        <mat-error *ngIf="formulario.get('multaCobrada')?.invalid">{{
+          getErrorMessage("multaCobrada")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Item</mat-label>
+        <mat-select formControlName="item" name="item" placeholder="Item" [compareWith]="compareWithItem">
+          <mat-option *ngFor="let item of itens" [value]="item">
+            {{ item.numSerie}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formulario.get('item')?.invalid">{{
+          getErrorMessage("item")
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="largura-total">
+        <mat-label>Sócios</mat-label>
+        <mat-select formControlName="socio" name="socio" placeholder="Socios" [compareWith]="compareWithSocio">
+          <mat-option *ngFor="let socio of socios" [value]="socio">
+            {{ socio.nome}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formulario.get('item')?.invalid">{{
+          getErrorMessage("item")
+          }}</mat-error>
+      </mat-form-field>
+    </form>
+    </mat-card-content>
+
+  <mat-card-actions class="acoes-centralizadas">
+    <button mat-raised-button color="primary" (click)="onSubmit()">
+      Salvar
+    </button>
+    <button mat-raised-button (click)="onCancel()" class="botao-espaço">
+      Cancelar
+    </button>
+  </mat-card-actions>
+</mat-card>

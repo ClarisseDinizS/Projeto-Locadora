@@ -1,0 +1,53 @@
+<mat-table matSort [dataSource]="locacao">
+
+  <ng-container matColumnDef="id">
+    <mat-header-cell mat-sort-header="id" *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let locacao">{{ locacao.id }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dtLocacao">
+    <mat-header-cell mat-sort-header="dtLocacao" *matHeaderCellDef>Data de Locação</mat-header-cell>
+    <mat-cell *matCellDef="let locacao">{{ locacao.dtLocacao | date: 'dd/MM/yyyy' }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dtDevolucaoPrevista">
+    <mat-header-cell mat-sort-header="dtDevolucaoPrevista" *matHeaderCellDef>Devolução Prevista</mat-header-cell>
+    <mat-cell *matCellDef="let locacao">{{ locacao.dtDevolucaoPrevista | date: 'dd/MM/yyyy' }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dtDevolucaoEfetiva">
+    <mat-header-cell mat-sort-header="dtDevolucaoEfetiva" *matHeaderCellDef>Devolução Efetiva</mat-header-cell>
+    <mat-cell *matCellDef="let locacao">{{ locacao.dtDevolucaoEfetiva | date: 'dd/MM/yyyy' }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="valorCobrado">
+    <mat-header-cell mat-sort-header="valorCobrado" *matHeaderCellDef>Valor Cobrado</mat-header-cell>
+    <mat-cell *matCellDef="let locacao">{{ locacao.valorCobrado }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="multaCobrada">
+    <mat-header-cell mat-sort-header="multaCobrada" *matHeaderCellDef>Multa Cobrada</mat-header-cell>
+    <mat-cell *matCellDef="let locacao">{{ locacao.multaCobrada }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Ações -->
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef class="coluna-acoes">
+      <button mat-mini-fab color="accent" aria-label="Adicionar um Item" (click)="onAdd()" class="coluna-acoes-header">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item" class="coluna-acoes">
+      <button mat-icon-button color="primary" aria-label="Editar Item" (click)="onEdit(item)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Remover Item" (click)="onRemove(item)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: colunasExibidas"></mat-row>
+</mat-table>
