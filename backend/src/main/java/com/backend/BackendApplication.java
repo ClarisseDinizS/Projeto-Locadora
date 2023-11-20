@@ -187,7 +187,6 @@ public class BackendApplication {
 			dependente.setDataNascimento(LocalDate.now());
 			dependente.setSexo("Feminino");
 			dependente.setEstahAtivo(SimNao.SIM);
-			clienteRepository.save(dependente);
 
 			Cliente dependente2 = new Cliente();
 			dependente2.setNome("João Pedro Assis");
@@ -195,7 +194,6 @@ public class BackendApplication {
 			dependente2.setDataNascimento(LocalDate.now());
 			dependente2.setSexo("Masculino");
 			dependente2.setEstahAtivo(SimNao.SIM);
-			clienteRepository.save(dependente2);
 
 			// Criação dos Sócios
 			socioRepository.deleteAll();

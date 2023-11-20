@@ -10,9 +10,7 @@ import com.backend.dto.SocioDTO;
 import com.backend.dto.mapper.SocioMapper;
 import com.backend.enums.SimNao;
 import com.backend.exception.RegistroNotFoundException;
-import com.backend.model.Cliente;
 import com.backend.model.Socio;
-import com.backend.repository.ClienteRepository;
 import com.backend.repository.SocioRepository;
 
 import jakarta.validation.Valid;
@@ -25,13 +23,10 @@ public class SocioService {
 
     private final SocioRepository socioRepository;
     private final SocioMapper socioMapper;
-    private final ClienteRepository clienteRepository;
 
-    public SocioService(SocioRepository socioRepository, SocioMapper socioMapper,
-            ClienteRepository clienteRepository) {
+    public SocioService(SocioRepository socioRepository, SocioMapper socioMapper) {
         this.socioRepository = socioRepository;
         this.socioMapper = socioMapper;
-        this.clienteRepository = clienteRepository;
     }
 
     public List<SocioDTO> listar() {
@@ -69,13 +64,7 @@ public class SocioService {
     }
 
     public void excluir(@NotNull @Positive Long id) {
-        // socioRepository.delete(socioRepository.findById(id)
-        // .orElseThrow(() -> new RegistroNotFoundException(id)));
-
-        Socio socio = socioRepository.findById(id)
-                .orElseThrow(() -> new RegistroNotFoundException(id));
-
-        socio.setEstahAtivo(SimNao.NAO);
-        socioRepository.save(socio);
+        socioRepository.delete(socioRepository.findById(id)
+        .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
 }

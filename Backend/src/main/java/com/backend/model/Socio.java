@@ -3,6 +3,7 @@ package com.backend.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -27,7 +28,7 @@ public class Socio extends Cliente {
     @Column(length = 20, nullable = false)
     private String telefone;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "socio_dependente", 
             joinColumns = { @JoinColumn(name = "idSocio") }, 
             inverseJoinColumns = { @JoinColumn(name = "idDependente") })

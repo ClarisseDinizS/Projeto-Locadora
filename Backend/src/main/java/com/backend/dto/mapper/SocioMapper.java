@@ -69,8 +69,6 @@ public class SocioMapper {
             return dependente;
         }).collect(Collectors.toList());
 
-        this.clienteRepository.saveAll(dependentes);
-
         socio.setDependentes(dependentes);
 
         return socio;
