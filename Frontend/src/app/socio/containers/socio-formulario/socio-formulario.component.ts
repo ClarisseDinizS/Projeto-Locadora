@@ -87,8 +87,6 @@ export class SocioFormularioComponent {
       ],
       dependentes: this.formBuild.array(this.obterDependentes(socio)),
     });
-    if(socio.id != 0)
-      this.formulario.get('numeroInscricao')?.disable()
   }
 
   private obterDependentes(socio: Socio) {
@@ -137,12 +135,17 @@ export class SocioFormularioComponent {
   }
 
   adicionarNovoDependente() {
-    (<UntypedFormArray>this.formulario.get('dependentes')).push(
-      this.criarDependente()
-    );
+    const dependentesFormArray = <UntypedFormArray>this.formulario.get('dependentes');
+
+    const maxDependentes = 3;
+
+    if (dependentesFormArray.length < maxDependentes) {
+      dependentesFormArray.push(this.criarDependente());
+    }
   }
 
   removerDependente(index: number) {
+    console.log(this.formulario.get('dependentes'));
     (<UntypedFormArray>this.formulario.get('dependentes')).removeAt(index);
   }
 

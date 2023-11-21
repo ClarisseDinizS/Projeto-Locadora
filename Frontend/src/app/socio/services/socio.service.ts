@@ -41,10 +41,6 @@ export class SocioService {
     return this.httpCliente.post<Socio>(this.API, registro).pipe(first());
   }
 
-  private criarCliente(registro: Partial<Cliente>) {
-    return this.httpCliente.post<Cliente>(this.APICliente, registro).pipe(first());
-  }
-
   private atualizar(registro: Partial<Socio>) {
     return this.httpCliente
       .put<Socio>(`${this.API}/${registro.id}`, registro)

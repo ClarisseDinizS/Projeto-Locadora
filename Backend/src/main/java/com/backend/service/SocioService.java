@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import com.backend.dto.ClienteDTO;
 import com.backend.dto.SocioDTO;
 import com.backend.dto.mapper.SocioMapper;
 import com.backend.exception.RegistroNotFoundException;
+import com.backend.model.Cliente;
 import com.backend.model.Socio;
 import com.backend.repository.SocioRepository;
 
@@ -62,18 +64,33 @@ public class SocioService {
                     registro.setEndereco(socioDTO.endereco());
                     registro.setTelefone(socioDTO.telefone());
 
-                    registro.getDependentes().clear();
+                    registro.getDependentes().removeIf(dependente -> socioDTO.dependentes().stream().noneMatch(
+                            dependenteDTO -> dependenteDTO.id() != null
+                                    && dependenteDTO.id().equals(dependente.getId())));
 
-                    socio.getDependentes().forEach(registro.getDependentes()::add);
-                    socio.getDependentes().forEach(dependente -> {
+                    for (ClienteDTO dependenteDTO : socioDTO.dependentes()) {
+                        if (dependenteDTO.id() == 0) {
+                            // Novo dependente, você pode criar um novo objeto Cliente aqui
+                            Cliente novoDependente = new Cliente();
+                            novoDependente.setNumeroInscricao(dependenteDTO.numeroInscricao());
+                            novoDependente.setNome(dependenteDTO.nome());
+                            novoDependente.setDataNascimento(dependenteDTO.dataNascimento());
+                            novoDependente.setSexo(dependenteDTO.sexo());
+                            novoDependente.setEstahAtivo(this.socioMapper.converterValorEstahAtivo(dependenteDTO.estahAtivo()));
+                            registro.getDependentes().add(novoDependente);
+                        }
+                    }
+
+                    for (Cliente dependente : registro.getDependentes()) {
                         dependente.setEstahAtivo(this.socioMapper.converterValorEstahAtivo(socioDTO.estahAtivo()));
-                    });
+                    }
+
                     return socioMapper.paraDTO(socioRepository.save(registro));
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }
 
     public void excluir(@NotNull @Positive Long id) {
         socioRepository.delete(socioRepository.findById(id)
-        .orElseThrow(() -> new RegistroNotFoundException(id)));
+                .orElseThrow(() -> new RegistroNotFoundException(id)));
     }
 }

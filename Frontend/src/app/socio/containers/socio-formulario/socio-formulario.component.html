@@ -17,7 +17,7 @@
 
       <mat-form-field class="largura-total">
         <mat-label>Número de Inscrição</mat-label>
-        <input matInput placeholder="Número de Inscrição" formControlName="numeroInscricao" type="number" />
+        <input matInput placeholder="Número de Inscrição" formControlName="numeroInscricao" type="number" readonly/>
         <mat-error *ngIf="formulario.get('numeroInscricao')?.invalid">{{
           formUtils.getErrorMessage(formulario, "numeroInscricao")
           }}</mat-error>

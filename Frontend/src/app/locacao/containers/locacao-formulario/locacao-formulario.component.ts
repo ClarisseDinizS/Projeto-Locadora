@@ -1,12 +1,12 @@
+import { Locacao } from './../../model/locacao';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from '../../../item/model/item';
 import { ItemService } from '../../../item/services/item.service';
 import { SocioService } from '../../../socio/services/socio.service';
-import { Locacao } from '../../model/locacao';
 import { LocacaoService } from '../../service/locacao.service';
 import { Cliente } from '../../../socio/model/cliente';
 
@@ -16,16 +16,18 @@ import { Cliente } from '../../../socio/model/cliente';
   styleUrls: ['./locacao-formulario.component.scss'],
 })
 export class LocacaoFormularioComponent implements OnInit {
-  formulario = this.formBuild.group({
-    id: [0],
-    dtLocacao: [new Date(), Validators.required],
-    dtDevolucaoPrevista: [new Date(), Validators.required],
-    dtDevolucaoEfetiva: [new Date(), Validators.required],
-    valorCobrado: [0],
-    multaCobrada: [0],
-    item: [<Item>{}],
-    cliente: [<Cliente>{}],
-  });
+
+  formulario!: FormGroup;
+  // formulario = this.formBuild.group({
+  //   id: [0],
+  //   dtLocacao: [new Date(), Validators.required],
+  //   dtDevolucaoPrevista: [new Date(), Validators.required],
+  //   dtDevolucaoEfetiva: [new Date(), Validators.required],
+  //   valorCobrado: [0],
+  //   multaCobrada: [0],
+  //   item: [<Item>{}],
+  //   cliente: [<Cliente>{}],
+  // });
 
   itens: Item[] = [];
   clientes: Cliente[] = [];
@@ -53,17 +55,28 @@ export class LocacaoFormularioComponent implements OnInit {
       this.clientes = clientes;
     });
 
-    const locacao: Locacao = this.route.snapshot.data['locacao'];
+      const locacao: Locacao =
+      this.route.snapshot.data['locacao'] ||
+      ({
+        id: 0,
+        dtLocacao: new Date(),
+        dtDevolucaoPrevista: new Date(),
+        dtDevolucaoEfetiva: new Date(),
+        valorCobrado: 0,
+        multaCobrada: 0,
+        item: <Item>{},
+        cliente: <Cliente>{},
+      } as Locacao);
 
-    this.formulario.setValue({
-      id: locacao.id,
-      dtLocacao: locacao.dtLocacao,
-      dtDevolucaoPrevista: locacao.dtDevolucaoPrevista,
-      dtDevolucaoEfetiva: locacao.dtDevolucaoEfetiva,
-      valorCobrado: locacao.valorCobrado,
-      multaCobrada: locacao.multaCobrada,
-      item: locacao.item,
-      cliente: locacao.cliente,
+    this.formulario = this.formBuild.group({
+      id: [locacao.id],
+      dtLocacao: [locacao.dtLocacao, Validators.required],
+      dtDevolucaoPrevista: [locacao.dtDevolucaoPrevista, Validators.required],
+      dtDevolucaoEfetiva: [locacao.dtDevolucaoEfetiva, Validators.required],
+      valorCobrado: [locacao.valorCobrado],
+      multaCobrada: [locacao.multaCobrada],
+      item: [locacao.item, Validators.required],
+      cliente: [locacao.cliente, Validators.required],
     });
   }
 

@@ -28,7 +28,7 @@ public class Socio extends Cliente {
     @Column(length = 20, nullable = false)
     private String telefone;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(name = "socio_dependente", 
             joinColumns = { @JoinColumn(name = "idSocio") }, 
             inverseJoinColumns = { @JoinColumn(name = "idDependente") })
