@@ -58,17 +58,13 @@ export class LocacaoResolver implements Resolve<Locacao> {
       titulo: titulo
     };
 
-    const socio: Socio = {
+    const cliente: Cliente = {
       id: 0,
       numeroInscricao: 0,
       nome: '',
       dataNascimento: new Date(),
       sexo: '',
-      estahAtivo: '',
-      cpf: '',
-      endereco: '',
-      telefone: '',
-      dependentes: [],
+      estahAtivo: ''
     };
 
     return of({
@@ -79,7 +75,7 @@ export class LocacaoResolver implements Resolve<Locacao> {
       valorCobrado: 0,
       multaCobrada: 0,
       item: item,
-      socio: socio
+      cliente: cliente
     });
   }
 }

@@ -16,6 +16,7 @@ import com.backend.model.Classe;
 import com.backend.model.Cliente;
 import com.backend.model.Diretor;
 import com.backend.model.Item;
+import com.backend.model.Locacao;
 import com.backend.model.Socio;
 import com.backend.model.Titulo;
 import com.backend.repository.AtorRepository;
@@ -23,6 +24,7 @@ import com.backend.repository.ClasseRepository;
 import com.backend.repository.ClienteRepository;
 import com.backend.repository.DiretorRepository;
 import com.backend.repository.ItemRepository;
+import com.backend.repository.LocacaoRepository;
 import com.backend.repository.SocioRepository;
 import com.backend.repository.TituloRepository;
 
@@ -37,7 +39,7 @@ public class BackendApplication {
 	CommandLineRunner initDatabase(ClasseRepository classeRepository, DiretorRepository diretorRepository,
 			AtorRepository atorRepository, TituloRepository tituloRepository, 
 			ItemRepository itemRepository, ClienteRepository clienteRepository,
-			SocioRepository	socioRepository) {
+			SocioRepository	socioRepository, LocacaoRepository locacaoRepository) {
 		return args -> {
 			
 			// Criação das Classes
@@ -212,6 +214,21 @@ public class BackendApplication {
 
 			socio.setDependentes(dependentes);
 			socioRepository.save(socio);
+
+			locacaoRepository.deleteAll();
+			Locacao locacao = new Locacao();
+			locacao.setDtLocacao(LocalDate.now().minusYears(3));
+			locacao.setDtDevolucaoPrevista(LocalDate.now().minusYears(3));
+			locacao.setDtDevolucaoEfetiva(LocalDate.now().minusYears(3));
+			locacao.setValorCobrado(22.4);
+			locacao.setMultaCobrada(2.50);
+			locacao.setItem(item);
+			locacao.setCliente(dependente);
+
+			locacaoRepository.save(locacao);
+
+
+
 
 		};
 	}

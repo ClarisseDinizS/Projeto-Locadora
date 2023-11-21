@@ -60,10 +60,10 @@
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Sócios</mat-label>
-        <mat-select formControlName="socio" name="socio" placeholder="Socios" [compareWith]="compareWithSocio">
-          <mat-option *ngFor="let socio of socios" [value]="socio">
-            {{ socio.nome}}
+        <mat-label>Clientes</mat-label>
+        <mat-select formControlName="cliente" name="cliente" placeholder="Clientes" [compareWith]="compareWithCliente">
+          <mat-option *ngFor="let cliente of clientes" [value]="cliente">
+            {{ cliente.nome}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formulario.get('item')?.invalid">{{

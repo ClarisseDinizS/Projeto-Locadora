@@ -29,14 +29,4 @@ export class LocacaoListaComponent {
   onRemove(locacao: Locacao){
     this.excluir.emit(locacao);
   }
-
-  sortData(sort: Sort) {
-    const sortedData = this.locacao.slice();
-
-    if (!sort.active || sort.direction === '') {
-      this.locacao = sortedData;
-      return;
-    }
-
-  }
 }

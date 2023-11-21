@@ -10,5 +10,5 @@ export interface Locacao {
   valorCobrado: number;
   multaCobrada: number;
   item: Item;
-  socio: Socio;
+  cliente: Cliente;
 }

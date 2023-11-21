@@ -12,6 +12,8 @@ import {TituloService} from "../../../titulo/services/titulo.service";
 import {ItemService} from "../../../item/services/item.service";
 import {SocioService} from "../../../socio/services/socio.service";
 import {Locacao} from "../../model/locacao";
+import {LocacaoService} from "../../service/locacao.service";
+import {Cliente} from "../../../socio/model/cliente";
 
 @Component({
   selector: 'app-locacao-formulario',
@@ -28,32 +30,33 @@ export class LocacaoFormularioComponent implements OnInit {
     valorCobrado: [0],
     multaCobrada: [0],
     item: [<Item>{}],
-    socio: [<Socio>{}]
+    cliente: [<Cliente>{}]
 
   });
 
   itens: Item[] = [];
-  socios: Socio[] = [];
+  clientes: Cliente[] = [];
 
   compareWithItem=(item1: Item, item2: Item) => item1.id == item2.id;
-  compareWithSocio=(socio1: Socio, socio2: Socio) => socio1.id == socio2.id;
+  compareWithCliente=(cliente1: Cliente, cliente2: Cliente) => cliente1.id == cliente2.id;
 
   constructor(private formBuild: NonNullableFormBuilder,
-              private servico: DiretorService,
+              private servico: LocacaoService,
               private itemService: ItemService,
-              private socioService: SocioService,
+              private clienteService: SocioService,
               private snackBar: MatSnackBar,
               private localizacao: Location,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
+
     this.itemService.listar().subscribe((itens) => {
       this.itens = itens;
     });
 
-    this.socioService.listar().subscribe((socios) => {
-      this.socios = socios;
+    this.clienteService.listarCliente().subscribe((clientes) => {
+      this.clientes = clientes;
     });
 
     const locacao: Locacao = this.route.snapshot.data['locacao'];
@@ -66,8 +69,9 @@ export class LocacaoFormularioComponent implements OnInit {
       valorCobrado: locacao.valorCobrado,
       multaCobrada: locacao.multaCobrada,
       item: locacao.item,
-      socio: locacao.socio
+      cliente: locacao.cliente
     });
+    console.log(this.formulario.value);
   }
 
   onSubmit() {

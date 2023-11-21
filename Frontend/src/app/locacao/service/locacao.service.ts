@@ -21,6 +21,7 @@ export class LocacaoService {
   }
 
   salvar(registro: Partial<Locacao>) {
+    console.log(registro);
     if (registro.id != 0) {
       return this.atualizar(registro);
     }

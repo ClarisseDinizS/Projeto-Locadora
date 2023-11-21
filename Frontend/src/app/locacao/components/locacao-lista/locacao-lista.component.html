@@ -33,16 +33,16 @@
   <!-- Coluna Ações -->
   <ng-container matColumnDef="acoes">
     <mat-header-cell *matHeaderCellDef class="coluna-acoes">
-      <button mat-mini-fab color="accent" aria-label="Adicionar um Item" (click)="onAdd()" class="coluna-acoes-header">
+      <button mat-mini-fab color="accent" aria-label="Adicionar uma Locação" (click)="onAdd()" class="coluna-acoes-header">
         <mat-icon>add</mat-icon>
       </button>
     </mat-header-cell>
-    <mat-cell *matCellDef="let item" class="coluna-acoes">
-      <button mat-icon-button color="primary" aria-label="Editar Item" (click)="onEdit(item)">
+    <mat-cell *matCellDef="let locacao" class="coluna-acoes">
+      <button mat-icon-button color="primary" aria-label="Editar Locação" (click)="onEdit(locacao)">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button mat-icon-button color="warn" aria-label="Remover Item" (click)="onRemove(item)">
+      <button mat-icon-button color="warn" aria-label="Remover Locação" (click)="onRemove(locacao)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
