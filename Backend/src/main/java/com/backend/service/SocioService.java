@@ -8,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 
 import com.backend.dto.SocioDTO;
 import com.backend.dto.mapper.SocioMapper;
-import com.backend.enums.SimNao;
 import com.backend.exception.RegistroNotFoundException;
 import com.backend.model.Socio;
 import com.backend.repository.SocioRepository;
@@ -31,6 +30,14 @@ public class SocioService {
 
     public List<SocioDTO> listar() {
         return socioRepository.findAll().stream().map(socioMapper::paraDTO).collect(Collectors.toList());
+    }
+
+    public List<SocioDTO> listarAtivos() {
+        return socioRepository.findAllByEstahAtivo().stream().map(socioMapper::paraDTO).collect(Collectors.toList());
+    }
+
+    public List<SocioDTO> listarInativos() {
+        return socioRepository.findAllByEstahInativo().stream().map(socioMapper::paraDTO).collect(Collectors.toList());
     }
 
     public SocioDTO buscarPorId(@NotNull @Positive Long id) {
@@ -58,7 +65,9 @@ public class SocioService {
                     registro.getDependentes().clear();
 
                     socio.getDependentes().forEach(registro.getDependentes()::add);
-
+                    socio.getDependentes().forEach(dependente -> {
+                        dependente.setEstahAtivo(this.socioMapper.converterValorEstahAtivo(socioDTO.estahAtivo()));
+                    });
                     return socioMapper.paraDTO(socioRepository.save(registro));
                 }).orElseThrow(() -> new RegistroNotFoundException(id));
     }

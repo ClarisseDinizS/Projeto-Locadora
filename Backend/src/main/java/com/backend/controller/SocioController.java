@@ -45,6 +45,28 @@ public class SocioController {
         return socioService.listar();
     }
 
+    @GetMapping("/ativos")
+    @Operation( summary = "Listar sócios ativos",
+            description = "Retorna a lista de sócios ativos do sistema",
+            responses ={
+                    @ApiResponse(responseCode = "200", description = "Caso o sócio seja incluído com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Caso não tenha sido possível cadastrar o sócio")
+            })
+    public List<SocioDTO> listarAtivos() {
+        return socioService.listarAtivos();
+    }
+
+    @GetMapping("/inativos")
+    @Operation( summary = "Listar sócios inativos",
+            description = "Retorna a lista de sócios inativos do sistema",
+            responses ={
+                    @ApiResponse(responseCode = "200", description = "Caso o sócio seja incluído com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Caso não tenha sido possível cadastrar o sócio")
+            })
+    public List<SocioDTO> listarInativos() {
+        return socioService.listarInativos();
+    }
+
     @GetMapping("/{id}")
     @Operation( summary = "Buscar sócio por ID",
             description = "Retorna as informações do sócio pelo ID fornecido",

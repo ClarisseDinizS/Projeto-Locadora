@@ -28,8 +28,8 @@
   </ng-container>
 
   <ng-container matColumnDef="estahAtivo">
-    <mat-header-cell *matHeaderCellDef >Está Ativo?</mat-header-cell>
-    <mat-cell *matCellDef="let socio">{{ socio.estahAtivo }}</mat-cell>
+    <mat-header-cell *matHeaderCellDef>Ativar|Desativar</mat-header-cell>
+    <mat-cell *matCellDef="let socio"><mat-slide-toggle [checked]="socio.estahAtivo == 'Sim'"></mat-slide-toggle></mat-cell>
   </ng-container>
 
   <!-- Coluna Ações -->

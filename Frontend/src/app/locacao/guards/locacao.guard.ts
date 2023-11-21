@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Titulo} from "../../titulo/model/titulo";
-import {TituloService} from "../../titulo/services/titulo.service";
 import {Observable, of} from "rxjs";
 import {Locacao} from "../model/locacao";
 import {LocacaoService} from "../service/locacao.service";
@@ -9,7 +8,6 @@ import {Item} from "../../item/model/item";
 import {Cliente} from "../../socio/model/cliente";
 import {Diretor} from "../../diretor/model/diretor";
 import {Classe} from "../../classe/model/classe";
-import {Socio} from "../../socio/model/socio";
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +52,7 @@ export class LocacaoResolver implements Resolve<Locacao> {
       id: 0,
       numSerie: 0,
       dtaAquisicao: new Date(),
-      tipoItem: '',
+      tipoItem: 'DVD',
       titulo: titulo
     };
 
@@ -64,7 +62,7 @@ export class LocacaoResolver implements Resolve<Locacao> {
       nome: '',
       dataNascimento: new Date(),
       sexo: '',
-      estahAtivo: ''
+      estahAtivo: 'Sim'
     };
 
     return of({

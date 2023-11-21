@@ -2,9 +2,8 @@
   <mat-card-content>
     <mat-toolbar color="primary">Locações Disponíveis</mat-toolbar>
     <div class="mat-elevation-z8 coluna-flex">
-      <app-locacao-lista *ngIf="locacoes | async as locacao; else carregando"
-                          [locacao]="locacao" (adicionar)="onAdd()"
-                         (editar)="onEdit($event)" (excluir)="onRemove($event)">
+      <app-locacao-lista *ngIf="locacoes$ | async as locacoes; else carregando" [locacoes]="locacoes" (adicionar)="onAdd()"
+        (editar)="onEdit($event)" (excluir)="onRemove($event)">
       </app-locacao-lista>
 
       <ng-template #carregando>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.backend.dto.ClienteDTO;
+import com.backend.dto.SocioDTO;
 import com.backend.dto.mapper.ClienteMapper;
 import com.backend.exception.RegistroNotFoundException;
 import com.backend.repository.ClienteRepository;
@@ -29,6 +30,10 @@ public class ClienteService {
 
     public List<ClienteDTO> listar() {
         return clienteRepository.findAll().stream().map(clienteMapper::paraDTO).collect(Collectors.toList());
+    }
+
+    public List<ClienteDTO> listarAtivos() {
+        return clienteRepository.findAllByEstahAtivo().stream().map(clienteMapper::paraDTO).collect(Collectors.toList());
     }
 
     public List<ClienteDTO> listarDependentes() {

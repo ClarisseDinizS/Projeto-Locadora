@@ -1,4 +1,4 @@
-<mat-table matSort [dataSource]="locacao">
+<mat-table matSort (matSortChange)="sortData($event)" [dataSource]="locacoes">
 
   <ng-container matColumnDef="id">
     <mat-header-cell mat-sort-header="id" *matHeaderCellDef>Id</mat-header-cell>

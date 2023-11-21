@@ -18,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   exports: [
@@ -40,6 +41,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatRadioModule,
     MatListModule,
     MatSortModule,
+    MatSlideToggleModule
   ],
 })
 export class AppMaterialModule { }

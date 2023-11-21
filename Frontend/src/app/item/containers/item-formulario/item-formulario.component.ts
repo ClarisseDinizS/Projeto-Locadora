@@ -8,7 +8,6 @@ import { Item } from '../../model/item';
 import { ItemService } from '../../services/item.service';
 import { Titulo } from 'src/app/titulo/model/titulo';
 import { TituloService } from 'src/app/titulo/services/titulo.service';
-import {Diretor} from "../../../diretor/model/diretor";
 
 @Component({
   selector: 'app-item-formulario',

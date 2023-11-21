@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/home/home/home.component';
 import {NavBarComponent} from "./nav-bar/nav-bar.component";
-import {LocacaoModule} from "./locacao/locacao.module";
 
 const routes: Routes = [{
   path: '', component: NavBarComponent, children: [

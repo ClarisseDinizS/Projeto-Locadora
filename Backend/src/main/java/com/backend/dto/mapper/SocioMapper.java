@@ -10,17 +10,14 @@ import com.backend.dto.SocioDTO;
 import com.backend.enums.SimNao;
 import com.backend.model.Cliente;
 import com.backend.model.Socio;
-import com.backend.repository.ClienteRepository;
 
 @Component
 public class SocioMapper {
 
     private final ClienteMapper clienteMapper;
-    private final ClienteRepository clienteRepository;
 
-    public SocioMapper(ClienteMapper clienteMapper, ClienteRepository clienteRepository) {
+    public SocioMapper(ClienteMapper clienteMapper) {
         this.clienteMapper = clienteMapper;
-        this.clienteRepository = clienteRepository;
     }
 
     public SocioDTO paraDTO(Socio socio) {

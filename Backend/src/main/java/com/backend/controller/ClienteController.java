@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.dto.ClienteDTO;
+import com.backend.dto.SocioDTO;
 import com.backend.service.ClienteService;
 
 import jakarta.validation.Valid;
@@ -43,6 +44,17 @@ public class ClienteController {
             })
     public List<ClienteDTO> listar() {
         return clienteService.listar();
+    }
+
+    @GetMapping("/ativos")
+    @Operation( summary = "Listar clientes ativos",
+            description = "Retorna a clientes de sócios ativos do sistema",
+            responses ={
+                    @ApiResponse(responseCode = "200", description = "Caso o clientes seja incluído com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Caso não tenha sido possível cadastrar o clientes")
+            })
+    public List<ClienteDTO> listarAtivos() {
+        return clienteService.listarAtivos();
     }
 
     @GetMapping("/dependentes")

@@ -2,9 +2,6 @@ package com.backend.model;
 
 import java.time.LocalDate;
 
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
 import com.backend.enums.SimNao;
 import com.backend.enums.converters.SimNaoConverter;
 

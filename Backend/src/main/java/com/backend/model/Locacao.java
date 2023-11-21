@@ -44,6 +44,4 @@ public class Locacao {
     @JoinColumn(name="id_item", referencedColumnName = "id")
     private Item item;
 
-
-    
 }

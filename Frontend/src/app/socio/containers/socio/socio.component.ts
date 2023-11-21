@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { SocioService } from '../../services/socio.service';
   styleUrls: ['./socio.component.scss'],
 })
 export class SocioComponent {
+
   socios$: Observable<Socio[]> | null = null;
 
   constructor(
@@ -23,13 +24,22 @@ export class SocioComponent {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {
-    this.recarregar();
+    this.recarregarAtivos();
   }
 
-  recarregar() {
-    this.socios$ = this.socioServico.listar().pipe(
+  recarregarAtivos() {
+    this.socios$ = this.socioServico.listarAtivos().pipe(
       catchError((error) => {
-        this.onError('Erro ao carregar sócioss');
+        this.onError('Erro ao carregar sócios ativos');
+        return of([]);
+      })
+    );
+  }
+
+  recarregarInativos() {
+    this.socios$ = this.socioServico.listarInativos().pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar sócios inativos');
         return of([]);
       })
     );
@@ -60,7 +70,7 @@ export class SocioComponent {
       if (resultado) {
         this.socioServico.excluir(socio.id).subscribe(
           () => {
-            this.recarregar();
+            this.recarregarAtivos();
             this.snackBar.open('Sócio removido com sucesso!', 'X', {
               duration: 5000,
               verticalPosition: 'top',

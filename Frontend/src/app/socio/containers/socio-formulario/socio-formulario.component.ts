@@ -19,6 +19,7 @@ import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
   styleUrls: ['./socio-formulario.component.scss'],
 })
 export class SocioFormularioComponent {
+
   formulario!: FormGroup;
 
   constructor(
@@ -86,6 +87,8 @@ export class SocioFormularioComponent {
       ],
       dependentes: this.formBuild.array(this.obterDependentes(socio)),
     });
+    if(socio.id != 0)
+      this.formulario.get('numeroInscricao')?.disable()
   }
 
   private obterDependentes(socio: Socio) {

@@ -47,8 +47,8 @@ public class LocacaoService {
                     registro.setDtDevolucaoEfetiva(locacaoDto.dtDevolucaoEfetiva());
                     registro.setValorCobrado(locacaoDto.valorCobrado());
                     registro.setMultaCobrada(locacaoDto.multaCobrada());
-                    registro.setItem(locacaoDto.item());
-                    registro.setCliente(locacaoDto.cliente());
+                    registro.setItem(this.locacaoMapper.getItemMapper().paraEntidade(locacaoDto.item()));
+                    registro.setCliente(this.locacaoMapper.getClienteMapper().paraEntidade(locacaoDto.cliente()));
 
                     return locacaoMapper.paraDTO(locacaoRepository.save(registro));
                 }).orElseThrow(() -> new RegistroNotFoundException(id));

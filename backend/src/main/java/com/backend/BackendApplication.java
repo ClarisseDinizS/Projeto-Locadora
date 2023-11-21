@@ -215,20 +215,29 @@ public class BackendApplication {
 			socio.setDependentes(dependentes);
 			socioRepository.save(socio);
 
+			Socio socio1 = new Socio();
+			socio1.setNome("Edson Lima");
+			socio1.setNumeroInscricao(79);
+			socio1.setDataNascimento(LocalDate.now());
+			socio1.setSexo("Masculino");
+			socio1.setCpf("12345678924");
+			socio1.setEndereco("Rua Abc");
+			socio1.setTelefone("12345678978");
+			socio1.setEstahAtivo(SimNao.NAO);
+			socio1.setDependentes(null);
+			socioRepository.save(socio1);
+
 			locacaoRepository.deleteAll();
 			Locacao locacao = new Locacao();
 			locacao.setDtLocacao(LocalDate.now().minusYears(3));
-			locacao.setDtDevolucaoPrevista(LocalDate.now().minusYears(3));
-			locacao.setDtDevolucaoEfetiva(LocalDate.now().minusYears(3));
+			locacao.setDtDevolucaoPrevista(LocalDate.now().minusYears(2));
+			locacao.setDtDevolucaoEfetiva(LocalDate.now().minusYears(1));
 			locacao.setValorCobrado(22.4);
 			locacao.setMultaCobrada(2.50);
 			locacao.setItem(item);
 			locacao.setCliente(dependente);
 
 			locacaoRepository.save(locacao);
-
-
-
 
 		};
 	}
