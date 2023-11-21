@@ -31,6 +31,7 @@ export class SocioService {
   }
 
   salvar(registro: Partial<Socio>) {
+    console.log(registro);
     if (registro.id != 0) {
       return this.atualizar(registro);
     }

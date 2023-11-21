@@ -13,7 +13,7 @@ public class ClienteMapper {
         if (cliente == null) {
             return null;
         }
-        return new ClienteDTO(cliente.getId(), cliente.getNumeroInscricao(), cliente.getNome(),
+        return new ClienteDTO(cliente.getId(), cliente.getNome(),
                 cliente.getDataNascimento(), cliente.getSexo(), cliente.getEstahAtivo().getValor());
     }
 
@@ -27,7 +27,6 @@ public class ClienteMapper {
             cliente.setId(clienteDto.id());
         }
 
-        cliente.setNumeroInscricao(clienteDto.numeroInscricao());
         cliente.setNome(clienteDto.nome());
         cliente.setDataNascimento(clienteDto.dataNascimento());
         cliente.setSexo(clienteDto.sexo());

@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {first} from "rxjs/operators";
-import {Locacao} from "../model/locacao";
+import { HttpClient } from '@angular/common/http';
+import { first } from 'rxjs/operators';
+import { Locacao } from '../model/locacao';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocacaoService {
-
   private readonly API = 'api/locacao';
 
   constructor(private httpCliente: HttpClient) { }

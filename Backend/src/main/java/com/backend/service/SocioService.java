@@ -11,7 +11,6 @@ import com.backend.dto.SocioDTO;
 import com.backend.dto.mapper.SocioMapper;
 import com.backend.exception.RegistroNotFoundException;
 import com.backend.model.Cliente;
-import com.backend.model.Socio;
 import com.backend.repository.SocioRepository;
 
 import jakarta.validation.Valid;
@@ -54,8 +53,6 @@ public class SocioService {
     public SocioDTO atualizar(@NotNull @Positive Long id, @Valid SocioDTO socioDTO) {
         return socioRepository.findById(id)
                 .map(registro -> {
-                    Socio socio = socioMapper.paraEntidade(socioDTO);
-                    registro.setNumeroInscricao(socioDTO.numeroInscricao());
                     registro.setNome(socioDTO.nome());
                     registro.setDataNascimento(socioDTO.dataNascimento());
                     registro.setSexo(socioDTO.sexo());
@@ -72,7 +69,6 @@ public class SocioService {
                         if (dependenteDTO.id() == 0) {
                             // Novo dependente, você pode criar um novo objeto Cliente aqui
                             Cliente novoDependente = new Cliente();
-                            novoDependente.setNumeroInscricao(dependenteDTO.numeroInscricao());
                             novoDependente.setNome(dependenteDTO.nome());
                             novoDependente.setDataNascimento(dependenteDTO.dataNascimento());
                             novoDependente.setSexo(dependenteDTO.sexo());

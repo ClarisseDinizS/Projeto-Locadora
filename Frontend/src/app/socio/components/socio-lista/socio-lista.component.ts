@@ -21,7 +21,6 @@ export class SocioListaComponent {
     private router: Router) {}
 
   readonly colunasExibidas = [
-    'id',
     'numeroInscricao',
     'nome',
     'dataNascimento',

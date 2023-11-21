@@ -26,12 +26,12 @@ public class SocioMapper {
         }
 
         List<ClienteDTO> dependentes = socio.getDependentes().stream()
-                .map(dependente -> new ClienteDTO(dependente.getId(), dependente.getNumeroInscricao(),
+                .map(dependente -> new ClienteDTO(dependente.getId(),
                         dependente.getNome(), dependente.getDataNascimento(), dependente.getSexo(),
                         dependente.getEstahAtivo().getValor()))
                 .collect(Collectors.toList());
 
-        return new SocioDTO(socio.getId(), socio.getNumeroInscricao(), socio.getNome(), socio.getDataNascimento(),
+        return new SocioDTO(socio.getId(), socio.getNome(), socio.getDataNascimento(),
                 socio.getSexo(), socio.getEstahAtivo().getValor(), socio.getCpf(), socio.getEndereco(),
                 socio.getTelefone(), dependentes);
     }
@@ -46,7 +46,6 @@ public class SocioMapper {
             socio.setId(socioDTO.id());
         }
 
-        socio.setNumeroInscricao(socioDTO.numeroInscricao());
         socio.setNome(socioDTO.nome());
         socio.setDataNascimento(socioDTO.dataNascimento());
         socio.setSexo(socioDTO.sexo());
@@ -57,7 +56,6 @@ public class SocioMapper {
 
         List<Cliente> dependentes = socioDTO.dependentes().stream().map(dependenteDTO -> {
             var dependente = new Cliente();
-            dependente.setNumeroInscricao(dependenteDTO.numeroInscricao());
             dependente.setNome(dependenteDTO.nome());
             dependente.setDataNascimento(dependenteDTO.dataNascimento());
             dependente.setSexo(dependenteDTO.sexo());

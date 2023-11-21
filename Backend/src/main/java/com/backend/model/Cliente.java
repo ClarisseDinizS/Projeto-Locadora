@@ -26,9 +26,6 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private Integer numeroInscricao;
-
     @Column(length = 200, nullable = false)
     private String nome;
 

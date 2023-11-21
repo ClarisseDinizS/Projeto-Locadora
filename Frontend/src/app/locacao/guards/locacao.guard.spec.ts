@@ -3,9 +3,9 @@ import { CanActivateFn } from '@angular/router';
 
 import { locacaoGuard } from './locacao.guard';
 
-describe('locacaoGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => locacaoGuard(...guardParameters));
+describe('guardsGuard', () => {
+  const executeGuard: CanActivateFn = (...guardParameters) =>
+    TestBed.runInInjectionContext(() => locacaoGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

@@ -1,48 +1,50 @@
-<mat-table matSort (matSortChange)="sortData($event)" [dataSource]="locacoes">
-
+<mat-table [dataSource]="locacoes">
+  <!-- Coluna Id -->
   <ng-container matColumnDef="id">
-    <mat-header-cell mat-sort-header="id" *matHeaderCellDef>Id</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
     <mat-cell *matCellDef="let locacao">{{ locacao.id }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="dtLocacao">
-    <mat-header-cell mat-sort-header="dtLocacao" *matHeaderCellDef>Data de Locação</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Data da Locação</mat-header-cell>
     <mat-cell *matCellDef="let locacao">{{ locacao.dtLocacao | date: 'dd/MM/yyyy' }}</mat-cell>
   </ng-container>
 
+  <!-- Coluna Nome -->
   <ng-container matColumnDef="dtDevolucaoPrevista">
-    <mat-header-cell mat-sort-header="dtDevolucaoPrevista" *matHeaderCellDef>Devolução Prevista</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Data da Devolução Prevista</mat-header-cell>
     <mat-cell *matCellDef="let locacao">{{ locacao.dtDevolucaoPrevista | date: 'dd/MM/yyyy' }}</mat-cell>
   </ng-container>
 
+  <!-- Coluna Data -->
   <ng-container matColumnDef="dtDevolucaoEfetiva">
-    <mat-header-cell mat-sort-header="dtDevolucaoEfetiva" *matHeaderCellDef>Devolução Efetiva</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Data da Devolução Efetiva</mat-header-cell>
     <mat-cell *matCellDef="let locacao">{{ locacao.dtDevolucaoEfetiva | date: 'dd/MM/yyyy' }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="valorCobrado">
-    <mat-header-cell mat-sort-header="valorCobrado" *matHeaderCellDef>Valor Cobrado</mat-header-cell>
-    <mat-cell *matCellDef="let locacao">{{ locacao.valorCobrado }}</mat-cell>
+    <mat-header-cell *matHeaderCellDef>Valor Locação</mat-header-cell>
+    <mat-cell *matCellDef="let locacao">{{ locacao.valorCobrado | number: '1.2-2' }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="multaCobrada">
-    <mat-header-cell mat-sort-header="multaCobrada" *matHeaderCellDef>Multa Cobrada</mat-header-cell>
-    <mat-cell *matCellDef="let locacao">{{ locacao.multaCobrada }}</mat-cell>
+    <mat-header-cell *matHeaderCellDef>Multa Cobrada</mat-header-cell>
+    <mat-cell *matCellDef="let locacao">{{ locacao.multaCobrada | number: '1.2-2' }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Ações -->
   <ng-container matColumnDef="acoes">
     <mat-header-cell *matHeaderCellDef class="coluna-acoes">
-      <button mat-mini-fab color="accent" aria-label="Adicionar uma Locação" (click)="onAdd()" class="coluna-acoes-header">
+      <button mat-mini-fab color="accent" aria-label="Adicionar uma locação" (click)="onAdd()" class="coluna-acoes-header">
         <mat-icon>add</mat-icon>
       </button>
     </mat-header-cell>
     <mat-cell *matCellDef="let locacao" class="coluna-acoes">
-      <button mat-icon-button color="primary" aria-label="Editar Locação" (click)="onEdit(locacao)">
+      <button mat-icon-button color="primary" aria-label="Editar locação" (click)="onEdit(locacao)">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button mat-icon-button color="warn" aria-label="Remover Locação" (click)="onRemove(locacao)">
+      <button mat-icon-button color="warn" aria-label="Remover locação" (click)="onRemove(locacao)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

@@ -1,13 +1,7 @@
 <mat-table [dataSource]="socios">
-  <!-- Coluna Id -->
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-    <mat-cell *matCellDef="let socio">{{ socio.id }}</mat-cell>
-  </ng-container>
-
   <ng-container matColumnDef="numeroInscricao">
-    <mat-header-cell *matHeaderCellDef>Nº de Incrição</mat-header-cell>
-    <mat-cell *matCellDef="let socio">{{ socio.numeroInscricao }}</mat-cell>
+    <mat-header-cell *matHeaderCellDef>Nº de Inscrição</mat-header-cell>
+    <mat-cell *matCellDef="let socio">{{ socio.id }}</mat-cell>
   </ng-container>
 
   <!-- Coluna Nome -->

@@ -1,35 +1,47 @@
-import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
-import {Titulo} from "../../titulo/model/titulo";
-import {Observable, of} from "rxjs";
-import {Locacao} from "../model/locacao";
-import {LocacaoService} from "../service/locacao.service";
-import {Item} from "../../item/model/item";
-import {Cliente} from "../../socio/model/cliente";
-import {Diretor} from "../../diretor/model/diretor";
-import {Classe} from "../../classe/model/classe";
+import { Cliente } from './../../socio/model/cliente';
+import { Item } from './../../item/model/item';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  Resolve,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { LocacaoService } from '../services/locacao.service';
+import { Locacao } from '../model/locacao';
+import { Diretor } from 'src/app/diretor/model/diretor';
+import { Classe } from 'src/app/classe/model/classe';
+import { Titulo } from 'src/app/titulo/model/titulo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocacaoResolver implements Resolve<Locacao> {
-
   constructor(private service: LocacaoService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot):
-    Observable<Locacao> {
+    state: RouterStateSnapshot
+  ): Observable<Locacao> {
     if (route.params && route.params['id']) {
       return this.service.buscarPorId(route.params['id']);
     }
 
+    const cliente: Cliente = {
+      id: 0,
+      nome: '',
+      dataNascimento: new Date(),
+      sexo: '',
+      estahAtivo: 'Sim'
+    };
 
+    // Criar uma instância de Diretor aqui
     const diretor: Diretor = {
       id: 0,
       nome: '',
     };
 
+    // Criar uma instância de Classe aqui
     const classe: Classe = {
       id: 0,
       nome: '',
@@ -37,6 +49,7 @@ export class LocacaoResolver implements Resolve<Locacao> {
       data: new Date(),
     };
 
+    // Criar uma instância de Título aqui
     const titulo: Titulo = {
       id: 0,
       nome: '',
@@ -53,17 +66,9 @@ export class LocacaoResolver implements Resolve<Locacao> {
       numSerie: 0,
       dtaAquisicao: new Date(),
       tipoItem: 'DVD',
-      titulo: titulo
+      titulo: titulo,
     };
 
-    const cliente: Cliente = {
-      id: 0,
-      numeroInscricao: 0,
-      nome: '',
-      dataNascimento: new Date(),
-      sexo: '',
-      estahAtivo: 'Sim'
-    };
 
     return of({
       id: 0,
@@ -73,7 +78,7 @@ export class LocacaoResolver implements Resolve<Locacao> {
       valorCobrado: 0,
       multaCobrada: 0,
       item: item,
-      cliente: cliente
+      cliente: cliente,
     });
   }
 }

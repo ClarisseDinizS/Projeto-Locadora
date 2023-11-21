@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.backend.dto.ClienteDTO;
-import com.backend.dto.SocioDTO;
 import com.backend.dto.mapper.ClienteMapper;
 import com.backend.exception.RegistroNotFoundException;
 import com.backend.repository.ClienteRepository;
@@ -52,7 +51,6 @@ public class ClienteService {
     public ClienteDTO atualizar(@NotNull @Positive Long id, @Valid ClienteDTO clienteDto) {
         return clienteRepository.findById(id)
                 .map(registro -> {
-                    registro.setNumeroInscricao(clienteDto.numeroInscricao());
                     registro.setNome(clienteDto.nome());
                     registro.setDataNascimento(clienteDto.dataNascimento());
                     registro.setSexo(clienteDto.sexo());

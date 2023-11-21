@@ -185,14 +185,12 @@ public class BackendApplication {
 			clienteRepository.deleteAll();
 			Cliente dependente = new Cliente();
 			dependente.setNome("Isabella Ferreira");
-			dependente.setNumeroInscricao(12);
 			dependente.setDataNascimento(LocalDate.now());
 			dependente.setSexo("Feminino");
 			dependente.setEstahAtivo(SimNao.SIM);
 
 			Cliente dependente2 = new Cliente();
 			dependente2.setNome("João Pedro Assis");
-			dependente2.setNumeroInscricao(45);
 			dependente2.setDataNascimento(LocalDate.now());
 			dependente2.setSexo("Masculino");
 			dependente2.setEstahAtivo(SimNao.SIM);
@@ -201,7 +199,6 @@ public class BackendApplication {
 			socioRepository.deleteAll();
 			Socio socio = new Socio();
 			socio.setNome("Marcos Veltri");
-			socio.setNumeroInscricao(89);
 			socio.setDataNascimento(LocalDate.now());
 			socio.setSexo("Masculino");
 			socio.setCpf("12345678910");
@@ -217,7 +214,6 @@ public class BackendApplication {
 
 			Socio socio1 = new Socio();
 			socio1.setNome("Edson Lima");
-			socio1.setNumeroInscricao(79);
 			socio1.setDataNascimento(LocalDate.now());
 			socio1.setSexo("Masculino");
 			socio1.setCpf("12345678924");

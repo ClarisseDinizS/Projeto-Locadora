@@ -23,7 +23,6 @@ export class SocioResolver implements Resolve<Socio> {
     }
     return of({
       id: 0,
-      numeroInscricao: 0,
       nome: '',
       dataNascimento: new Date(),
       sexo: '',

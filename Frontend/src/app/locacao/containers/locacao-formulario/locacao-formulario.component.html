@@ -10,48 +10,48 @@
       <mat-form-field class="largura-total">
         <mat-label>Data da Locação</mat-label>
         <input matInput placeholder="Data da Locação" formControlName="dtLocacao" [matDatepicker]="dtLocacao" />
-        <mat-datepicker-toggle matIconSuffix [for]="dtLocacao"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="dtLocacao"></mat-datepicker-toggle>
         <mat-datepicker #dtLocacao></mat-datepicker>
         <mat-error *ngIf="formulario.get('dtLocacao')?.invalid">{{
-          getErrorMessage("dtLocacao")
+          formUtils.getErrorMessage(formulario, "dtLocacao")
           }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Data de Devolução Prevista</mat-label>
-        <input matInput placeholder="Data de Devolução Prevista" formControlName="dtDevolucaoPrevista"
+        <mat-label>Data da Devolução Previsão</mat-label>
+        <input matInput placeholder="Data da Devolução Previsão" formControlName="dtDevolucaoPrevista"
           [matDatepicker]="dtDevolucaoPrevista" />
-        <mat-datepicker-toggle matIconSuffix [for]="dtDevolucaoPrevista"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="dtDevolucaoPrevista"></mat-datepicker-toggle>
         <mat-datepicker #dtDevolucaoPrevista></mat-datepicker>
         <mat-error *ngIf="formulario.get('dtDevolucaoPrevista')?.invalid">{{
-          getErrorMessage("dtDevolucaoPrevista")
+          formUtils.getErrorMessage(formulario, "dtDevolucaoPrevista")
           }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Data de Devolução Efetiva</mat-label>
-        <input matInput placeholder="Data de Devolução Efetiva" formControlName="dtDevolucaoEfetiva"
+        <mat-label>Data da Devolução Efetiva</mat-label>
+        <input matInput placeholder="Data da Devolução Efetiva" formControlName="dtDevolucaoEfetiva"
           [matDatepicker]="dtDevolucaoEfetiva" />
-        <mat-datepicker-toggle matIconSuffix [for]="dtDevolucaoEfetiva"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="dtDevolucaoEfetiva"></mat-datepicker-toggle>
         <mat-datepicker #dtDevolucaoEfetiva></mat-datepicker>
         <mat-error *ngIf="formulario.get('dtDevolucaoEfetiva')?.invalid">{{
-          getErrorMessage("dtDevolucaoEfetiva")
+          formUtils.getErrorMessage(formulario, "dtDevolucaoEfetiva")
           }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="largura-total">
         <mat-label>Valor Cobrado</mat-label>
-        <input matInput placeholder="Valor Cobrado" formControlName="valorCobrado" #valorCobrado />
+        <input matInput placeholder="Valor Cobrado" formControlName="valorCobrado" type="number" />
         <mat-error *ngIf="formulario.get('valorCobrado')?.invalid">{{
-          getErrorMessage("valorCobrado")
+          formUtils.getErrorMessage(formulario, "valorCobrado")
           }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Valor da Multa</mat-label>
-        <input matInput placeholder="Valor da Multa" formControlName="multaCobrada" #multaCobrada />
+        <mat-label>Multa Cobrada</mat-label>
+        <input matInput placeholder="Multa Cobrada" formControlName="multaCobrada" type="number" />
         <mat-error *ngIf="formulario.get('multaCobrada')?.invalid">{{
-          getErrorMessage("multaCobrada")
+          formUtils.getErrorMessage(formulario, "multaCobrada")
           }}</mat-error>
       </mat-form-field>
 
@@ -63,19 +63,19 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formulario.get('item')?.invalid">{{
-          getErrorMessage("item")
+          formUtils.getErrorMessage(formulario, "item")
           }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Clientes</mat-label>
-        <mat-select formControlName="cliente" name="cliente" placeholder="Clientes" [compareWith]="compareWithCliente">
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="cliente" name="cliente" placeholder="Cliente" [compareWith]="compareWithCliente">
           <mat-option *ngFor="let cliente of clientes" [value]="cliente">
             {{ cliente.nome }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formulario.get('cliente')?.invalid">{{
-          getErrorMessage("cliente")
+          formUtils.getErrorMessage(formulario, "cliente")
           }}</mat-error>
       </mat-form-field>
     </form>

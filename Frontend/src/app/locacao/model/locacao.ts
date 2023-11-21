@@ -1,5 +1,5 @@
-import {Item} from "../../item/model/item";
-import {Cliente} from "../../socio/model/cliente";
+import { Item } from "src/app/item/model/item";
+import { Cliente } from "src/app/socio/model/cliente";
 
 export interface Locacao {
   id: number;

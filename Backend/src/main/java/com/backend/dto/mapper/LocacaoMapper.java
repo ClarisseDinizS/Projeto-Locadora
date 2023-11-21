@@ -34,7 +34,7 @@ public class LocacaoMapper {
         }
 
         ClienteDTO cliente = locacao.getCliente() != null
-                ? new ClienteDTO(locacao.getCliente().getId(), locacao.getCliente().getNumeroInscricao(),
+                ? new ClienteDTO(locacao.getCliente().getId(),
                         locacao.getCliente().getNome(), locacao.getCliente().getDataNascimento(),
                         locacao.getCliente().getSexo(), locacao.getCliente().getEstahAtivo().getValor())
                 : null;
@@ -63,7 +63,6 @@ public class LocacaoMapper {
         Cliente cliente = locacaoDTO.cliente() != null ? new Cliente() : null;
 
         cliente.setId(locacaoDTO.cliente().id());
-        cliente.setNumeroInscricao(locacaoDTO.cliente().numeroInscricao());
         cliente.setNome(locacaoDTO.cliente().nome());
         cliente.setDataNascimento(locacaoDTO.cliente().dataNascimento());
         cliente.setSexo(locacaoDTO.cliente().sexo());

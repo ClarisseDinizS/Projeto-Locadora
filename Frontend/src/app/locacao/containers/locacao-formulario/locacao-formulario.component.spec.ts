@@ -8,7 +8,7 @@ describe('LocacaoFormularioComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LocacaoFormularioComponent]
+      declarations: [LocacaoFormularioComponent],
     });
     fixture = TestBed.createComponent(LocacaoFormularioComponent);
     component = fixture.componentInstance;

@@ -36,7 +36,6 @@ export class SocioFormularioComponent {
       this.route.snapshot.data['socio'] ||
       ({
         id: 0,
-        numeroInscricao: 0,
         nome: '',
         dataNascimento: new Date(),
         sexo: '',
@@ -49,7 +48,6 @@ export class SocioFormularioComponent {
 
     this.formulario = this.formBuild.group({
       id: [socio.id],
-      numeroInscricao: [socio.numeroInscricao],
       nome: [
         socio.nome,
         [
@@ -106,7 +104,6 @@ export class SocioFormularioComponent {
   private criarDependente(
     dependente: Cliente = {
       id: 0,
-      numeroInscricao: this.formulario.get('numeroInscricao')?.value,
       nome: '',
       dataNascimento: new Date(),
       sexo: '',
@@ -115,7 +112,6 @@ export class SocioFormularioComponent {
   ) {
     return this.formBuild.group({
       id: [dependente.id],
-      numeroInscricao: [dependente.numeroInscricao],
       nome: [
         dependente.nome,
         [

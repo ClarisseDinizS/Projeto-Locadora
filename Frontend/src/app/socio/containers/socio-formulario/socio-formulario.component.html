@@ -16,14 +16,6 @@
       </mat-form-field>
 
       <mat-form-field class="largura-total">
-        <mat-label>Número de Inscrição</mat-label>
-        <input matInput placeholder="Número de Inscrição" formControlName="numeroInscricao" type="number" readonly/>
-        <mat-error *ngIf="formulario.get('numeroInscricao')?.invalid">{{
-          formUtils.getErrorMessage(formulario, "numeroInscricao")
-          }}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="largura-total">
         <mat-label>Data de Nascimento</mat-label>
         <input matInput placeholder="Data de Nascimento" formControlName="dataNascimento"
           [matDatepicker]="dataPicker" />

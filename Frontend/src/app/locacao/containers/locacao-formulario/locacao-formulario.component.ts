@@ -1,33 +1,28 @@
-import { Locacao } from './../../model/locacao';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Item } from '../../../item/model/item';
-import { ItemService } from '../../../item/services/item.service';
-import { SocioService } from '../../../socio/services/socio.service';
-import { LocacaoService } from '../../service/locacao.service';
-import { Cliente } from '../../../socio/model/cliente';
+import { Locacao } from '../../model/locacao';
+import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
+import { Item } from 'src/app/item/model/item';
+import { Cliente } from 'src/app/socio/model/cliente';
+import { LocacaoService } from '../../services/locacao.service';
+import { ItemService } from 'src/app/item/services/item.service';
+import { SocioService } from 'src/app/socio/services/socio.service';
 
 @Component({
   selector: 'app-locacao-formulario',
   templateUrl: './locacao-formulario.component.html',
   styleUrls: ['./locacao-formulario.component.scss'],
 })
-export class LocacaoFormularioComponent implements OnInit {
+export class LocacaoFormularioComponent {
 
   formulario!: FormGroup;
-  // formulario = this.formBuild.group({
-  //   id: [0],
-  //   dtLocacao: [new Date(), Validators.required],
-  //   dtDevolucaoPrevista: [new Date(), Validators.required],
-  //   dtDevolucaoEfetiva: [new Date(), Validators.required],
-  //   valorCobrado: [0],
-  //   multaCobrada: [0],
-  //   item: [<Item>{}],
-  //   cliente: [<Cliente>{}],
-  // });
 
   itens: Item[] = [];
   clientes: Cliente[] = [];
@@ -39,23 +34,24 @@ export class LocacaoFormularioComponent implements OnInit {
   constructor(
     private formBuild: NonNullableFormBuilder,
     private servico: LocacaoService,
-    private itemService: ItemService,
     private clienteService: SocioService,
+    private itemService: ItemService,
     private snackBar: MatSnackBar,
     private localizacao: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public formUtils: FormUtilsService
   ) { }
 
   ngOnInit(): void {
-    this.itemService.listar().subscribe((itens) => {
-      this.itens = itens;
-    });
-
     this.clienteService.listarClientes().subscribe((clientes) => {
       this.clientes = clientes;
     });
 
-      const locacao: Locacao =
+    this.itemService.listar().subscribe((itens) => {
+      this.itens = itens;
+    });
+
+    const locacao: Locacao =
       this.route.snapshot.data['locacao'] ||
       ({
         id: 0,
@@ -73,18 +69,23 @@ export class LocacaoFormularioComponent implements OnInit {
       dtLocacao: [locacao.dtLocacao, Validators.required],
       dtDevolucaoPrevista: [locacao.dtDevolucaoPrevista, Validators.required],
       dtDevolucaoEfetiva: [locacao.dtDevolucaoEfetiva, Validators.required],
-      valorCobrado: [locacao.valorCobrado],
-      multaCobrada: [locacao.multaCobrada],
+      valorCobrado: [locacao.valorCobrado, Validators.required],
+      multaCobrada: [locacao.multaCobrada, Validators.required],
       item: [locacao.item, Validators.required],
       cliente: [locacao.cliente, Validators.required],
     });
   }
 
   onSubmit() {
-    this.servico.salvar(this.formulario.value).subscribe(
-      (resultado) => this.onSucess(),
-      (erro) => this.onError()
-    );
+    console.log(this.formulario.value);
+    if (this.formulario.valid) {
+      this.servico.salvar(this.formulario.value).subscribe(
+        (resultado) => this.onSucess(),
+        (erro) => this.onError()
+      );
+    } else {
+      this.formUtils.validateAllFormFields(this.formulario);
+    }
   }
 
   onCancel() {
@@ -98,29 +99,5 @@ export class LocacaoFormularioComponent implements OnInit {
 
   private onError() {
     this.snackBar.open('Error ao salvar locação.', '', { duration: 5000 });
-  }
-
-  getErrorMessage(fieldName: string) {
-    const field = this.formulario.get(fieldName);
-
-    if (field?.hasError('required')) {
-      return 'Campo Obrigatório';
-    }
-
-    if (field?.hasError('minlength')) {
-      const requiredLength: number = field.errors
-        ? field.errors['minlength']['requiredLength']
-        : 5;
-      return `Tamanho mínimo precisa ser de ${requiredLength} caracteres.`;
-    }
-
-    if (field?.hasError('maxlength')) {
-      const requiredLength: number = field.errors
-        ? field.errors['maxlength']['requiredLength']
-        : 200;
-      return `Tamanho máximo excedido de ${requiredLength} caracteres.`;
-    }
-
-    return 'Campo Inválido';
   }
 }

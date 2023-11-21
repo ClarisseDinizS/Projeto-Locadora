@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.backend.model.Cliente;
-import com.backend.model.Socio;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
