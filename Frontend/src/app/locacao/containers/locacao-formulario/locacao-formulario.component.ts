@@ -14,6 +14,8 @@ import { Cliente } from 'src/app/socio/model/cliente';
 import { LocacaoService } from '../../services/locacao.service';
 import { ItemService } from 'src/app/item/services/item.service';
 import { SocioService } from 'src/app/socio/services/socio.service';
+import {ClasseService} from "../../../classe/services/classe.service";
+import {Classe} from "../../../classe/model/classe";
 
 @Component({
   selector: 'app-locacao-formulario',
@@ -35,6 +37,7 @@ export class LocacaoFormularioComponent {
     private formBuild: NonNullableFormBuilder,
     private servico: LocacaoService,
     private clienteService: SocioService,
+    private classeService: ClasseService,
     private itemService: ItemService,
     private snackBar: MatSnackBar,
     private localizacao: Location,
@@ -87,6 +90,20 @@ export class LocacaoFormularioComponent {
     } else {
       this.formUtils.validateAllFormFields(this.formulario);
     }
+  }
+
+  atualizarValorCobrado() {
+    const itemSelecionado: (Item)= this.formulario.get('item')?.value;
+
+    this.classeService.buscarPorId(itemSelecionado.titulo.classe.id).subscribe(
+      (classe: Classe) => {
+        // Agora, atualize o valor cobrado no formulário
+        this.formulario.get('valorCobrado')?.setValue(classe.valor);
+      },
+      (erro) => {
+        console.error('Erro ao buscar classe por ID:', erro);
+      }
+    );
   }
 
   onCancel() {

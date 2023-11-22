@@ -1,3 +1,10 @@
+<mat-card-content>
+    <mat-form-field class = "largura-total">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)"#input>
+    </mat-form-field>
+</mat-card-content>
+
 <mat-table [dataSource]="dataSource" matSort>
   <!-- Coluna Id -->
   <ng-container matColumnDef="id">

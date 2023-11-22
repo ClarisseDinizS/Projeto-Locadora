@@ -8,6 +8,8 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 import { Titulo } from '../../model/titulo';
 import { TituloService } from '../../services/titulo.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import {MatTableDataSource} from "@angular/material/table";
+import {Ator} from "../../../ator/model/ator";
 
 @Component({
   selector: 'app-titulo',
@@ -16,6 +18,7 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 })
 export class TituloComponent implements OnInit {
   titulos$: Observable<Titulo[]> | null = null;
+
 
   constructor(
     private tituloServico: TituloService,
@@ -43,6 +46,10 @@ export class TituloComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+
+
+
 
   onAdd() {
     this.router.navigate(['novo'], { relativeTo: this.route });
