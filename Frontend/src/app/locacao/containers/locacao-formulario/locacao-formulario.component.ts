@@ -58,10 +58,11 @@ export class LocacaoFormularioComponent {
         dtLocacao: new Date(),
         dtDevolucaoPrevista: new Date(),
         dtDevolucaoEfetiva: new Date(),
-        valorCobrado: 0,
-        multaCobrada: 0,
         item: <Item>{},
         cliente: <Cliente>{},
+        valorCobrado: 0,
+        multaCobrada: 0,
+
       } as Locacao);
 
     this.formulario = this.formBuild.group({

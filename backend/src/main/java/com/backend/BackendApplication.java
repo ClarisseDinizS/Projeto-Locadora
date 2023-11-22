@@ -228,7 +228,7 @@ public class BackendApplication {
 			locacao.setDtLocacao(LocalDate.now().minusYears(3));
 			locacao.setDtDevolucaoPrevista(LocalDate.now().minusYears(2));
 			locacao.setDtDevolucaoEfetiva(LocalDate.now().minusYears(1));
-			locacao.setValorCobrado(22.4);
+			locacao.setValorCobrado(item.getTitulo().getClasse().getValor());
 			locacao.setMultaCobrada(2.50);
 			locacao.setItem(item);
 			locacao.setCliente(dependente);
