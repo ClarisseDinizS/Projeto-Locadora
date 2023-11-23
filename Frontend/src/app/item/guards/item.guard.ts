@@ -44,7 +44,7 @@ export class ItemResolver implements Resolve<Item> {
     const titulo: Titulo = {
       id: 0,
       nome: '',
-      ano: new Date(),
+      ano: new Date().getFullYear(),
       sinopse: '',
       categoria: '',
       atores: [],

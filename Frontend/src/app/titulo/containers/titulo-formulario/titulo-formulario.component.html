@@ -18,9 +18,9 @@
 
       <mat-form-field class="largura-total">
         <mat-label>Ano</mat-label>
-        <input matInput placeholder="Ano" formControlName="ano" [matDatepicker]="ano" />
-        <mat-datepicker-toggle matIconSuffix [for]="ano"></mat-datepicker-toggle>
-        <mat-datepicker #ano></mat-datepicker>
+        <input matInput placeholder="Ano" formControlName="ano" type="number" />
+        <!-- <mat-datepicker-toggle matIconSuffix [for]="ano"></mat-datepicker-toggle>
+        <mat-datepicker #ano startView="multi-year"></mat-datepicker> -->
         <mat-error *ngIf="formulario.get('ano')?.invalid">{{ getErrorMessage("ano") }}</mat-error>
       </mat-form-field>
 

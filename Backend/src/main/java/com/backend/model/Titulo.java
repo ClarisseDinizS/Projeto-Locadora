@@ -1,6 +1,6 @@
 package com.backend.model;
 
-import java.time.LocalDate;
+import java.time.Year;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -29,7 +29,7 @@ public class Titulo {
     private String nome;
 
     @Column
-    private LocalDate ano;
+    private Year ano;
 
     @Column(length = 200, nullable = false)
     private String sinopse;

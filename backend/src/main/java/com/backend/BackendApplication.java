@@ -1,6 +1,7 @@
 package com.backend;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +120,7 @@ public class BackendApplication {
 			List<Titulo> tituloList = new ArrayList<>();
 			Titulo titulo = new Titulo();
 			titulo.setNome("A Queda");
-			titulo.setAno(LocalDate.now().minusYears(3));
+			titulo.setAno(Year.now().minusYears(1));
 			titulo.setSinopse("Para as melhores amigas Becky e Hunter, a vida é sobre vencer medos e ultrapassar limites.");
 			titulo.setCategoria("Suspense");
 			titulo.setDiretor(diretor);
@@ -130,7 +131,7 @@ public class BackendApplication {
 
 			Titulo titulo2 = new Titulo();
 			titulo2.setNome("Besouro Azul");
-			titulo2.setAno(LocalDate.now().minusYears(2));
+			titulo2.setAno(Year.now().minusYears(2));
 			titulo2.setSinopse("O adolescente Jaime Reyes ganha superpoderes quando um misterioso escaravelho se prende à sua coluna e lhe fornece uma poderosa armadura alienígena azul.");
 			titulo2.setCategoria("Aventura/Ação");
 			titulo2.setDiretor(diretor);
@@ -141,7 +142,7 @@ public class BackendApplication {
 
 			Titulo titulo3 = new Titulo();
 			titulo3.setNome("A Freira 2");
-			titulo3.setAno(LocalDate.now().minusYears(1));
+			titulo3.setAno(Year.now().minusYears(5));
 			titulo3.setSinopse("Em 1956, na França, um padre é assassinado e parece que um mal está se espalhando. Determinada a deter o maligno, irmã Irene mais uma vez fica cara a cara com uma força demoníaca.");
 			titulo3.setCategoria("Terror");
 			titulo3.setDiretor(diretor2);

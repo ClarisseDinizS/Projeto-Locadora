@@ -53,7 +53,7 @@ export class LocacaoResolver implements Resolve<Locacao> {
     const titulo: Titulo = {
       id: 0,
       nome: '',
-      ano: new Date(),
+      ano: new Date().getFullYear(),
       sinopse: '',
       categoria: '',
       atores: [],

@@ -3,7 +3,7 @@ import { Ator } from './../../../ator/model/ator';
 import { Diretor } from './../../../diretor/model/diretor';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
@@ -19,16 +19,7 @@ import { ClasseService } from 'src/app/classe/services/classe.service';
   styleUrls: ['./titulo-formulario.component.scss'],
 })
 export class TituloFormularioComponent implements OnInit {
-  formulario = this.formBuild.group({
-    id: [0],
-    nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-    ano: [new Date, Validators.required],
-    sinopse: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-    categoria: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-    diretor: [<Diretor>{}],
-    classe: [<Classe>{}],
-    atores: [this.formBuild.array(<Ator[]>[]), Validators.required],
-  });
+  formulario!: FormGroup;
 
   diretores: Diretor[] = [];
   atores: Ator[] = [];
@@ -60,17 +51,26 @@ export class TituloFormularioComponent implements OnInit {
       this.atores = atores;
     });
 
-    const titulo: Titulo = this.route.snapshot.data['titulo'];
+    const titulo: Titulo = this.route.snapshot.data['titulo'] || {
+      id: 0,
+      nome: '',
+      ano: new Date().getFullYear(),
+      sinopse: '',
+      categoria: '',
+      diretor: <Diretor>{},
+      classe: <Classe>{},
+      atores: <Ator[]>[]
+    };
 
-    this.formulario.setValue({
-      id: titulo.id,
-      nome: titulo.nome,
-      ano: titulo.ano,
-      sinopse: titulo.sinopse,
-      categoria: titulo.categoria,
-      diretor: titulo.diretor,
-      classe: titulo.classe,
-      atores: titulo.atores
+    this.formulario = this.formBuild.group({
+      id: [titulo.id],
+      nome: [titulo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      ano: [titulo.ano, Validators.required],
+      sinopse: [titulo.sinopse, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      categoria: [titulo.categoria, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      diretor: [titulo.diretor],
+      classe: [titulo.classe],
+      atores: [this.formBuild.array(titulo.atores), Validators.required],
     });
   }
 

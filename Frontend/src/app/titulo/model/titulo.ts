@@ -5,7 +5,7 @@ import { Diretor } from "../../diretor/model/diretor";
 export interface Titulo {
     id: number;
     nome: string;
-    ano: Date;
+    ano: number;
     sinopse: string;
     categoria: string;
     diretor: Diretor;

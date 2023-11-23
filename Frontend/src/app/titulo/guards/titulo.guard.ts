@@ -35,6 +35,6 @@ export class TituloResolver implements Resolve<Titulo> {
       data: new Date()
     };
 
-    return of({ id: 0, nome: '', ano: new Date(), sinopse: '', categoria: '', diretor: diretor, classe: classe, atores: [] });
+    return of({ id: 0, nome: '', ano: new Date().getFullYear(), sinopse: '', categoria: '', diretor: diretor, classe: classe, atores: [] });
   }
 }
