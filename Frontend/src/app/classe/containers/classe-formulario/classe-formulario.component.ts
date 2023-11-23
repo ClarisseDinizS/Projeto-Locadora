@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,28 +12,39 @@ import { ClasseService } from '../../services/classe.service';
   templateUrl: './classe-formulario.component.html',
   styleUrls: ['./classe-formulario.component.scss'],
 })
-export class ClasseFormularioComponent {
+export class ClasseFormularioComponent implements OnInit {
+  formulario!: FormGroup;
 
-  formulario = this.formBuild.group({
-    id: [0],
-    nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-    valor: [0, Validators.required],
-    data: [new Date, Validators.required]
-  });
-
-  constructor(private formBuild: NonNullableFormBuilder,
+  constructor(
+    private formBuild: NonNullableFormBuilder,
     private servico: ClasseService,
     private snackBar: MatSnackBar,
     private localizacao: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const classe: Classe = this.route.snapshot.data['classe'];
-    this.formulario.setValue({
-      id: classe.id,
-      nome: classe.nome,
-      valor: classe.valor,
-      data: classe.data
+    const classe: Classe =
+      this.route.snapshot.data['classe'] ||
+      ({
+        id: 0,
+        nome: '',
+        valor: 0,
+        data: new Date(),
+      } as Classe);
+
+    this.formulario = this.formBuild.group({
+      id: [classe.id],
+      nome: [
+        classe.nome,
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(100),
+        ],
+      ],
+      valor: [classe.valor, Validators.required],
+      data: [classe.data, Validators.required],
     });
   }
 
@@ -66,12 +77,16 @@ export class ClasseFormularioComponent {
     }
 
     if (field?.hasError('minlength')) {
-      const requiredLength: number = field.errors ? field.errors['minlength']['requiredLength'] : 5;
+      const requiredLength: number = field.errors
+        ? field.errors['minlength']['requiredLength']
+        : 5;
       return `Tamanho mínimo precisa ser de ${requiredLength} caracteres.`;
     }
 
     if (field?.hasError('maxlength')) {
-      const requiredLength: number = field.errors ? field.errors['maxlength']['requiredLength'] : 200;
+      const requiredLength: number = field.errors
+        ? field.errors['maxlength']['requiredLength']
+        : 200;
       return `Tamanho máximo excedido de ${requiredLength} caracteres.`;
     }
 

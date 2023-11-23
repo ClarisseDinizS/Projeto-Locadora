@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, UntypedFormArray, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ import { SocioService } from '../../services/socio.service';
   templateUrl: './socio-formulario.component.html',
   styleUrls: ['./socio-formulario.component.scss'],
 })
-export class SocioFormularioComponent {
+export class SocioFormularioComponent implements OnInit {
 
   formulario!: FormGroup;
 

@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,24 +12,35 @@ import { DiretorService } from '../../service/diretor.service';
   templateUrl: './diretor-formulario.component.html',
   styleUrls: ['./diretor-formulario.component.scss'],
 })
-export class DiretorFormularioComponent {
+export class DiretorFormularioComponent implements OnInit {
+  formulario!: FormGroup;
 
-  formulario = this.formBuild.group({
-    id: [0],
-    nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]]
-  });
-
-  constructor(private formBuild: NonNullableFormBuilder,
+  constructor(
+    private formBuild: NonNullableFormBuilder,
     private servico: DiretorService,
     private snackBar: MatSnackBar,
     private localizacao: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    const diretor: Diretor = this.route.snapshot.data['diretor'];
-    this.formulario.setValue({
-      id: diretor.id,
-      nome: diretor.nome
+    const diretor: Diretor =
+      this.route.snapshot.data['diretor'] ||
+      ({
+        id: 0,
+        nome: '',
+      } as Diretor);
+
+    this.formulario = this.formBuild.group({
+      id: [diretor.id],
+      nome: [
+        diretor.nome,
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(100),
+        ],
+      ],
     });
   }
 
@@ -61,12 +72,16 @@ export class DiretorFormularioComponent {
     }
 
     if (field?.hasError('minlength')) {
-      const requiredLength: number = field.errors ? field.errors['minlength']['requiredLength'] : 5;
+      const requiredLength: number = field.errors
+        ? field.errors['minlength']['requiredLength']
+        : 5;
       return `Tamanho mínimo precisa ser de ${requiredLength} caracteres.`;
     }
 
     if (field?.hasError('maxlength')) {
-      const requiredLength: number = field.errors ? field.errors['maxlength']['requiredLength'] : 200;
+      const requiredLength: number = field.errors
+        ? field.errors['maxlength']['requiredLength']
+        : 200;
       return `Tamanho máximo excedido de ${requiredLength} caracteres.`;
     }
 

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -19,7 +19,7 @@ import { LocacaoService } from '../../services/locacao.service';
   templateUrl: './locacao-formulario.component.html',
   styleUrls: ['./locacao-formulario.component.scss'],
 })
-export class LocacaoFormularioComponent {
+export class LocacaoFormularioComponent implements OnInit {
 
   formulario!: FormGroup;
 

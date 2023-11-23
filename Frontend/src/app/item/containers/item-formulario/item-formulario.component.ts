@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Titulo } from 'src/app/titulo/model/titulo';
@@ -15,17 +15,12 @@ import { ItemService } from '../../services/item.service';
   styleUrls: ['./item-formulario.component.scss'],
 })
 export class ItemFormularioComponent implements OnInit {
-  formulario = this.formBuild.group({
-    id: [0],
-    numSerie: [0, Validators.required],
-    dtaAquisicao: [new Date(), Validators.required],
-    tipoItem: ['', Validators.required],
-    titulo: [<Titulo>{}],
-  });
+  formulario!: FormGroup;
 
   titulos: Titulo[] = [];
 
-  compareWithTitulo=(titulo1: Titulo, titulo2: Titulo) => titulo1.id == titulo2.id;
+  compareWithTitulo = (titulo1: Titulo, titulo2: Titulo) =>
+    titulo1.id == titulo2.id;
 
   constructor(
     private formBuild: NonNullableFormBuilder,
@@ -41,14 +36,22 @@ export class ItemFormularioComponent implements OnInit {
       this.titulos = titulos;
     });
 
-    const item: Item = this.route.snapshot.data['item'];
+    const item: Item =
+      this.route.snapshot.data['item'] ||
+      ({
+        id: 0,
+        numSerie: 0,
+        dtaAquisicao: new Date(),
+        tipoItem: '',
+        titulo: <Titulo>{},
+      } as Item);
 
-    this.formulario.setValue({
-      id: item.id,
-      numSerie: item.numSerie,
-      dtaAquisicao: item.dtaAquisicao,
-      tipoItem: item.tipoItem,
-      titulo: item.titulo,
+    this.formulario = this.formBuild.group({
+      id: [item.id],
+      numSerie: [item.numSerie, [Validators.required]],
+      dtaAquisicao: [item.dtaAquisicao, Validators.required],
+      tipoItem: [item.tipoItem, [Validators.required]],
+      titulo: [item.titulo],
     });
   }
 
