@@ -1,5 +1,5 @@
-  <mat-card>
-    <mat-card-header>
+<mat-card>
+  <mat-card-header>
     <mat-toolbar color="primary">
       <mat-card-title>Detalhes do Item</mat-card-title>
     </mat-toolbar>
@@ -11,7 +11,7 @@
         <mat-label>Num. Serie</mat-label>
         <input matInput placeholder="Num. Serie" formControlName="numSerie" #numSerie />
         <mat-error *ngIf="formulario.get('numSerie')?.invalid">{{
-          getErrorMessage("numSerie")
+          formUtils.getErrorMessage(formulario, "numSerie")
           }}</mat-error>
       </mat-form-field>
 
@@ -20,7 +20,9 @@
         <input matInput placeholder="Data de Aquisição" formControlName="dtaAquisicao" [matDatepicker]="dtaAquisicao" />
         <mat-datepicker-toggle matIconSuffix [for]="dtaAquisicao"></mat-datepicker-toggle>
         <mat-datepicker #dtaAquisicao></mat-datepicker>
-        <mat-error *ngIf="formulario.get('dtaAquisicao')?.invalid">{{ getErrorMessage("dtaAquisicao") }}</mat-error>
+        <mat-error *ngIf="formulario.get('dtaAquisicao')?.invalid">{{
+          formUtils.getErrorMessage(formulario, "dtaAquisicao")
+          }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="largura-total">
@@ -31,7 +33,7 @@
           <mat-option value="Blu-Ray">Blu-Ray</mat-option>
         </mat-select>
         <mat-error *ngIf="formulario.get('tipoItem')?.invalid">{{
-          getErrorMessage("tipoItem")
+          formUtils.getErrorMessage(formulario, "tipoItem")
           }}</mat-error>
       </mat-form-field>
 
@@ -43,7 +45,7 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formulario.get('titulo')?.invalid">{{
-          getErrorMessage("titulo")
+          formUtils.getErrorMessage(formulario, "titulo")
           }}</mat-error>
       </mat-form-field>
     </form>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
 
 import { Diretor } from '../../model/diretor';
 import { DiretorService } from '../../service/diretor.service';
@@ -20,7 +21,8 @@ export class DiretorFormularioComponent implements OnInit {
     private servico: DiretorService,
     private snackBar: MatSnackBar,
     private localizacao: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public formUtils: FormUtilsService
   ) { }
 
   ngOnInit(): void {
@@ -62,29 +64,5 @@ export class DiretorFormularioComponent implements OnInit {
 
   private onError() {
     this.snackBar.open('Error ao salvar diretor.', '', { duration: 5000 });
-  }
-
-  getErrorMessage(fieldName: string) {
-    const field = this.formulario.get(fieldName);
-
-    if (field?.hasError('required')) {
-      return 'Campo Obrigatório';
-    }
-
-    if (field?.hasError('minlength')) {
-      const requiredLength: number = field.errors
-        ? field.errors['minlength']['requiredLength']
-        : 5;
-      return `Tamanho mínimo precisa ser de ${requiredLength} caracteres.`;
-    }
-
-    if (field?.hasError('maxlength')) {
-      const requiredLength: number = field.errors
-        ? field.errors['maxlength']['requiredLength']
-        : 200;
-      return `Tamanho máximo excedido de ${requiredLength} caracteres.`;
-    }
-
-    return 'Campo Inválido';
   }
 }

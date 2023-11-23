@@ -79,7 +79,14 @@
               <mat-label>Nome do Dependente</mat-label>
               <input matInput placeholder="Nome do Dependente" formControlName="nome" #nome />
               <mat-hint align="end">{{ nome.value.length }}/100</mat-hint>
-              <mat-error *ngIf="obterDependenteFormArray()[i].get('nome')?.invalid">{{ formUtils.getFormArrayErrorMessage(formulario, "dependentes", "nome", i) }}</mat-error>
+              <mat-error *ngIf="obterDependenteFormArray()[i].get('nome')?.invalid">{{
+                formUtils.getFormArrayErrorMessage(
+                formulario,
+                "dependentes",
+                "nome",
+                i
+                )
+                }}</mat-error>
             </mat-form-field>
           </td>
           <td style="width: 30%">
@@ -91,7 +98,14 @@
               <mat-datepicker #dataPicker></mat-datepicker>
               <mat-error *ngIf="
                   obterDependenteFormArray()[i].get('dataNascimento')?.invalid
-                ">{{ formUtils.getFormArrayErrorMessage(formulario, "dependentes", "dataNascimento", i) }}</mat-error>
+                ">{{
+                formUtils.getFormArrayErrorMessage(
+                formulario,
+                "dependentes",
+                "dataNascimento",
+                i
+                )
+                }}</mat-error>
             </mat-form-field>
           </td>
           <td style="width: 20%">

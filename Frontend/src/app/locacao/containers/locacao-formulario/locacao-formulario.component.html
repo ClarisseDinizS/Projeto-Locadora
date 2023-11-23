@@ -41,7 +41,8 @@
 
       <mat-form-field class="largura-total">
         <mat-label>Item</mat-label>
-        <mat-select formControlName="item" name="item" placeholder="Item" [compareWith]="compareWithItem" (selectionChange)="atualizarValorCobrado()">
+        <mat-select formControlName="item" name="item" placeholder="Item" [compareWith]="compareWithItem"
+          (selectionChange)="atualizarValorCobrado()">
           <mat-option *ngFor="let item of itens" [value]="item">
             {{ item.numSerie }}
           </mat-option>
@@ -78,8 +79,6 @@
           formUtils.getErrorMessage(formulario, "multaCobrada")
           }}</mat-error>
       </mat-form-field>
-
-
     </form>
   </mat-card-content>
 

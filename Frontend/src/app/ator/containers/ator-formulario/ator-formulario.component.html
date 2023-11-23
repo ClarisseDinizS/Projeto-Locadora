@@ -12,7 +12,7 @@
         <input matInput placeholder="Nome" formControlName="nome" #nome />
         <mat-hint align="end">{{ nome.value.length }}/100</mat-hint>
         <mat-error *ngIf="formulario.get('nome')?.invalid">{{
-          getErrorMessage("nome")
+          formUtils.getErrorMessage(formulario, "nome")
           }}</mat-error>
       </mat-form-field>
     </form>
