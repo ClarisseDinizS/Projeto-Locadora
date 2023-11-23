@@ -13,6 +13,7 @@ import { DiretorService } from '../../service/diretor.service';
   styleUrls: ['./diretor-formulario.component.scss'],
 })
 export class DiretorFormularioComponent {
+
   formulario = this.formBuild.group({
     id: [0],
     nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]]

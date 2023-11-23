@@ -13,6 +13,7 @@ import { ClasseService } from '../../services/classe.service';
   styleUrls: ['./classe-formulario.component.scss'],
 })
 export class ClasseFormularioComponent {
+
   formulario = this.formBuild.group({
     id: [0],
     nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],

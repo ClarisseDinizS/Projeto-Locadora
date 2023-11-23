@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, Observable, of } from 'rxjs';
+
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Locacao } from '../../model/locacao';
 import { LocacaoService } from '../../services/locacao.service';
 
@@ -13,7 +14,7 @@ import { LocacaoService } from '../../services/locacao.service';
   templateUrl: './locacao.component.html',
   styleUrls: ['./locacao.component.scss'],
 })
-export class LocacaoComponent {
+export class LocacaoComponent implements OnInit {
 
   locacoes$: Observable<Locacao[]> | null = null;
 
@@ -26,6 +27,8 @@ export class LocacaoComponent {
   ) {
     this.recarregar();
   }
+
+  ngOnInit(): void { }
 
   recarregar() {
     this.locacoes$ = this.locacaoServico.listar().pipe(
@@ -41,8 +44,6 @@ export class LocacaoComponent {
       data: mensagemErro,
     });
   }
-
-  ngOnInit(): void { }
 
   onAdd() {
     this.router.navigate(['novo'], { relativeTo: this.route });

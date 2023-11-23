@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Titulo } from 'src/app/titulo/model/titulo';
+import { TituloService } from 'src/app/titulo/services/titulo.service';
 
 import { Item } from '../../model/item';
 import { ItemService } from '../../services/item.service';
-import { Titulo } from 'src/app/titulo/model/titulo';
-import { TituloService } from 'src/app/titulo/services/titulo.service';
 
 @Component({
   selector: 'app-item-formulario',

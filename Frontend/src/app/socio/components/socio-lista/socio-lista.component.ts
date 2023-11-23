@@ -1,14 +1,18 @@
-import { SocioComponent } from './../../containers/socio/socio.component';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { PaginacaoTraduzida } from 'src/app/shared/paginacaoTraduzida/paginacao-traduzida';
 
 import { Socio } from '../../model/socio';
 import { SocioService } from '../../services/socio.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-socio-lista',
   templateUrl: './socio-lista.component.html',
   styleUrls: ['./socio-lista.component.scss'],
+  providers: [{ provide: MatPaginatorIntl, useClass: PaginacaoTraduzida }],
 })
 export class SocioListaComponent {
 
@@ -16,9 +20,6 @@ export class SocioListaComponent {
   @Output() adicionar = new EventEmitter(false);
   @Output() editar = new EventEmitter(false);
   @Output() excluir = new EventEmitter(false);
-
-  constructor(private servico: SocioService,
-    private router: Router) {}
 
   readonly colunasExibidas = [
     'numeroInscricao',
@@ -29,7 +30,18 @@ export class SocioListaComponent {
     'acoes',
   ];
 
-  ngOnInit(): void { }
+  dataSource = new MatTableDataSource<Socio>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private servico: SocioService, private router: Router) { }
+
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.socios);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   onToggleChange(socio: Socio) {
     socio.estahAtivo = socio.estahAtivo === 'Sim' ? 'Não' : 'Sim';
@@ -53,4 +65,8 @@ export class SocioListaComponent {
     this.excluir.emit(socio);
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

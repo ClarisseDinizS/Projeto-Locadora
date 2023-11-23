@@ -13,6 +13,7 @@ import { AtorService } from '../../services/ator.service';
   styleUrls: ['./ator-formulario.component.scss'],
 })
 export class AtorFormularioComponent {
+
   formulario = this.formBuild.group({
     id: [0],
     nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]]

@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, Observable, of } from 'rxjs';
+
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Socio } from '../../model/socio';
 import { SocioService } from '../../services/socio.service';
 
@@ -13,7 +14,7 @@ import { SocioService } from '../../services/socio.service';
   templateUrl: './socio.component.html',
   styleUrls: ['./socio.component.scss'],
 })
-export class SocioComponent {
+export class SocioComponent implements OnInit {
 
   socios$: Observable<Socio[]> | null = null;
 
@@ -26,6 +27,8 @@ export class SocioComponent {
   ) {
     this.recarregarAtivos();
   }
+
+  ngOnInit(): void { }
 
   recarregarAtivos() {
     this.socios$ = this.socioServico.listarAtivos().pipe(
@@ -50,8 +53,6 @@ export class SocioComponent {
       data: mensagemErro,
     });
   }
-
-  ngOnInit(): void { }
 
   onAdd() {
     this.router.navigate(['novo'], { relativeTo: this.route });

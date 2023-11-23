@@ -1,17 +1,13 @@
-import { Component } from '@angular/core';
-import {
-  FormGroup,
-  NonNullableFormBuilder,
-  UntypedFormArray,
-  Validators,
-} from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormGroup, NonNullableFormBuilder, UntypedFormArray, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { SocioService } from '../../services/socio.service';
-import { Socio } from '../../model/socio';
-import { Cliente } from '../../model/cliente';
 import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
+
+import { Cliente } from '../../model/cliente';
+import { Socio } from '../../model/socio';
+import { SocioService } from '../../services/socio.service';
 
 @Component({
   selector: 'app-socio-formulario',

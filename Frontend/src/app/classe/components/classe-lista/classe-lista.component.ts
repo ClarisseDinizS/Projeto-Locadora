@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { PaginacaoTraduzida } from 'src/app/shared/paginacaoTraduzida/paginacao-traduzida';
 
 import { Classe } from '../../model/classe';
 
@@ -6,8 +10,10 @@ import { Classe } from '../../model/classe';
   selector: 'app-classe-lista',
   templateUrl: './classe-lista.component.html',
   styleUrls: ['./classe-lista.component.scss'],
+  providers: [{ provide: MatPaginatorIntl, useClass: PaginacaoTraduzida }],
 })
 export class ClasseListaComponent {
+
   @Input() classes: Classe[] = [];
   @Output() adicionar = new EventEmitter(false);
   @Output() editar = new EventEmitter(false);
@@ -15,9 +21,16 @@ export class ClasseListaComponent {
 
   readonly colunasExibidas = ['id', 'nome', 'valor', 'data', 'acoes'];
 
-  constructor() {}
+  dataSource = new MatTableDataSource<Classe>();
 
-  ngOnInit(): void {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.classes);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   onAdd() {
     this.adicionar.emit(true);
@@ -29,5 +42,10 @@ export class ClasseListaComponent {
 
   onRemove(classe: Classe){
     this.excluir.emit(classe);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

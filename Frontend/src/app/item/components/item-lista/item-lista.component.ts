@@ -1,14 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { PaginacaoTraduzida } from 'src/app/shared/paginacaoTraduzida/paginacao-traduzida';
 
 import { Item } from '../../model/item';
-import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-item-lista',
   templateUrl: './item-lista.component.html',
   styleUrls: ['./item-lista.component.scss'],
+  providers: [{ provide: MatPaginatorIntl, useClass: PaginacaoTraduzida }],
 })
 export class ItemListaComponent {
+
   @Input() itens: Item[] = [];
   @Output() adicionar = new EventEmitter(false);
   @Output() editar = new EventEmitter(false);
@@ -23,6 +28,17 @@ export class ItemListaComponent {
     'acoes',
   ];
 
+  dataSource = new MatTableDataSource<Item>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.itens);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   onAdd() {
     this.adicionar.emit(true);
   }
@@ -35,41 +51,8 @@ export class ItemListaComponent {
     this.excluir.emit(item);
   }
 
-  sortData(sort: Sort) {
-    const sortedData = this.itens.slice();
-
-    if (!sort.active || sort.direction === '') {
-      this.itens = sortedData;
-      return;
-    }
-
-    sortedData.sort((a, b) => {
-      const ascendente = sort.direction === 'asc';
-
-      switch (sort.active) {
-        case 'id':
-          return this.comparar(a.id, b.id, ascendente);
-        case 'numSerie':
-          return this.comparar(a.numSerie, b.numSerie, ascendente);
-        case 'dtaAquisicao':
-          return this.comparar(a.dtaAquisicao, b.dtaAquisicao, ascendente);
-        case 'tipoItem':
-          return this.comparar(a.tipoItem, b.tipoItem, ascendente);
-        case 'titulo':
-          return this.comparar(a.titulo.nome, b.titulo.nome, ascendente);
-        default:
-          return 0;
-      }
-    });
-
-    this.itens = sortedData;
-  }
-
-  comparar(
-    a: number | string | Date,
-    b: number | string | Date,
-    isAsc: boolean
-  ) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

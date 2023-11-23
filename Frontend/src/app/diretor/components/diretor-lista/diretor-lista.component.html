@@ -1,34 +1,47 @@
-<mat-table [dataSource]="diretores">
-    <!-- Coluna Id -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-      <mat-cell *matCellDef="let diretor">{{ diretor.id }}</mat-cell>
-    </ng-container>
-  
-    <!-- Coluna Nome -->
-    <ng-container matColumnDef="nome">
-      <mat-header-cell *matHeaderCellDef>Diretor</mat-header-cell>
-      <mat-cell *matCellDef="let diretor">{{ diretor.nome }}</mat-cell>
-    </ng-container>
-  
-    <!-- Coluna Ações -->
-    <ng-container matColumnDef="acoes">
-      <mat-header-cell *matHeaderCellDef class="coluna-acoes">
-        <button mat-mini-fab color="accent" aria-label="Adicionar um Diretor" (click)="onAdd()" class="coluna-acoes-header">
-          <mat-icon>add</mat-icon>
-        </button>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let diretor" class="coluna-acoes">
-        <button mat-icon-button color="primary" aria-label="Editar Diretor" (click)="onEdit(diretor)">
-          <mat-icon>edit</mat-icon>
-        </button>
-  
-        <button mat-icon-button color="warn" aria-label="Remover Diretor" (click)="onRemove(diretor)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
-  
-    <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: colunasExibidas"></mat-row>
-  </mat-table>
+<mat-card-content>
+  <mat-form-field>
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Stanley" #input />
+  </mat-form-field>
+</mat-card-content>
+
+<mat-divider></mat-divider>
+
+<mat-table [dataSource]="dataSource" matSort>
+  <!-- Coluna Id -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+    <mat-cell *matCellDef="let diretor">{{ diretor.id }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Nome -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Diretor</mat-header-cell>
+    <mat-cell *matCellDef="let diretor">{{ diretor.nome }}</mat-cell>
+  </ng-container>
+
+  <!-- Coluna Ações -->
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef class="coluna-acoes">
+      <button mat-mini-fab color="accent" aria-label="Adicionar um Diretor" (click)="onAdd()"
+        class="coluna-acoes-header">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let diretor" class="coluna-acoes">
+      <button mat-icon-button color="primary" aria-label="Editar Diretor" (click)="onEdit(diretor)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Remover Diretor" (click)="onRemove(diretor)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: colunasExibidas"></mat-row>
+</mat-table>
+
+<mat-paginator [length]="diretores.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons></mat-paginator>

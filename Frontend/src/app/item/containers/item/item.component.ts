@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 import { Item } from '../../model/item';
 import { ItemService } from '../../services/item.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-item',
@@ -15,6 +15,7 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
   styleUrls: ['./item.component.scss'],
 })
 export class ItemComponent implements OnInit {
+
   itens$: Observable<Item[]> | null = null;
 
   constructor(
@@ -26,6 +27,8 @@ export class ItemComponent implements OnInit {
   ) {
     this.recarregar();
   }
+
+  ngOnInit(): void { }
 
   recarregar() {
     this.itens$ = this.itemServico.listar().pipe(
@@ -41,8 +44,6 @@ export class ItemComponent implements OnInit {
       data: mensagemErro,
     });
   }
-
-  ngOnInit(): void { }
 
   onAdd() {
     this.router.navigate(['novo'], { relativeTo: this.route });

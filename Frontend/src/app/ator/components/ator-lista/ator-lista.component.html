@@ -1,9 +1,11 @@
 <mat-card-content>
-    <mat-form-field class = "largura-total">
-      <mat-label>Buscar</mat-label>
-      <input matInput (keyup)="applyFilter($event)"#input>
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Tom" #input />
+  </mat-form-field>
 </mat-card-content>
+
+<mat-divider></mat-divider>
 
 <mat-table [dataSource]="dataSource" matSort>
   <!-- Coluna Id -->

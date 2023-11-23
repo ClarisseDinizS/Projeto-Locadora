@@ -1,21 +1,18 @@
-import { Component } from '@angular/core';
-import {
-  FormGroup,
-  NonNullableFormBuilder,
-  Validators,
-} from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Locacao } from '../../model/locacao';
-import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
 import { Item } from 'src/app/item/model/item';
-import { Cliente } from 'src/app/socio/model/cliente';
-import { LocacaoService } from '../../services/locacao.service';
 import { ItemService } from 'src/app/item/services/item.service';
+import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
+import { Cliente } from 'src/app/socio/model/cliente';
 import { SocioService } from 'src/app/socio/services/socio.service';
-import {ClasseService} from "../../../classe/services/classe.service";
-import {Classe} from "../../../classe/model/classe";
+
+import { Classe } from '../../../classe/model/classe';
+import { ClasseService } from '../../../classe/services/classe.service';
+import { Locacao } from '../../model/locacao';
+import { LocacaoService } from '../../services/locacao.service';
 
 @Component({
   selector: 'app-locacao-formulario',

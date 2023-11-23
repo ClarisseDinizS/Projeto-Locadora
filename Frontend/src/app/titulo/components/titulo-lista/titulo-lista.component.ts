@@ -1,12 +1,11 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
+import { PaginacaoTraduzida } from '../../../shared/paginacaoTraduzida/paginacao-traduzida';
 import { Titulo } from '../../model/titulo';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
-import {PaginacaoTraduzida} from "../../../shared/paginacaoTraduzida/paginacao-traduzida";
-7
+
 
 @Component({
   selector: 'app-titulo-lista',
@@ -15,6 +14,7 @@ import {PaginacaoTraduzida} from "../../../shared/paginacaoTraduzida/paginacao-t
   providers: [{ provide: MatPaginatorIntl, useClass: PaginacaoTraduzida }],
 })
 export class TituloListaComponent {
+
   @Input() titulos: Titulo[] = [];
   @Output() adicionar = new EventEmitter(false);
   @Output() editar = new EventEmitter(false);
@@ -33,10 +33,6 @@ export class TituloListaComponent {
     this.dataSource.sort = this.sort;
   }
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
   getNomesAtores(titulo: Titulo): string {
     // Verifica se há atores no título
     if (titulo.atores && titulo.atores.length > 0) {
@@ -51,11 +47,6 @@ export class TituloListaComponent {
     }
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   onAdd() {
     this.adicionar.emit(true);
   }
@@ -68,4 +59,8 @@ export class TituloListaComponent {
     this.excluir.emit(titulo);
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

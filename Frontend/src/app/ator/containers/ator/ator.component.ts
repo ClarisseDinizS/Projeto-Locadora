@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 import { Ator } from '../../model/ator';
 import { AtorService } from '../../services/ator.service';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-ator',
@@ -15,6 +15,7 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
   styleUrls: ['./ator.component.scss'],
 })
 export class AtorComponent implements OnInit {
+
   atores$: Observable<Ator[]> | null = null;
 
   constructor(
@@ -26,6 +27,8 @@ export class AtorComponent implements OnInit {
   ) {
     this.recarregar();
   }
+
+  ngOnInit(): void { }
 
   recarregar() {
     this.atores$ = this.atorServico.listar().pipe(
@@ -41,8 +44,6 @@ export class AtorComponent implements OnInit {
       data: mensagemErro,
     });
   }
-
-  ngOnInit(): void { }
 
   onAdd() {
     this.router.navigate(['novo'], { relativeTo: this.route });
