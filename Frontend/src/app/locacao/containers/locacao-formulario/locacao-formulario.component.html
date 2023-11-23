@@ -10,7 +10,7 @@
       <mat-form-field class="largura-total">
         <mat-label>Data da Locação</mat-label>
         <input matInput placeholder="Data da Locação" formControlName="dtLocacao" [matDatepicker]="dtLocacao" />
-        <mat-datepicker-toggle matSuffix [for]="dtLocacao"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matIconSuffix [for]="dtLocacao"></mat-datepicker-toggle>
         <mat-datepicker #dtLocacao></mat-datepicker>
         <mat-error *ngIf="formulario.get('dtLocacao')?.invalid">{{
           formUtils.getErrorMessage(formulario, "dtLocacao")

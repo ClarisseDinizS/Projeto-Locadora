@@ -12,16 +12,16 @@
         <input matInput placeholder="Nome" formControlName="nome" #nome />
         <mat-hint align="end">{{ nome.value.length }}/100</mat-hint>
         <mat-error *ngIf="formulario.get('nome')?.invalid">{{
-          getErrorMessage("nome")
+          formUtils.getErrorMessage(formulario, "nome")
           }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="largura-total">
         <mat-label>Ano</mat-label>
-        <input matInput placeholder="Ano" formControlName="ano" type="number" />
+        <input matInput placeholder="Ano" formControlName="ano" type="number"/>
         <!-- <mat-datepicker-toggle matIconSuffix [for]="ano"></mat-datepicker-toggle>
         <mat-datepicker #ano startView="multi-year"></mat-datepicker> -->
-        <mat-error *ngIf="formulario.get('ano')?.invalid">{{ getErrorMessage("ano") }}</mat-error>
+        <mat-error *ngIf="formulario.get('ano')?.invalid">{{ formUtils.getErrorMessage(formulario, "ano") }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="largura-total">
@@ -29,7 +29,7 @@
         <input matInput placeholder="Sinopse" formControlName="sinopse" #sinopse />
         <mat-hint align="end">{{ sinopse.value.length }}/100</mat-hint>
         <mat-error *ngIf="formulario.get('sinopse')?.invalid">{{
-          getErrorMessage("sinopse")
+          formUtils.getErrorMessage(formulario, "sinopse")
           }}</mat-error>
       </mat-form-field>
 
@@ -38,7 +38,7 @@
         <input matInput placeholder="Categoria" formControlName="categoria" #categoria />
         <mat-hint align="end">{{ categoria.value.length }}/100</mat-hint>
         <mat-error *ngIf="formulario.get('categoria')?.invalid">{{
-          getErrorMessage("categoria")
+          formUtils.getErrorMessage(formulario, "categoria")
           }}</mat-error>
       </mat-form-field>
 
@@ -50,7 +50,7 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formulario.get('diretor')?.invalid">{{
-          getErrorMessage("diretor")
+          formUtils.getErrorMessage(formulario, "diretor")
           }}</mat-error>
       </mat-form-field>
 
@@ -62,7 +62,7 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formulario.get('classe')?.invalid">{{
-          getErrorMessage("classe")
+          formUtils.getErrorMessage(formulario, "classe")
           }}</mat-error>
       </mat-form-field>
 
@@ -74,7 +74,7 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formulario.get('atores')?.invalid">{{
-          getErrorMessage("atores")
+          formUtils.getErrorMessage(formulario, "atores")
           }}</mat-error>
       </mat-form-field>
     </form>

@@ -2,8 +2,8 @@ import { Classe } from './../../../classe/model/classe';
 import { Ator } from './../../../ator/model/ator';
 import { Diretor } from './../../../diretor/model/diretor';
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, forwardRef } from '@angular/core';
+import { FormGroup, NG_VALUE_ACCESSOR, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { TituloService } from '../../services/titulo.service';
 import { DiretorService } from 'src/app/diretor/service/diretor.service';
 import { AtorService } from 'src/app/ator/services/ator.service';
 import { ClasseService } from 'src/app/classe/services/classe.service';
+import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
 
 @Component({
   selector: 'app-titulo-formulario',
@@ -36,7 +37,8 @@ export class TituloFormularioComponent implements OnInit {
     private classeService: ClasseService,
     private snackBar: MatSnackBar,
     private localizacao: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    protected formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
     this.diretorService.listar().subscribe(diretores =>{
@@ -75,10 +77,14 @@ export class TituloFormularioComponent implements OnInit {
   }
 
   onSubmit() {
-    this.servico.salvar(this.formulario.value).subscribe(
-      (resultado) => this.onSucess(),
-      (erro) => this.onError()
-    );
+    if (this.formulario.valid) {
+      this.servico.salvar(this.formulario.value).subscribe(
+        (resultado) => this.onSucess(),
+        (erro) => this.onError()
+      );
+    } else {
+      this.formUtils.validateAllFormFields(this.formulario);
+    };
   }
 
   onCancel() {
@@ -92,25 +98,5 @@ export class TituloFormularioComponent implements OnInit {
 
   private onError() {
     this.snackBar.open('Error ao salvar titulo.', '', { duration: 5000 });
-  }
-
-  getErrorMessage(fieldName: string) {
-    const field = this.formulario.get(fieldName);
-
-    if (field?.hasError('required')) {
-      return 'Campo Obrigatório';
-    }
-
-    if (field?.hasError('minlength')) {
-      const requiredLength: number = field.errors ? field.errors['minlength']['requiredLength'] : 5;
-      return `Tamanho mínimo precisa ser de ${requiredLength} caracteres.`;
-    }
-
-    if (field?.hasError('maxlength')) {
-      const requiredLength: number = field.errors ? field.errors['maxlength']['requiredLength'] : 200;
-      return `Tamanho máximo excedido de ${requiredLength} caracteres.`;
-    }
-
-    return 'Campo Inválido';
   }
 }

@@ -47,10 +47,14 @@ export class DiretorFormularioComponent implements OnInit {
   }
 
   onSubmit() {
-    this.servico.salvar(this.formulario.value).subscribe(
-      (resultado) => this.onSucess(),
-      (erro) => this.onError()
-    );
+    if (this.formulario.valid) {
+      this.servico.salvar(this.formulario.value).subscribe(
+        (resultado) => this.onSucess(),
+        (erro) => this.onError()
+      );
+    } else {
+      this.formUtils.validateAllFormFields(this.formulario);
+    };
   }
 
   onCancel() {

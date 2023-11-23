@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/item/model/item';
@@ -39,7 +40,7 @@ export class LocacaoFormularioComponent implements OnInit {
     private snackBar: MatSnackBar,
     private localizacao: Location,
     private route: ActivatedRoute,
-    public formUtils: FormUtilsService
+    public formUtils: FormUtilsService,
   ) { }
 
   ngOnInit(): void {
@@ -78,7 +79,6 @@ export class LocacaoFormularioComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formulario.value);
     if (this.formulario.valid) {
       this.servico.salvar(this.formulario.value).subscribe(
         (resultado) => this.onSucess(),
