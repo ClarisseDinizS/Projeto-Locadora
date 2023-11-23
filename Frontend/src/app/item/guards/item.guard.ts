@@ -26,31 +26,7 @@ export class ItemResolver implements Resolve<Item> {
       return this.service.buscarPorId(route.params['id']);
     }
 
-    // Criar uma instância de Diretor aqui
-    const diretor: Diretor = {
-      id: 0,
-      nome: '',
-    };
-
-    // Criar uma instância de Classe aqui
-    const classe: Classe = {
-      id: 0,
-      nome: '',
-      valor: 0,
-      data: new Date(),
-    };
-
-    // Criar uma instância de Título aqui
-    const titulo: Titulo = {
-      id: 0,
-      nome: '',
-      ano: new Date().getFullYear(),
-      sinopse: '',
-      categoria: '',
-      atores: [],
-      diretor: diretor,
-      classe: classe,
-    };
+    const titulo = {} as Titulo;
 
     return of({
       id: 0,
