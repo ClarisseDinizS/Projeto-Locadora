@@ -40,7 +40,13 @@
 
   <ng-container matColumnDef="atores">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Atores</mat-header-cell>
-    <mat-cell *matCellDef="let titulo"> {{ getNomesAtores(titulo) }}</mat-cell>
+    <mat-cell *matCellDef="let titulo">
+      <div style="display: block;">
+        <div *ngFor="let ator of titulo.atores">
+          {{ ator.nome }}
+        </div>
+      </div>
+    </mat-cell>
   </ng-container>
 
   <!-- Coluna Ações -->
